@@ -1,0 +1,17 @@
+\contentsline {equations}{\numberline {2.2}$c = \lambda \nu $}{60}{equation.2.2}%
+\contentsline {equations}{\numberline {2.3}$d_{\text {target}} = \frac {c \cdot \varphi }{4 \pi \nu }$}{66}{equation.2.3}%
+\contentsline {equations}{\numberline {2.4}$p_{\text {class}} = \frac {e^{\text {logit}_{i}}}{\DOTSB \sum@ \slimits@ _{j=1}^{N} e^{\text {logit}_{j}}}$}{79}{equation.2.4}%
+\contentsline {equations}{\numberline {3.2}$U = p_m \cdot r_m + \epsilon $}{112}{equation.3.2}%
+\contentsline {equations}{\numberline {3.3}$U = \DOTSB \sum@ \slimits@ _{m=1}^{M} p_m \cdot r_m + \epsilon $}{112}{equation.3.3}%
+\contentsline {equations}{\numberline {3.5}$\mu _i = \frac {S}{\sqrt {2\pi \sigma ^2}} \exp \left (-\frac {(t_i - t_0)^2}{2\sigma ^2}\right )$}{121}{equation.3.5}%
+\contentsline {equations}{\numberline {3.6}$P(h_i = k) = \frac {(\mu _i + b)^k e^{-(\mu _i + b)}}{k!}$}{121}{equation.3.6}%
+\contentsline {equations}{\numberline {3.7}$\mu _i = \DOTSB \sum@ \slimits@ _{m=1}^{M} \frac {S_m}{\sqrt {2\pi \sigma _m^2}} \exp \left (-\frac {(t_i - t_{0,m})^2}{2\sigma _m^2}\right ) + b$}{122}{equation.3.7}%
+\contentsline {equations}{\numberline {3.8}$U_\lambda = \DOTSB \sum@ \slimits@ _{m=1}^{M} p_m \cdot r_{m,\lambda } + \epsilon _\lambda $}{130}{equation.3.8}%
+\contentsline {equations}{\numberline {3.9}$\mu _{i,\lambda } = \frac {S_\lambda }{\sqrt {2\pi \sigma _\lambda ^2}} \exp \left (-\frac {(t_i - t_{0,\lambda })^2}{2\sigma _\lambda ^2}\right )$}{137}{equation.3.9}%
+\contentsline {equations}{\numberline {3.10}$\mu _{i,\lambda } = \DOTSB \sum@ \slimits@ _{m=1}^{M} \frac {S_{m,\lambda }}{\sqrt {2\pi \sigma _{m,\lambda }^2}} \exp \left (-\frac {(t_i - t_{0,m,\lambda })^2}{2\sigma _{m,\lambda }^2}\right ) + b_\lambda $}{137}{equation.3.10}%
+\contentsline {equations}{\numberline {4.1}$T_{\text {rt}} = 2 \frac {d_{\text {target}}}{c}$}{156}{equation.4.1}%
+\contentsline {equations}{\numberline {5.1}\text {Loss}_{x,y} = \DOTSB \sum@ \slimits@ _{i=0}^{a} \DOTSB \sum@ \slimits@ _{j=0}^{g^{2}} \alpha _{ji}^{\text {trg}} \left [ (x_{\text {gt}} - x_{\text {pred}})^{2} + (y_{\text {gt}} - y_{\text {pred}})^{2} \right ], \hskip 1em\relax \alpha \in \{0,1\} }{220}{equation.5.1}%
+\contentsline {equations}{\numberline {5.2}\text {Loss}_{h,w} = \DOTSB \sum@ \slimits@ _{i=0}^{a} \DOTSB \sum@ \slimits@ _{j=0}^{g^{2}} \alpha _{ji}^{\text {trg}} \left [ (h_{\text {gt}} - h_{\text {pred}})^{2} + (w_{\text {gt}} - w_{\text {pred}})^{2} \right ], \hskip 1em\relax \alpha \in \{0,1\} }{220}{equation.5.2}%
+\contentsline {equations}{\numberline {5.3}\text {Loss}_{C} = \DOTSB \sum@ \slimits@ _{i=0}^{a} \DOTSB \sum@ \slimits@ _{j=0}^{g^{2}} \alpha _{ji}^{\text {trg}} \left [ (C_{\text {gt}} - C_{\text {pred}})^{2} \right ], \hskip 1em\relax C_{\text {gt}} \in \{1\} }{220}{equation.5.3}%
+\contentsline {equations}{\numberline {5.4}\text {Loss}_{p_{\text {gt}}^{\text {cls}}} = \DOTSB \sum@ \slimits@ _{i=0}^{a} \DOTSB \sum@ \slimits@ _{j=0}^{g^{2}} \alpha _{ji}^{\text {trg}} \left [ (p_{\text {gt}}^{\text {cls}} - p_{\text {pred}}^{\text {cls}})^{2} \right ], \hskip 1em\relax 0 \leq p_{\text {pred}}^{\text {cls}} \leq 1 }{221}{equation.5.4}%
+\contentsline {equations}{\numberline {5.5}\text {Loss}_{p_{\text {gt}}^{\text {mat\_cls}}} = \DOTSB \sum@ \slimits@ _{i=0}^{a} \DOTSB \sum@ \slimits@ _{j=0}^{g^{2}} \alpha _{ji}^{\text {trg}} \left [ (p_{\text {gt}}^{\text {mat\_cls}} - p_{\text {pred}}^{\text {mat\_cls}})^{2} \right ], \hskip 1em\relax 0 \leq p_{\text {gt}}^{\text {mat\_cls}} \leq 1 }{221}{equation.5.5}%

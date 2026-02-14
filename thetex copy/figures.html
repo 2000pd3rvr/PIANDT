@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesis Figures</title>
+    <!-- 
+    LaTeX Dimension Reference:
+    HTML: 750px width
+    LaTeX equivalent options:
+    - width=0.75\textwidth (responsive, recommended)
+    - width=15cm (fixed width, close to 750px)
+    - width=562.5pt (750px ≈ 562.5pt)
+    
+    Example LaTeX usage:
+    \includegraphics[width=0.75\textwidth]{figures/filename.png}
+    
+    Note: Image resolution is determined by the source PNG files.
+    LaTeX will use the native resolution of the images when compiled.
+    -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .figure-container {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .figure-image {
+            width: 750px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .figure-filename {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .figure-text {
+            color: #555;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thesis Figures</h1>
+    <div id="figures-container">
+        <div class="figure-container">
+            <div class="figure-filename">1.2.png</div>
+            <img src="figures/1.2.png" alt="1.2.png" class="figure-image">
+            <div class="figure-text">Comparison of signal reflectivity profiles (photon time of arrival histograms obtained with SPAD) for translucent material (top) and opaque material (bottom). The observed curves indicate that positioned at the same distance, the translucent material presents a longer tail compared to the opaque material. This is resulting from the delayed arrival of sub-surface scattered photons from the translucent material</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">1.3.png</div>
+            <img src="figures/1.3.png" alt="1.3.png" class="figure-image">
+            <div class="figure-text">visual illustration of remote material detection setup showing passive, active, external and internal sources.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">2.1.png</div>
+            <img src="figures/2.1.png" alt="2.1.png" class="figure-image">
+            <div class="figure-text">Visual illustration of different material detection instruments and their corresponding categories as processing wavelike or particle-like radiation. Material detection instruments are classified according to their fundamental detection mechanisms, which operate on either wave-like or particle-like interpretations of electromagnetic radiation. This categorization reflects the dual nature of light-matter interactions, where detectors may exploit wave properties (interference, diffraction, phase relationships) or particle properties (individual photon detection, quantum effects, discrete energy transfer) to extract material-specific information from optical signals.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">2.2.png</div>
+            <img src="figures/2.2.png" alt="2.2.png" class="figure-image">
+            <div class="figure-text">Direct time-of-flight operation illustrating signal transmission, energy-matter interaction, and detection. Transmitted signals (red arrows) represent strong illumination, with pulsed signals shown as discrete wave packets and continuous signals as uninterrupted waveforms. Following energy-matter interaction, scattered and partially absorbed return signals exhibit reduced intensity and propagate to the detector. The demodulation circuit within each pixel, employing either direct or indirect approaches, times photon arrivals for pulsed signals or counts phases for continuous signals to determine signal travel time, which is subsequently used to derive target material depth or distance.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">2.3.png</div>
+            <img src="figures/2.3.png" alt="2.3.png" class="figure-image">
+            <div class="figure-text">SPAD signal detection path and voltage progression during avalanche and quenching. Left: SPAD signal detection path. Center: voltage progression from high voltage till quenched. Right: Key for left and center diagrams.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">2.4.png</div>
+            <img src="figures/2.4.png" alt="2.4.png" class="figure-image">
+            <div class="figure-text">Illustration of core CNN architecture for N-Dimensional pixel input; model input sequence, convolution of input sequence and subsampling of convolved input to fully connected layer and logits for prediction. Kernel size and number of filters are varied per layer.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.1.png</div>
+            <img src="figures/3.1.png" alt="3.1.png" class="figure-image">
+            <div class="figure-text">Core models of the Particle Wave Detection (PAWD) framework. The framework partitions sensing and processing into four regimes: intensity-spectral, intensity non-spectral, temporal-spectral, and temporal non-spectral. Intensity-spectral systems (e.g., RGB and hyperspectral imagers) operate on spatially resolved, wavelength-dependent measurements. Intensity non-spectral systems use spatial intensity without explicit spectral separation (e.g., grayscale or infrared cameras). Temporal-spectral systems resolve both photon arrival time and wavelength, while temporal non-spectral systems, such as the SPAD dToF instruments in this work, operate on one-dimensional time-resolved histograms from a monochromatic source. The right-hand side highlights how spatial (geometric) and structural (material and depth) cues can be combined to form spatiotemporal decision pipelines.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.2.png</div>
+            <img src="figures/3.2.png" alt="3.2.png" class="figure-image">
+            <div class="figure-text">Effect of surface texture and curvature on specular and diffuse reflection. Smooth, planar regions concentrate reflected energy into narrow specular lobes, while rough or curved regions redistribute energy over broader angular ranges, increasing diffuse components and reducing view dependence.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.3.png</div>
+            <img src="figures/3.3.png" alt="3.3.png" class="figure-image">
+            <div class="figure-text">Specular reflection in intensity and time-of-flight domains. Left: a 4 × 4 intensity image where a smooth, planar specular surface concentrates returned photons into central pixels. Right: corresponding time-of-flight histograms, with central pixels exhibiting narrow, high-amplitude peaks and surrounding pixels showing broader, lower-amplitude responses with elongated tails</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.4.png</div>
+            <img src="figures/3.4.png" alt="3.4.png" class="figure-image">
+            <div class="figure-text">Effect of smooth curvature on specular reflection. Convex, concave, and free-form smooth surfaces redistribute the specular lobe over different viewing directions, altering which pixels receive the strongest returns while preserving the underlying mirror-like behaviour.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.5.png</div>
+            <img src="figures/3.5.png" alt="3.5.png" class="figure-image">
+            <div class="figure-text">Diffuse reflection in intensity and time-of-flight domains. Left: a 4 × 4 intensity image of a rough, diffusely reflecting surface, where scattered returns distribute photons relatively evenly across central and surrounding pixels. Right: corresponding time-of-flight histograms, with all pixels exhibiting low, broadened peaks and extended tails due to multiple scattering and delayed photon arrivals.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.6.png</div>
+            <img src="figures/3.6.png" alt="3.6.png" class="figure-image">
+            <div class="figure-text">Subsurface scattering and its effect on time-of-flight histograms. Incident photons (red) penetrate beneath a translucent surface, undergo multiple internal scattering events, and re-emerge at displaced locations and later times than photons reflected at the surface. The resulting single-photon time-of-flight histogram exhibits a broadened peak with an elongated tail compared to that of an opaque, purely surface-scattering material.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.7.png</div>
+            <img src="figures/3.7.png" alt="3.7.png" class="figure-image">
+            <div class="figure-text">Intensity signal detector circuitry converting collected electrons to voltage values. The pixel well accumulates electrons through photoelectric effects, and readout circuitry converts the collected charge to equivalent voltage values for digital representation.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.8.png</div>
+            <img src="figures/3.8.png" alt="3.8.png" class="figure-image">
+            <div class="figure-text">Spatially resolved two-dimensional intensity image formation from pixel arrays. Individual pixel intensity values are organized in a two-dimensional architecture to form grayscale images that capture spatial patterns and geometric layout.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.9.png</div>
+            <img src="figures/3.9.png" alt="3.9.png" class="figure-image">
+            <div class="figure-text">left: achromatic image segmentation with bounding box(green) and assigned label(blue) Right: image segmentation with deformable outline and assigned label. Segmented and labeled images may be used as inputs for object detection models.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.10.png</div>
+            <img src="figures/3.10.png" alt="3.10.png" class="figure-image">
+            <div class="figure-text">Left: 2D laterally resolved pixel intensity with APS Right: 2D laterally resolved pixels each of 1D temporal resolution ToF sensor. On the right side, red signal peaks represent the ToF sensor reference signal (see chapter 4) and the right peak in blue represent time of flight signal from target object.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.11.png</div>
+            <img src="figures/3.11.png" alt="3.11.png" class="figure-image">
+            <div class="figure-text">Annotated achromatic target detection in 1D temporal data from SPAD sensor</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.12.png</div>
+            <img src="figures/3.12.png" alt="3.12.png" class="figure-image">
+            <div class="figure-text">Dark yellow (APS signal): 2D laterally resolved intensity image from scene. Red (high gain sensor): Temporal data by SPAD along axial plane. First peak represents mailbox in foreground. Highest peak represents target (boy) and last peak indicative of background object (bus)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.13.png</div>
+            <img src="figures/3.13.png" alt="3.13.png" class="figure-image">
+            <div class="figure-text">Left: 2D laterally resolved pixels each of 1D temporal data Right: single pixel of 1D temporal signal resolution. The red curve represents reference signal (see chapter 4) and the blue curve represent return signal from target.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.14.png</div>
+            <img src="figures/3.14.png" alt="3.14.png" class="figure-image">
+            <div class="figure-text">Left: illustration of a single ToF histogram showing less smoothness in return signal curve as effects of ambient (noise from surrounding light sources) and poisson noise (noise from the randomness in photon arrival). Start bin at time position (ts), end bin at time position (te), corresponds to the time of flight of photons to the target surface. Ambient noise is assumed to be uniformly distributed forming a baseline (Base error). Poisson noise is not uniform, thus embedded within the return signal. Right: illustration of approximated as gaussian (smoother) single ToF histogram showing return signal. Thus, less obvious effects of ambient (noise from surrounding light sources) and poisson noise (noise from the randomness in photon arrival). Start bin at time position (ts), end bin at time position (te), μ corresponds to the time of flight of photons to the target surface.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.15.png</div>
+            <img src="figures/3.15.png" alt="3.15.png" class="figure-image">
+            <div class="figure-text">From left: multispectral illumination source towards chromatic pixel-well(abstract illustration of electrons by incoming photons in pixel). For spectral analyses, pixel filters or splitters and other circuitry convert electrons from each identified spectrum to equivalent voltages; numeric voltage values (red.208, green.177, blue.212) known as pixel intensity are output for each channel. Representation of intensity as visualized in resulting colored multispectral pixel (square tile). The diagram uses red, green, blue channels. However, this is possible with single or full spectrum. Also other color combinations beside RGB are possible.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.16.png</div>
+            <img src="figures/3.16.png" alt="3.16.png" class="figure-image">
+            <div class="figure-text">Left: 2D laterally resolved multispectral (RGB) pixels each of scaler intensity vales from APS. Right: 2D laterally resolved pixels each of 1D temporal resolution from SPAD sensor</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.17.png</div>
+            <img src="figures/3.17.png" alt="3.17.png" class="figure-image">
+            <div class="figure-text">Annotated spectral object detection in a 2D laterally resolved multispectral (RGB). The single annotation of gold color contain multiple pixels each of three RGB channels; red:253, green:208, blue:23. A single intensity pixel (unlike SPAD detector) could not represent the circle object illustrated in the image.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.18.png</div>
+            <img src="figures/3.18.png" alt="3.18.png" class="figure-image">
+            <div class="figure-text">Annotation of multiple signal peaks in range for single multichannel ToF pixel. Left annotated target indicative of main target with higher intensity (reflectivity) whereas second annotation indicated another target in background (behind main target).</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.19.png</div>
+            <img src="figures/3.19.png" alt="3.19.png" class="figure-image">
+            <div class="figure-text">Spectral signal resolution across different measurements (intensity and temporal).</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">3.20.png</div>
+            <img src="figures/3.20.png" alt="3.20.png" class="figure-image">
+            <div class="figure-text">From the left: 2D laterally resolved pixels each of unique wavelength and corresponding temporal resolution from SPAD sensor. Bottom: single pixel of 1D temporal signal resolution. From the right: 2D multispectral intensity image from scene with active pixel sensor (located above) and. Recorded multifrequency temporal data by single SPAD pixel along axial plane. First peak representing mailbox in foreground. Highest peak representing target (boy) and last peak indicative of background object (bus).</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.1.png</div>
+            <img src="figures/4.1.png" alt="4.1.png" class="figure-image">
+            <div class="figure-text">View angle ambiguity in transient measurements. Different view angles can generate similar transient profiles, creating challenges for material classification.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.2.png</div>
+            <img src="figures/4.2.png" alt="4.2.png" class="figure-image">
+            <div class="figure-text">Material translucency: illustration of penetration levels of photons through matter. Top: transparent material that full transmission of all incident radiation through with no reflection or returned signal. Middle: translucent material with some absorption, scattering, transmission and reflection. Bottom: opaque materials with zero incident signal transmission and full reflectance.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.3.png</div>
+            <img src="figures/4.3.png" alt="4.3.png" class="figure-image">
+            <div class="figure-text">Intensity based transient image across multiple pixels of ToF sensor. Annotation of transient image indicating variations in intensity for different signal peaks in range. Red annotations indicate non targets in foreground (objects perceived before target) and background (objects perceived after target)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.4.png</div>
+            <img src="figures/4.4.png" alt="4.4.png" class="figure-image">
+            <div class="figure-text">Illustration of target-background overlap (occlusion) in transient image. The isolated target object is assumed to return signal off the surface with no interference or mix up with other objects. On the contrary (often seen in background signal), signal from closely position multiple objects tend to partially or fully transform into a smear like signal spanning more bins than a single target should.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.5.png</div>
+            <img src="figures/4.5.png" alt="4.5.png" class="figure-image">
+            <div class="figure-text">Illustration of SPAD event timeline (pulse start and stop for both reference and returned signal); The histogram is constructed by time-stamping the leading edge of SPAD pulses (ambient and signal), and accumulating these timestamps over multiple timing/laser cycles. There are certain periods of time over which no signal photons are received.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.6.png</div>
+            <img src="figures/4.6.png" alt="4.6.png" class="figure-image">
+            <div class="figure-text">Orientation invariance: illustration of lat target surface orientation invariance to returned temporal signal from detector</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.7.png</div>
+            <img src="figures/4.7.png" alt="4.7.png" class="figure-image">
+            <div class="figure-text">Distance–albedo ambiguity in transient measurements. The inverse square law [1] dictates that signal intensity decreases proportionally to the square of the distance, creating a relationship where measured reflectivity scales inversely with the square of target distance. This inverse square relationship between target distance and measured reflectivity creates variability that threatens signal profile uniqueness.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.8.png</div>
+            <img src="figures/4.8.png" alt="4.8.png" class="figure-image">
+            <div class="figure-text">White nylon sheet (WNT) target used in the SPAD experiments. Example capture showing the planar, homogeneous surface of the white nylon target under controlled illumination.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.9.png</div>
+            <img src="figures/4.9.png" alt="4.9.png" class="figure-image">
+            <div class="figure-text">Black nylon sheet (BNT) target used in the SPAD experiments. Example capture of the black nylon target, highlighting its low-albedo, weak-return response relative to the white nylon sheet.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.10.png</div>
+            <img src="figures/4.10.png" alt="4.10.png" class="figure-image">
+            <div class="figure-text">Black cardboard (BCB) target used in the SPAD experiments. Example capture of the black cardboard surface, which serves as a low-reflectivity, weak-scattering reference material.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.11.png</div>
+            <img src="figures/4.11.png" alt="4.11.png" class="figure-image">
+            <div class="figure-text">White foam (WGF) target used in the SPAD experiments. Example capture of the white foam material, whose porous, highly scattering structure induces broadened transient responses relative to the nylon sheets.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.12.png</div>
+            <img src="figures/4.12.png" alt="4.12.png" class="figure-image">
+            <div class="figure-text">SPAD detector field of view configuration. The 25° field of view of the SPAD detector, shown in relation to the 35° illumination source field of view, ensuring adequate spatial coverage for material detection experiments.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.13.png</div>
+            <img src="figures/4.13.png" alt="4.13.png" class="figure-image">
+            <div class="figure-text">Signal peak extraction. Top: multi pixel stacking approached considers multiple pixels from sensor incorporating slightly different views of same target in a 2D tensor without reference to depth or distance information. Bottom: depth integrated single pixel approach transforms transient sequence with target depth information and normalized to retain only relevant frequency information.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.14.png</div>
+            <img src="figures/4.14.png" alt="4.14.png" class="figure-image">
+            <div class="figure-text">Confusion matrix for CNN of multi-stack transient image input for four material classes (WNT, BNT, WGF and BCB) with over 99% accuracy</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.15.png</div>
+            <img src="figures/4.15.png" alt="4.15.png" class="figure-image">
+            <div class="figure-text">Confusion matrix for never seen transient images; included background samples from either of the four material classes (WNT, BNT, WGF and BCB) and untrained materials (UNKNOWN) yielding ~19% accuracy out of expected 0%.. Indicative of low confidence levels in over 80% of predictions.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">4.16.png</div>
+            <img src="figures/4.16.png" alt="4.16.png" class="figure-image">
+            <div class="figure-text">Visualizations of transient image reconstruction performance from convolutional auto encoder.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.1.png</div>
+            <img src="figures/5.1.png" alt="5.1.png" class="figure-image">
+            <div class="figure-text">The combination of single-photon avalanche diode (SPAD) time-of-flight sensor and active pixel sensor (APS) enables improved structural feature extraction for enhanced machine vision quality</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.2.png</div>
+            <img src="figures/5.2.png" alt="5.2.png" class="figure-image">
+            <div class="figure-text">left: bell pepper object of natural material. Right: bell pepper object of synthetic (3D model) material. Both objects perceived from aerial view. Biological vision might find it easy to distinguish between the two objects. But how easily can machines do same ?</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.3.png</div>
+            <img src="figures/5.3.png" alt="5.3.png" class="figure-image">
+            <div class="figure-text">Left: illustration of targets correctly detected by visual model without SPAD transient input. Right: same objects with some obscured parts (mammal) getting wrong model predictions indicates limitations of using only 2D spatial images in training object detection models.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.4.png</div>
+            <img src="figures/5.4.png" alt="5.4.png" class="figure-image">
+            <div class="figure-text">Left: Camouflage of leaf mantis taking on surface patterns of the leaf on which is lays. At higher level with less obvious edges, classical vision model would miss the two different targets and possible classify them as one. Nonetheless, transient images are able to encode unique composition of the leaf and the insect separately. Right: Camouflage of armadillo taking on the shape of a sphere after rolling up. At all levels, classical vision models are likely to treat both as different targets and possible classify them independently. Nonetheless, transient images are able to encode unique surface composition of the armadillo and return same material composition in either states.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.5.png</div>
+            <img src="figures/5.5.png" alt="5.5.png" class="figure-image">
+            <div class="figure-text">illustration of partial occlusion of target by different objects. Depending on level of occlusion, it may be difficult to intuitively derive target from exposed spatial features. Nonetheless, SPAD time of flight detectors can reconstruct the target based on signal from its surface.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.6.png</div>
+            <img src="figures/5.6.png" alt="5.6.png" class="figure-image">
+            <div class="figure-text">vision model trained only on spatially resolved images would make inferences based on geometric patterns of these three images. Thus, classifying them all as human object. However, the presented solution proves that a hybrid images including 1D transient can infer the geometric object as human and also infer composition of each object as real human skin, wood or paper respectively.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.7.png</div>
+            <img src="figures/5.7.png" alt="5.7.png" class="figure-image">
+            <div class="figure-text">illustration of viewing complex objects from different perspectives; full target view versus viewing components of targets through a pinhole. For systems that only process spatially removes inputs, it may be easier to classify whole object based on polygons, lines or edges. For time resolved systems, the signal can be used to deduce composition of surface from which it emerged. A combination of these inputs gives a hybrid space-time resolved input data that is suitable for the proposed spatiotemporal neural network.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.8.png</div>
+            <img src="figures/5.8.png" alt="5.8.png" class="figure-image">
+            <div class="figure-text">two geometrically similar human objects depicting common causes of challenging low level detection for machine vision. With similar geometric properties, it is easy for vision models to classify them as one target (human object). But at a low level, these would be two different individual (e.g identical twins)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.9.png</div>
+            <img src="figures/5.9.png" alt="5.9.png" class="figure-image">
+            <div class="figure-text">Left: Spatially resolved (SR) images of a bonsai tree (left, 5cm from detector) versus life size tree (right, 20cm from detector); both perceived from different distances. Spatially resolved images barely depict size difference of the two and such vision system may find it harder to distinguish between object scales especially without information about distance or depth. However, time resolved (TR) signal from SPAD ToF detector indicates that even with similar signal strengths, one item is significantly distant from the other. Thus, one object may be miniaturized in close view to sensor. Right: Spatially resolved (SR) images of a bonsai tree (left, 20cm from detector) versus life size natural tree (right, 20cm from detector); both perceived from same distance. Spatially resolved images clearly depict size difference of the two and such vision system may still find it harder to distinguish between object scales. However, time resolved (TR) signal from SPAD ToF detector indicates that with variations in signal strengths even at same distances from sensor, one item is significantly larger than the other. Thus, one object may be miniaturized in close view to sensor.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.10.png</div>
+            <img src="figures/5.10.png" alt="5.10.png" class="figure-image">
+            <div class="figure-text">Target regions of similar 2D geometric patterns</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.11.png</div>
+            <img src="figures/5.11.png" alt="5.11.png" class="figure-image">
+            <div class="figure-text">(Top): F1 score and level of confidence with which the various class labels make predictions. This curve gives a fair idea of the quality of custom trained models that plug into the spatial detection head of the dual model. (bottom): High performance state of the art vision model (YOLOv8) above struggling to distinguish between two different materials of similar geometric shape. carrots and parsnips. Model classifies everything as carrot due to limitation of sole spatial feature processing. On the contrary, transient signal encodes unique optical features that can distinguish between the different material composition. Hence the presented instrument that combines space and time resolved features.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.12.png</div>
+            <img src="figures/5.12.png" alt="5.12.png" class="figure-image">
+            <div class="figure-text">Data collection setup from sample target (natural bell pepper) from ~30cm range distance. Left image indicates signal accumulation over 16 zones.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.13.png</div>
+            <img src="figures/5.13.png" alt="5.13.png" class="figure-image">
+            <div class="figure-text">Left: Data collection setup of a sample object (bell pepper) suspended from an invisible thread. Imager views from below while capturing both spatially resolved 2D images (RGB camera for raspberry pi module) and transient image (4x4 zones SPAD sensor). Right: data collection setup of a sample object (teacup) suspended from an invisible thread. Imager views tilted from sideways while capturing both spatially resolved 2D images (RGB camera for raspberry pi module) and transient image (4x4 zones SPAD sensor)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.14.png</div>
+            <img src="figures/5.14.png" alt="5.14.png" class="figure-image">
+            <div class="figure-text">Combined SPAD-APS data collection setup. Targets suspended from an invisible string from ceiling within detectors' field of view. Setup was within a natural less controlled environment with different lighting and ambient sources (daylight, tungsten bulb and low or no light. For each datapoint, the transient and corresponding spatially resolved image is sourced simultaneously.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.15.png</div>
+            <img src="figures/5.15.png" alt="5.15.png" class="figure-image">
+            <div class="figure-text">Intensity and transient imaging of perceived images of objects from an LED screen. Similar imaging techniques would be imaging the object from other persisted media; printed photograph, cardboard, or even wood painting. The active pixel sensor captures spatial features of the object. Hence the consistent performance to predict same object on screen as though it was physically present. The SPAD records transient histograms which are used to predict the material composition of the surface from which the object is viewed. This unlocks low level detection of knowing whether object is natural material of image version of it.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.16.png</div>
+            <img src="figures/5.16.png" alt="5.16.png" class="figure-image">
+            <div class="figure-text">Web interface of spatial detection head using YOLOv3 weights. Same implementation is possible with other SOTA spatial detection models like DINOv3, YOLOv8 or even handcrafted vision models of the past.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.17.png</div>
+            <img src="figures/5.17.png" alt="5.17.png" class="figure-image">
+            <div class="figure-text">Web interface of spatial detection head using YOLOv8 weights. Same implementation is possible with other SOTA spatial detection models like DINOv3, YOLOv3 or even handcrafted vision models of the past.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.18.png</div>
+            <img src="figures/5.18.png" alt="5.18.png" class="figure-image">
+            <div class="figure-text">Web interface of spatial detection head using DINOv3 weights. Same implementation is possible with other SOTA spatial detection models like YOLOv8, YOLOv3 or even handcrafted vision models of the past.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.19.png</div>
+            <img src="figures/5.19.png" alt="5.19.png" class="figure-image">
+            <div class="figure-text">Confusion matrix of DINOv3 self supervised visual detection model. Custom trained and plugged into dual model as spatial detection head.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.20.png</div>
+            <img src="figures/5.20.png" alt="5.20.png" class="figure-image">
+            <div class="figure-text">Confusion matrix showing test results for 18 consolidated material classes; ~98%.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.21.png</div>
+            <img src="figures/5.21.png" alt="5.21.png" class="figure-image">
+            <div class="figure-text">Confusion matrix showing test results for 12 consolidated material classes; ~98%.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.22.png</div>
+            <img src="figures/5.22.png" alt="5.22.png" class="figure-image">
+            <div class="figure-text">Process diagram of dual detection web application</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.23.png</div>
+            <img src="figures/5.23.png" alt="5.23.png" class="figure-image">
+            <div class="figure-text">Confusion matrix of yolov3 spatial detection training (~94% accuracy)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.24.png</div>
+            <img src="figures/5.24.png" alt="5.24.png" class="figure-image">
+            <div class="figure-text">web interface of material detection head using custom classifier weights. Same implementation is possible with any ML, pattern recognition algorithm or even physics based models.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.25.png</div>
+            <img src="figures/5.25.png" alt="5.25.png" class="figure-image">
+            <div class="figure-text">Side-by-side comparison of the same object from different materials. Left: purple bowl object perceived from LED screen surface. Right: purple bowl object perceived from plastic material surface. These two objects have same prediction by spatial vision model but different predictions by material classifier.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.26.png</div>
+            <img src="figures/5.26.png" alt="5.26.png" class="figure-image">
+            <div class="figure-text">Project web application demo section interface</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.27.png</div>
+            <img src="figures/5.27.png" alt="5.27.png" class="figure-image">
+            <div class="figure-text">Spatiotemporal detection of a natural potato from physical space</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.28.png</div>
+            <img src="figures/5.28.png" alt="5.28.png" class="figure-image">
+            <div class="figure-text">Spatiotemporal detection of 3D model potato from LED screen</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">5.29.png</div>
+            <img src="figures/5.29.png" alt="5.29.png" class="figure-image">
+            <div class="figure-text">Spatial training samples of everyday objects</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.1.png</div>
+            <img src="figures/6.1.png" alt="6.1.png" class="figure-image">
+            <div class="figure-text">Flow diagram of material impurity sources and categories and examples.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.2.png</div>
+            <img src="figures/6.2.png" alt="6.2.png" class="figure-image">
+            <div class="figure-text">(experiment 3) left: control sample; center: impure mixture containing hydrogen peroxide contaminant; right: impure mixture with lemon contaminant</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.3.png</div>
+            <img src="figures/6.3.png" alt="6.3.png" class="figure-image">
+            <div class="figure-text">Simple data collection setup featuring target MOI, SPAD sensor and wireless access point for remotely accessing detector and data.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.4.png</div>
+            <img src="figures/6.4.png" alt="6.4.png" class="figure-image">
+            <div class="figure-text">(experiment 01) 2D Visualization of fresh unprocessed milk (14% fat) vs fresh homogenized milk (14% fat). Spatial distribution of features indicate linear separability</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.5.png</div>
+            <img src="figures/6.5.png" alt="6.5.png" class="figure-image">
+            <div class="figure-text">(experiment 6) 3D plot of PCA of four homogenized whole milk products(14%, 3.9%, 3.7%, 1.8% and 0.3% fat content). Overlap of variable per class indicate high similarity in purity patterns. Explained Variance Ratio:[0.18696326, 0.15745316]</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.6.png</div>
+            <img src="figures/6.6.png" alt="6.6.png" class="figure-image">
+            <div class="figure-text">(experiment 6) 2D plot of PCA of four homogenized whole milk products(14%, 3.9%, 3.7%, 1.8% and 0.3% fat content). Full overlap of variable per class indicate high similarity in purity patterns. Explained Variance Ratio:[0.18696326, 0.15745316]</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.7.png</div>
+            <img src="figures/6.7.png" alt="6.7.png" class="figure-image">
+            <div class="figure-text">(experiment 7a) PCA of three different whole milk (>3.7% fat) products in 3D plot; condensed milk, evaporated milk and fresh whole milk. Overlap indicative of similarity in feature variables but low linear separability.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.8.png</div>
+            <img src="figures/6.8.png" alt="6.8.png" class="figure-image">
+            <div class="figure-text">(experiment 01) Left: fresh homogenized whole milk (14% fat). Right: fresh heterogenous (not homogenized, colloidal) whole milk (14% fat)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.9.png</div>
+            <img src="figures/6.9.png" alt="6.9.png" class="figure-image">
+            <div class="figure-text">(experiment 7a) consumable condensed milk (6% fat content), homogenized</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.10.png</div>
+            <img src="figures/6.10.png" alt="6.10.png" class="figure-image">
+            <div class="figure-text">(experiment 07a) Evaporated milk sample in homogenized state</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.11.png</div>
+            <img src="figures/6.11.png" alt="6.11.png" class="figure-image">
+            <div class="figure-text">Left: stable colloid mixture with uniformly dispersed particles through water. Less suitable state for transient GT image sourcing. Center: unstable colloid mixture with dispersed particles through water. Less suitable state for transient GT image sourcing. Right: suspensive colloid state with both suspended and dispersed particles through water. Less suitable state for transient GT image sourcing</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.12.png</div>
+            <img src="figures/6.12.png" alt="6.12.png" class="figure-image">
+            <div class="figure-text">(experiment 2) confusion matrix for converging multi label classifier for all materials considered for the study. Both pure and impure materials.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.13.png</div>
+            <img src="figures/6.13.png" alt="6.13.png" class="figure-image">
+            <div class="figure-text">(experiment 4) 3D PCA of features from pure sample and invisibly impure milk samples (hydrogen peroxide impurity and sugar impurity). Higher dimensions reveal more separation of hydrogen peroxide contamination in comparison with sugar.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.14.png</div>
+            <img src="figures/6.14.png" alt="6.14.png" class="figure-image">
+            <div class="figure-text">(experiment 3) active non-material contaminated milk sample by poor temperature resulting to a colloid</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.15.png</div>
+            <img src="figures/6.15.png" alt="6.15.png" class="figure-image">
+            <div class="figure-text">Fresh homogenized vs inhomogenized milk (same manufacturer, 14% fat each) showing weak overlap of features from either classes. Explained variance ratio of three principal components;[0.21196705, 0.15826207, 0.11945989]</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.16.png</div>
+            <img src="figures/6.16.png" alt="6.16.png" class="figure-image">
+            <div class="figure-text">(Experiment 5) PCA of two homogenized whole milk products samples (3.7% fat each) from different manufacturers indicating strong overlap of group variables. Explained variance ratio of three principal components; [0.18387789, 0.1645287, 0.10170276]</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.17.png</div>
+            <img src="figures/6.17.png" alt="6.17.png" class="figure-image">
+            <div class="figure-text">(experiment 2) confusion matrix of fully converged multi label classifier for all materials considered for the study</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.18.png</div>
+            <img src="figures/6.18.png" alt="6.18.png" class="figure-image">
+            <div class="figure-text">(experiment 03) active non-material contaminated milk sample by expiration resulting to an unstable colloid mixture</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.19.png</div>
+            <img src="figures/6.19.png" alt="6.19.png" class="figure-image">
+            <div class="figure-text">(experiment 3) confusion matrix for classification of material and non material impurities (~98%)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.20.png</div>
+            <img src="figures/6.20.png" alt="6.20.png" class="figure-image">
+            <div class="figure-text">validation test on pre-trained classifier with untrained samples. (~93.33%)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.21.png</div>
+            <img src="figures/6.21.png" alt="6.21.png" class="figure-image">
+            <div class="figure-text">(experiment 3) confusion matrix for validation of experiment 3 model with invalid data; samples were transient from solid surfaces. ~18% show model is over 80% confident that input data is invalid.</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.22.png</div>
+            <img src="figures/6.22.png" alt="6.22.png" class="figure-image">
+            <div class="figure-text">(experiment 5) validation test on pre-trained binary classifier with untrained homogenized milk samples of different manufacturers as pure milk. (~99%)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.23.png</div>
+            <img src="figures/6.23.png" alt="6.23.png" class="figure-image">
+            <div class="figure-text">Left: (experiment 6) validation test on pre-trained binary classifier with untrained homogenized fresh milk sample (14% fat) as pure milk. (~99%). Center: (experiment 6) validation test on pre-trained binary classifier with untrained homogenized fresh milk sample (1.8% fat) as pure milk. (~97%). Right: (experiment 6) validation test on pre-trained binary classifier with untrained homogenized fresh milk sample (0.3% fat) as pure milk. (~91%)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.24a.png</div>
+            <img src="figures/6.24a.png" alt="6.24a.png" class="figure-image">
+            <div class="figure-text">(experiment 7a) Validation test on pre-trained binary classifier with untrained evaporated milk sample as pure milk</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.24b.png</div>
+            <img src="figures/6.24b.png" alt="6.24b.png" class="figure-image">
+            <div class="figure-text">(experiment 7a) validation test on pre-trained binary classifier with untrained condensed milk sample as pure milk. (~65%).</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.25.png</div>
+            <img src="figures/6.25.png" alt="6.25.png" class="figure-image">
+            <div class="figure-text">(experiment 7b) PCA of two homogenized milk products; cosmetic milk (non-consumable) and whole milk (consumable)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.26.png</div>
+            <img src="figures/6.26.png" alt="6.26.png" class="figure-image">
+            <div class="figure-text">(experiment 7b) validation test on pre-trained binary classifier with untrained cosmetic milk sample as pure milk. (~67%)</div>
+        </div>
+        <div class="figure-container">
+            <div class="figure-filename">6.27.png</div>
+            <img src="figures/6.27.png" alt="6.27.png" class="figure-image">
+            <div class="figure-text">2D plot of PCA of two whole milk samples; pure (homogenous) and expired (colloid). Partial overlap of variables per class indicate little similarity in purity patterns. Explained Variance Ratio:[0.18096039, 0.16276842]</div>
+        </div>
+    </div>
+</body>
+</html>
+

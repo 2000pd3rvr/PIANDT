@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flowchart Alignment Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #canvas {
+            border: 1px solid #ccc;
+            cursor: crosshair;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        .control-group {
+            margin: 10px 0;
+        }
+        label {
+            display: inline-block;
+            width: 200px;
+        }
+        input[type="range"] {
+            width: 300px;
+        }
+        .value {
+            display: inline-block;
+            width: 60px;
+            text-align: right;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flowchart Alignment Tool</h1>
+    <p>Adjust the positions below and click "Get Coordinates" to get the LaTeX code.</p>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label>Horizontal Line Below - X Start:</label>
+            <input type="range" id="hLineXStart" min="-10" max="10" step="0.1" value="-4">
+            <span class="value" id="hLineXStartVal">-4.0</span> cm
+        </div>
+        <div class="control-group">
+            <label>Horizontal Line Below - X End:</label>
+            <input type="range" id="hLineXEnd" min="-10" max="10" step="0.1" value="4">
+            <span class="value" id="hLineXEndVal">4.0</span> cm
+        </div>
+        <div class="control-group">
+            <label>Vertical Line 1 X Position:</label>
+            <input type="range" id="vLine1" min="-10" max="10" step="0.1" value="-4">
+            <span class="value" id="vLine1Val">-4.0</span> cm
+        </div>
+        <div class="control-group">
+            <label>Vertical Line 2 X Position:</label>
+            <input type="range" id="vLine2" min="-10" max="10" step="0.1" value="-1.3">
+            <span class="value" id="vLine2Val">-1.3</span> cm
+        </div>
+        <div class="control-group">
+            <label>Vertical Line 3 X Position:</label>
+            <input type="range" id="vLine3" min="-10" max="10" step="0.1" value="1.3">
+            <span class="value" id="vLine3Val">1.3</span> cm
+        </div>
+        <div class="control-group">
+            <label>Vertical Line 4 X Position:</label>
+            <input type="range" id="vLine4" min="-10" max="10" step="0.1" value="4">
+            <span class="value" id="vLine4Val">4.0</span> cm
+        </div>
+        <div class="control-group">
+            <label>Vertical Line Shift (Right):</label>
+            <input type="range" id="vLineShift" min="0" max="15" step="0.1" value="0">
+            <span class="value" id="vLineShiftVal">0.0</span> cm
+        </div>
+    </div>
+    
+    <button onclick="getCoordinates()">Get LaTeX Coordinates</button>
+    <button onclick="reset()">Reset</button>
+    
+    <div id="output" style="margin-top: 20px; padding: 10px; background: #f0f0f0; font-family: monospace; white-space: pre-wrap;"></div>
+    
+    <canvas id="canvas" width="800" height="600"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = 20; // pixels per cm
+        
+        function updateDisplay() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            // Draw reference: horizontal line above (at top)
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            const hLineAboveXStart = -4 * scale;
+            const hLineAboveXEnd = 4 * scale;
+            ctx.beginPath();
+            ctx.moveTo(centerX + hLineAboveXStart, centerY - 150);
+            ctx.lineTo(centerX + hLineAboveXEnd, centerY - 150);
+            ctx.stroke();
+            
+            // Draw 4 items (boxes)
+            const itemY = centerY - 50;
+            const itemWidth = 2.2 * scale;
+            const itemHeight = 1 * scale;
+            const itemPositions = [-4, -1.3, 1.3, 4];
+            itemPositions.forEach((x, i) => {
+                ctx.fillStyle = '#e0e0e0';
+                ctx.fillRect(centerX + x * scale - itemWidth/2, itemY - itemHeight/2, itemWidth, itemHeight);
+                ctx.strokeRect(centerX + x * scale - itemWidth/2, itemY - itemHeight/2, itemWidth, itemHeight);
+            });
+            
+            // Draw vertical lines above items
+            itemPositions.forEach(x => {
+                ctx.beginPath();
+                ctx.moveTo(centerX + x * scale, centerY - 150);
+                ctx.lineTo(centerX + x * scale, centerY - 100);
+                ctx.stroke();
+            });
+            
+            // Draw horizontal line below items
+            const hLineXStart = parseFloat(document.getElementById('hLineXStart').value);
+            const hLineXEnd = parseFloat(document.getElementById('hLineXEnd').value);
+            ctx.strokeStyle = '#00f';
+            ctx.beginPath();
+            ctx.moveTo(centerX + hLineXStart * scale, centerY + 50);
+            ctx.lineTo(centerX + hLineXEnd * scale, centerY + 50);
+            ctx.stroke();
+            
+            // Draw vertical lines below items
+            const vLineShift = parseFloat(document.getElementById('vLineShift').value);
+            const vLinePositions = [
+                parseFloat(document.getElementById('vLine1').value),
+                parseFloat(document.getElementById('vLine2').value),
+                parseFloat(document.getElementById('vLine3').value),
+                parseFloat(document.getElementById('vLine4').value)
+            ];
+            
+            ctx.strokeStyle = '#f00';
+            vLinePositions.forEach(x => {
+                const shiftedX = x + vLineShift;
+                ctx.beginPath();
+                ctx.moveTo(centerX + shiftedX * scale, centerY + 50);
+                ctx.lineTo(centerX + shiftedX * scale, centerY + 100);
+                ctx.stroke();
+            });
+        }
+        
+        function updateValue(id) {
+            const slider = document.getElementById(id);
+            const valueSpan = document.getElementById(id + 'Val');
+            valueSpan.textContent = parseFloat(slider.value).toFixed(1);
+            updateDisplay();
+        }
+        
+        // Add event listeners
+        ['hLineXStart', 'hLineXEnd', 'vLine1', 'vLine2', 'vLine3', 'vLine4', 'vLineShift'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => updateValue(id));
+        });
+        
+        function getCoordinates() {
+            const hLineXStart = parseFloat(document.getElementById('hLineXStart').value);
+            const hLineXEnd = parseFloat(document.getElementById('hLineXEnd').value);
+            const vLine1 = parseFloat(document.getElementById('vLine1').value);
+            const vLine2 = parseFloat(document.getElementById('vLine2').value);
+            const vLine3 = parseFloat(document.getElementById('vLine3').value);
+            const vLine4 = parseFloat(document.getElementById('vLine4').value);
+            const vLineShift = parseFloat(document.getElementById('vLineShift').value);
+            
+            const output = `Horizontal Line Below:
+X Start: ${hLineXStart}cm
+X End: ${hLineXEnd}cm
+
+Vertical Lines Below (with shift):
+Line 1: ${vLine1 + vLineShift}cm (base: ${vLine1}cm + shift: ${vLineShift}cm)
+Line 2: ${vLine2 + vLineShift}cm (base: ${vLine2}cm + shift: ${vLineShift}cm)
+Line 3: ${vLine3 + vLineShift}cm (base: ${vLine3}cm + shift: ${vLineShift}cm)
+Line 4: ${vLine4 + vLineShift}cm (base: ${vLine4}cm + shift: ${vLineShift}cm)
+
+LaTeX code:
+\\draw[thick] ([xshift=${hLineXStart}cm]items_bottom) -- ([xshift=${hLineXEnd}cm]items_bottom);
+\\draw[thick] ([xshift=${vLine1 + vLineShift}cm]items_bottom) -- ++(0,0.5cm);
+\\draw[thick] ([xshift=${vLine2 + vLineShift}cm]items_bottom) -- ++(0,0.5cm);
+\\draw[thick] ([xshift=${vLine3 + vLineShift}cm]items_bottom) -- ++(0,0.5cm);
+\\draw[thick] ([xshift=${vLine4 + vLineShift}cm]items_bottom) -- ++(0,0.5cm);`;
+            
+            document.getElementById('output').textContent = output;
+        }
+        
+        function reset() {
+            document.getElementById('hLineXStart').value = -4;
+            document.getElementById('hLineXEnd').value = 4;
+            document.getElementById('vLine1').value = -4;
+            document.getElementById('vLine2').value = -1.3;
+            document.getElementById('vLine3').value = 1.3;
+            document.getElementById('vLine4').value = 4;
+            document.getElementById('vLineShift').value = 0;
+            ['hLineXStart', 'hLineXEnd', 'vLine1', 'vLine2', 'vLine3', 'vLine4', 'vLineShift'].forEach(id => updateValue(id));
+        }
+        
+        // Initial display
+        updateDisplay();
+        ['hLineXStart', 'hLineXEnd', 'vLine1', 'vLine2', 'vLine3', 'vLine4', 'vLineShift'].forEach(id => updateValue(id));
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

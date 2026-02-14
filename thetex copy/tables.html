@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesis Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .table-container {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .table-number {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .table-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 13px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thesis Tables</h1>
+    <div id="tables-container">
+        <div class="table-container">
+            <div class="table-number">Table 2.1</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technique</th>
+                        <th>Type</th>
+                        <th>Input Data Processing Category</th>
+                        <th>Active Illumination</th>
+                        <th>Depth Information</th>
+                        <th>Primary Advantage</th>
+                        <th>Refs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Material classification</td>
+                        <td>RGB intensity images, hyperspectral</td>
+                        <td>Spatial and spectral processing</td>
+                        <td>No (passive)</td>
+                        <td>None</td>
+                        <td>Object-invariant detection; Simple implementation</td>
+                        <td>[6, 5]</td>
+                    </tr>
+                    <tr>
+                        <td>iToF-based material detection</td>
+                        <td>IR intensity + depth/point cloud</td>
+                        <td>Multi-modal spatial processing</td>
+                        <td>Yes (iToF)</td>
+                        <td>True depth (iToF)</td>
+                        <td>Combines multiple modalities; Doesn't rely on spectral composition (D-AI)</td>
+                        <td>[46]</td>
+                    </tr>
+                    <tr>
+                        <td>RGB-D object detection</td>
+                        <td>RGB + depth (stereoscopy)</td>
+                        <td>Multi-modal spatial processing</td>
+                        <td>No (passive)</td>
+                        <td>Relative depth</td>
+                        <td>3D object detection</td>
+                        <td>[11]</td>
+                    </tr>
+                    <tr>
+                        <td>Hidden object imaging</td>
+                        <td>ToF transient signal</td>
+                        <td>Temporal signal processing</td>
+                        <td>Yes (ToF)</td>
+                        <td>True depth</td>
+                        <td>Detects hidden objects in scattering media; True depth</td>
+                        <td>[49]</td>
+                    </tr>
+                    <tr>
+                        <td>Single-pixel 3D inference</td>
+                        <td>Single ToF pixel</td>
+                        <td>ML-based temporal processing</td>
+                        <td>Yes (ToF)</td>
+                        <td>True depth</td>
+                        <td>Solves ill-posed problem; Fast processing; Reduced image size</td>
+                        <td>[50, 33]</td>
+                    </tr>
+                    <tr>
+                        <td>ToF object detection</td>
+                        <td>ToF data</td>
+                        <td>ToF signal processing</td>
+                        <td>Yes (ToF)</td>
+                        <td>True depth</td>
+                        <td>True depth information</td>
+                        <td>[29, 47, 43, 48]</td>
+                    </tr>
+                    <tr>
+                        <td>dToF-based material detection (K-M theory)</td>
+                        <td>dToF data (histogram)</td>
+                        <td>Temporal signal processing</td>
+                        <td>Yes (dToF)</td>
+                        <td>True depth</td>
+                        <td>Perspective-invariant material characterization</td>
+                        <td>[28]</td>
+                    </tr>
+                    <tr>
+                        <td>Low-cost compact dToF material detection</td>
+                        <td>dToF histogram (VL53L1X)</td>
+                        <td>Temporal signal processing</td>
+                        <td>Yes (dToF)</td>
+                        <td>True depth</td>
+                        <td>Compact and low cost</td>
+                        <td>[53]</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 2.1: Table of comparison for different optical sensing processing techniques for scene inference</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 4.1</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Values</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Materials</td>
+                        <td>Black nylon sheet (BNT), white nylon sheet (WNT), white foam (WGF), black cardboard (BCB)</td>
+                    </tr>
+                    <tr>
+                        <td>Orientations</td>
+                        <td>pu, pd, pr, pl (portrait upright, downward, rightward, leftward)</td>
+                    </tr>
+                    <tr>
+                        <td>View angles</td>
+                        <td>0dtsn, +15dtsn, -15dtsn relative to target surface normal</td>
+                    </tr>
+                    <tr>
+                        <td>Perspectives</td>
+                        <td>x-, y-, and z-axis sensor viewpoints</td>
+                    </tr>
+                    <tr>
+                        <td>Illumination</td>
+                        <td>Bright (passive + active, including natural daylight) and dark scenes, balanced observations</td>
+                    </tr>
+                    <tr>
+                        <td>Distances</td>
+                        <td>20 cm to 400 cm in 20 cm steps (20 measurement levels)</td>
+                    </tr>
+                    <tr>
+                        <td>Observations per distance</td>
+                        <td>≈ 10 transient captures per material and configuration</td>
+                    </tr>
+                    <tr>
+                        <td>SNR enhancement</td>
+                        <td>Temporal averaging of up to 8 frames at longer distances (≈ 4 m)</td>
+                    </tr>
+                    <tr>
+                        <td>Auxiliary data</td>
+                        <td>Co-registered RGB images per range cycle for verification and cross-modal analysis</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 4.1: Summary of experimental parameters for SPAD-based material sensing. Factors controlled during data acquisition for single-pixel and multi-pixel classification experiments.</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 5.1</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Natural object<br>(excludes images, includes components)</th>
+                        <th>Natural material<br>(excludes images)</th>
+                        <th>Synthetic object<br>(includes images, includes components)</th>
+                        <th>Synthetic material<br>(includes images)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bell pepper</td>
+                        <td>Natural red colored skin</td>
+                        <td>Artificial red colored bell pepper. Also paper print or electronic images of object (e.g LED screen)</td>
+                        <td>Plastic, silicone or other 3D moulded material, Also Paper print or electronic screen (e.g LED)</td>
+                    </tr>
+                    <tr>
+                        <td>Carrot</td>
+                        <td>Natural carrot skin</td>
+                        <td>Silicone moulded carrot. also paper print or electronic images of object (e.g LED screen)</td>
+                        <td>Silicone. Printed or electronic images</td>
+                    </tr>
+                    <tr>
+                        <td>Ceramic bowl</td>
+                        <td>Bowl in its custom natural form (of ceramic material)</td>
+                        <td>Paper print or electronic images of object (e.g LED screen)</td>
+                        <td>Paper print or electronic screen (e.g LED screen)</td>
+                    </tr>
+                    <tr>
+                        <td>Teacup</td>
+                        <td>Cup in its custom natural or original form (of ceramic material)</td>
+                        <td>Paper print or electronic images of object (e.g LED screen)</td>
+                        <td>Paper print or electronic screen (e.g LED screen)</td>
+                    </tr>
+                    <tr>
+                        <td>Plastic bowl</td>
+                        <td>Cup in its custom natural or original purple colored form (of plastic material)</td>
+                        <td>Paper print or electronic images of object (e.g LED screen)</td>
+                        <td>Paper print or electronic screen (e.g LED screen)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 5.1: Naturally occurring or original objects used in project that have unique composition and corresponding synthetic objects could be made from different materials. The term 'natural' is used to represent 'original' form of the tested material. SPAD time of flight detectors can potentially identify natural objects by unique composition even in the absence of spatial features like full geometry, form, etc… such scenarios occur during scene occlusion or camouflage.</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 5.2</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Objects</th>
+                        <th>Consolidation</th>
+                        <th>Natural</th>
+                        <th>3d model</th>
+                        <th>LED Image (natural)</th>
+                        <th>LED Image (3d model)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bell_pepper_red</td>
+                        <td>Bell pepper</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                    <tr>
+                        <td>Bell_pepper_green</td>
+                        <td></td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                    <tr>
+                        <td>Bell_pepper_yellow</td>
+                        <td></td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                    <tr>
+                        <td>Teacup</td>
+                        <td>Teacup</td>
+                        <td>~2000 (x2)</td>
+                        <td>NA</td>
+                        <td>~2000 (x2)</td>
+                        <td>NA</td>
+                    </tr>
+                    <tr>
+                        <td>Eggplant</td>
+                        <td>Eggplant</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                    <tr>
+                        <td>Bowl_whiteceramic</td>
+                        <td>Bowl</td>
+                        <td>~2000 (x2)</td>
+                        <td>NA</td>
+                        <td>~2000 (x2)</td>
+                        <td>NA</td>
+                    </tr>
+                    <tr>
+                        <td>Bowl_purpleplastic</td>
+                        <td></td>
+                        <td>~2000 (x2)</td>
+                        <td>NA</td>
+                        <td>~2000 (x2)</td>
+                        <td>NA</td>
+                    </tr>
+                    <tr>
+                        <td>Carrot</td>
+                        <td>Carrot</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                    <tr>
+                        <td>Tomato</td>
+                        <td>Tomato</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                    <tr>
+                        <td>Potato</td>
+                        <td>Potato</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                        <td>~2000 (x2)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 5.2: Table of objects used in training spatiotemporal object detection model. Objects were either of their natural form or 3d model form. X2 indicates the samples were collected for both transient and spatially resolved images.</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 5.3</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>34 classes</th>
+                        <th>18 classes</th>
+                        <th>12 classes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>bowlLEDimagepurpleplastic</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>bowlLEDimagewhiteceramic</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>carrotLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>carrotLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>eggplantLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>eggplantLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>greenpepperLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>greenpepperLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>potatoLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>potatoLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>redpepperLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>redpepperLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>tomatoLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>tomatoLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>teacupLEDimageceramic</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>yellowpepperLEDimage3dmodel</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>yellowpepperLEDimagenatural</td>
+                        <td>LEDscreen</td>
+                        <td>LEDscreen</td>
+                    </tr>
+                    <tr>
+                        <td>eggplant3dmodel</td>
+                        <td>eggplant3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>greenpepper3dmodel</td>
+                        <td>greenpepper3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>potato3dmodel</td>
+                        <td>potato3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>redpepper3dmodel</td>
+                        <td>redpepper3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>carrot3dmodel</td>
+                        <td>carrot3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>tomato3dmodel</td>
+                        <td>tomato3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>yellowpepper3dmodel</td>
+                        <td>yellowpepper3dmodel</td>
+                        <td>3D model</td>
+                    </tr>
+                    <tr>
+                        <td>yellowpeppernatural</td>
+                        <td>yellowpeppernatural</td>
+                        <td>yellowpeppernatural</td>
+                    </tr>
+                    <tr>
+                        <td>redpeppernatural</td>
+                        <td>redpeppernatural</td>
+                        <td>redpeppernatural</td>
+                    </tr>
+                    <tr>
+                        <td>teacupceramic</td>
+                        <td>teacupceramic</td>
+                        <td>teacupceramic</td>
+                    </tr>
+                    <tr>
+                        <td>tomatonatural</td>
+                        <td>tomatonatural</td>
+                        <td>tomatonatural</td>
+                    </tr>
+                    <tr>
+                        <td>bowlpurpleplastic</td>
+                        <td>bowlpurpleplastic</td>
+                        <td>bowlpurpleplastic</td>
+                    </tr>
+                    <tr>
+                        <td>bowlwhiteceramic</td>
+                        <td>bowlwhiteceramic</td>
+                        <td>bowlwhiteceramic</td>
+                    </tr>
+                    <tr>
+                        <td>carrotnatural</td>
+                        <td>carrotnatural</td>
+                        <td>carrotnatural</td>
+                    </tr>
+                    <tr>
+                        <td>eggplantnatural</td>
+                        <td>eggplantnatural</td>
+                        <td>eggplantnatural</td>
+                    </tr>
+                    <tr>
+                        <td>greenpeppernatural</td>
+                        <td>greenpeppernatural</td>
+                        <td>greenpeppernatural</td>
+                    </tr>
+                    <tr>
+                        <td>potatonatural</td>
+                        <td>potatonatural</td>
+                        <td>potatonatural</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 5.3: Materials used in training spatiotemporal object detection model. Materials were trained as three different class sets. First set had no consolidation (34 materials). Second set consolidated all LED images to one resulting to 18 materials. Finally, both LED and 3D models were consolidated to individual materials leading to final 12 materials class set.</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 5.4</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Object Detection Accuracy (%)</th>
+                        <th>Material Classification Accuracy (%)</th>
+                        <th>Combined Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>YOLOv3</td>
+                        <td>94.0</td>
+                        <td>99.0</td>
+                        <td>94.5</td>
+                    </tr>
+                    <tr>
+                        <td>YOLOv8</td>
+                        <td>98.0</td>
+                        <td>99.0</td>
+                        <td>98.5</td>
+                    </tr>
+                    <tr>
+                        <td>DINOv3</td>
+                        <td>95.0</td>
+                        <td>99.0</td>
+                        <td>97.0</td>
+                    </tr>
+                    <tr>
+                        <td>Material Classifier (standalone)</td>
+                        <td>–</td>
+                        <td>99.0</td>
+                        <td>–</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 5.4: Combined dual detection performance metrics. Performance summary for spatial object detection models individually and in combination with the material classifier. Combined performance is calculated as the average of object detection and material classification accuracies, reflecting equal weighting of both tasks.</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 6.1</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>MATERIAL IMPURITY</th>
+                        <th>COLOR CHANGE</th>
+                        <th>CONSISTENCY CHANGE</th>
+                        <th>CONTAMINANT</th>
+                        <th>FLUID CONTAINER TYPE</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SOLID</td>
+                        <td>Yes</td>
+                        <td>Homogenous</td>
+                        <td>Instant coffee</td>
+                        <td>Transparent</td>
+                        <td>hm_as_tp_sch_ic</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Bread crumbs (skin)</td>
+                        <td></td>
+                        <td>hm_as_tp_scic_bc</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous suspension</td>
+                        <td>Food wrappers</td>
+                        <td></td>
+                        <td>hm_as_tp_scis_fw</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>No</td>
+                        <td>Homogenous</td>
+                        <td>Grounded sugar</td>
+                        <td></td>
+                        <td>hm_as_tp_suh_gs</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Soft white bread (core)</td>
+                        <td></td>
+                        <td>hm_as_tp_suic_swb</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous suspension</td>
+                        <td>Transparent soft plastic bag</td>
+                        <td></td>
+                        <td>hm_as_tp_suis_tp</td>
+                    </tr>
+                    <tr>
+                        <td>LIQUID</td>
+                        <td>Yes</td>
+                        <td>Homogenous</td>
+                        <td>TCP antiseptic</td>
+                        <td></td>
+                        <td>hm_al_tp_sch_tcp</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Fresh lemon juice</td>
+                        <td></td>
+                        <td>hm_al_tp_scic_lj</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous suspension</td>
+                        <td>Olive oil</td>
+                        <td></td>
+                        <td>hm_al_tp_scis_oo</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>No</td>
+                        <td>Homogenous</td>
+                        <td>Hydrogen peroxide</td>
+                        <td></td>
+                        <td>hm_al_tp_suh_hp</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Viscous petroleum jelly</td>
+                        <td></td>
+                        <td>hm_al_tp_suic_pj</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous suspension</td>
+                        <td>Clear liquid perfume</td>
+                        <td></td>
+                        <td>hm_al_tp_suis_cp</td>
+                    </tr>
+                    <tr>
+                        <td>GAS (with some liquid particles)</td>
+                        <td>NA</td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Air</td>
+                        <td></td>
+                        <td>hm_ag_tp_scic_air</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Spray paint</td>
+                        <td></td>
+                        <td>hm_ag_tp_scic_spaint</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Inhomogeneous suspension</td>
+                        <td>Spray perfume</td>
+                        <td></td>
+                        <td>hm_ag_tp_scis_sperf</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 6.1: categorization of material contaminants by matter state and resulting mixture attributes including color and homogeneity. Materials of samples used in the experiments are listed under contaminants</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 6.2</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fat content (%)</th>
+                        <th>Validation accuracy (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0.3</td>
+                        <td>~91</td>
+                    </tr>
+                    <tr>
+                        <td>1.8</td>
+                        <td>~97</td>
+                    </tr>
+                    <tr>
+                        <td>3.7</td>
+                        <td>~98</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>~99.9</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 6.2 (experiment 6) validation test of homogenized milk samples with different fat content using retrained model from experiment 3</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 6.3</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Train (%)</th>
+                        <th>Validation (%)</th>
+                        <th>ZSL invalid data (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Experiment 3</td>
+                        <td>~98.9</td>
+                        <td>~93.3</td>
+                        <td>~18</td>
+                    </tr>
+                    <tr>
+                        <td>Experiment 4</td>
+                        <td>-</td>
+                        <td>~95</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 6.3 (experiment 3, experiment 4) training and validation results of purity detection classifier for all impurities vs invisible impurities</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 6.4</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Fat content</th>
+                        <th>Consistency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Brand0a</td>
+                        <td>14%</td>
+                        <td>Homogenized</td>
+                    </tr>
+                    <tr>
+                        <td>Brand0b</td>
+                        <td>14%</td>
+                        <td>Inhomogenized</td>
+                    </tr>
+                    <tr>
+                        <td>Brand1</td>
+                        <td>3.7%, 1.8%, 0.3%</td>
+                        <td>Homogenized</td>
+                    </tr>
+                    <tr>
+                        <td>Brand2</td>
+                        <td>3.7%, 1.8%, 0.3%</td>
+                        <td>Homogenized</td>
+                    </tr>
+                    <tr>
+                        <td>Brand3</td>
+                        <td>3.9%</td>
+                        <td>Homogenized</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 6.4 metadata of milk samples used in experiment; brands, fat content and consistency</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 6.5</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>NONMATERIAL IMPURITY</th>
+                        <th>CONSISTENCY CHANGE</th>
+                        <th>CONTAMINANT</th>
+                        <th>FLUID CONTAINER TYPE</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Active nonmaterial impurity agent</td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Poor temperature conditions</td>
+                        <td>Transparent</td>
+                        <td>hm_UC_tp____i</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Inhomogeneous suspension</td>
+                        <td>Transluscent</td>
+                        <td></td>
+                        <td>hm_UC_tl____i</td>
+                    </tr>
+                    <tr>
+                        <td>Active nonmaterial impurity agent</td>
+                        <td>Inhomogeneous colloidal</td>
+                        <td>Product expiration under suitable temperature</td>
+                        <td>Transparent</td>
+                        <td>hm_UC_tp____i</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 6.5 categorization of non-material contaminants by product environment conditions and expiration with resulting mixture attributes</div>
+        </div>
+        <div class="table-container">
+            <div class="table-number">Table 6.6</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>BRAND</th>
+                        <th>MANUFACTURER</th>
+                        <th>FAT CONTENT</th>
+                        <th>CONSISTENCY</th>
+                        <th>CONTAINER</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Brand0a</td>
+                        <td>Graham's family dairy</td>
+                        <td>14%</td>
+                        <td>Homogenized</td>
+                        <td>Transluscent</td>
+                        <td>hm_C_tl</td>
+                    </tr>
+                    <tr>
+                        <td>Brand0b</td>
+                        <td>Graham's family dairy</td>
+                        <td>14%</td>
+                        <td>Inhomogenized</td>
+                        <td>Transluscent</td>
+                        <td>im_C_tl</td>
+                    </tr>
+                    <tr>
+                        <td>Brand1</td>
+                        <td>Sainsbury</td>
+                        <td>3.7%, 1.8%, 0.3%</td>
+                        <td>Homogenized</td>
+                        <td>Transluscent</td>
+                        <td>hm_C_tl</td>
+                    </tr>
+                    <tr>
+                        <td>Brand2</td>
+                        <td>Tesco</td>
+                        <td>3.7%, 1.8%, 0.3%</td>
+                        <td>Homogenized</td>
+                        <td>Transluscent</td>
+                        <td>hm_C_tl</td>
+                    </tr>
+                    <tr>
+                        <td>Brand2</td>
+                        <td>Tesco</td>
+                        <td>3.7%</td>
+                        <td>Homogenized</td>
+                        <td>Transparent</td>
+                        <td>hm_C_tp</td>
+                    </tr>
+                    <tr>
+                        <td>Brand3</td>
+                        <td>Lancashire diaries</td>
+                        <td>3.9%</td>
+                        <td>Homogenized</td>
+                        <td>Transluscent</td>
+                        <td>hm_C_tl</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-caption">Table 6.6 milk sources per brand, consistency, fat content and container</div>
+        </div>
+    </div>
+</body>
+</html>
+

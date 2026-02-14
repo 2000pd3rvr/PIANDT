@@ -1,0 +1,30 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% Essential packages
+\usepackage[T1]{fontenc}
+\usepackage{ebgaramond}
+\usepackage{graphicx}
+\usepackage{float}
+
+\begin{document}
+
+\section{SPAD Sensors}
+
+SPAD direct time-of-flight imagers are now widely deployed because compact, low-cost devices deliver picosecond timing and single-photon sensitivity. Current ToF systems span consumer cameras, medical imaging, robotics, and industrial automation. The return signal could be used for true depth estimation, material discrimination, pose estimation, and several others. Distance, surface finish, subsurface scattering, detector angle to target surface normal and other factors may affect optical properties, leading to distinct photon-arrival signatures (Figure~\ref{fig:1_2}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth,height=0.7\textheight,keepaspectratio]{figures/1.2.png}
+\caption[Comparison of signal reflectivity profiles (photon time of arrival histograms obtained with SPAD) for translucent material (top) and opaque material (bottom).]{\textbf{Comparison of signal reflectivity profiles (photon time of arrival histograms obtained with SPAD) for translucent material (top) and opaque material (bottom).} The observed curves indicate that positioned at the same distance, the translucent material presents a longer tail compared to the opaque material. This is resulting from the delayed arrival of sub-surface scattered photons from the translucent material.}
+\label{fig:1_2}
+\end{figure}
+
+The distinct photon-arrival signatures shown in Figure~\ref{fig:1_2} demonstrate how translucent materials exhibit longer tails due to delayed arrival of subsurface-scattered photons compared to opaque materials at the same distance. This temporal signature difference enables material discrimination through time-resolved measurements.
+
+\end{document}
+
+
+
+
+
+

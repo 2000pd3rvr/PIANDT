@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equations Database - Thesis Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e74c3c;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .instructions {
+            background-color: #ecf0f1;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .instructions ul {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        .instructions li {
+            margin: 8px 0;
+        }
+        .equation {
+            background-color: #fff;
+            border: 2px solid #bdc3c7;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        .equation-id {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .equation-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .equation-text {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            text-align: center;
+        }
+        .registry-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+        }
+        .registry-table th {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .registry-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        .registry-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status-active {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .status-ready {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .command-list {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .command-list strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Equations Database</h1>
+        <p style="color: #7f8c8d; font-style: italic;">Thesis Document - Equation Management System</p>
+
+        <h2>Insertion Instructions</h2>
+        <div class="instructions">
+            <p><strong>To insert an equation in the document, use one of the following commands:</strong></p>
+            <ul>
+                <li><strong>Unnumbered equation (display mode):</strong><br>
+                    <code>\insertequation{EQUATION_ID}</code><br>
+                    Example: <code>\insertequation{1}</code>
+                </li>
+                <li><strong>Numbered equation (appears in List of Equations):</strong><br>
+                    <code>\insertequationnumbered{EQUATION_ID}{LABEL}</code><br>
+                    Example: <code>\insertequationnumbered{1}{eq:example}</code>
+                </li>
+                <li><strong>Inline equation (within text):</strong><br>
+                    <code>\insertequationinline{EQUATION_ID}</code><br>
+                    Example: <code>\insertequationinline{1}</code>
+                </li>
+                <li><strong>Custom environment:</strong><br>
+                    <code>\insertequationenv{EQUATION_ID}{ENVIRONMENT}</code><br>
+                    Example: <code>\insertequationenv{1}{align}</code>
+                </li>
+            </ul>
+        </div>
+
+        <h2>Equation Definitions</h2>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 1</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Speed of light equation (wavelength-frequency relationship)
+            </div>
+            <div class="equation-text">
+                c = λv
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 2</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Target distance calculation for time-of-flight measurement
+            </div>
+            <div class="equation-text">
+                d<sub>target</sub> = (c · φ · T<sub>mod</sub>) / (4πν)
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 3</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Softmax function (probability distribution for classification)
+            </div>
+            <div class="equation-text">
+                p<sub>class</sub> = e<sup>logit<sub>i</sub></sup> / Σ<sub>j=1</sub><sup>N</sup> e<sup>logit<sub>j</sub></sup>
+            </div>
+            <div class="code-block">
+\newcommand{\equationthree}{%
+    p_{\text{class}} = \frac{e^{\text{logit}_{i}}}{\sum_{j=1}^{N} e^{\text{logit}_{j}}}
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 4</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Linear model with residual error
+            </div>
+            <div class="equation-text">
+                U = r<sub>m</sub> · p<sub>m</sub> + e
+            </div>
+            <div class="code-block">
+\newcommand{\equationfour}{%
+    U = r_{m} \cdot p_{m} + e
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 5</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Summation-based linear model with residual error
+            </div>
+            <div class="equation-text">
+                U = Σ<sub>m=1</sub><sup>M</sup> r<sub>m</sub> · p<sub>m</sub> + e
+            </div>
+            <div class="code-block">
+\newcommand{\equationfive}{%
+    U = \sum_{m=1}^{M} r_{m} \cdot p_{m} + e
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 6</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Gaussian mixture model with integration
+            </div>
+            <div class="equation-text">
+                λ<sub>i</sub> = Σ<sub>j=1</sub><sup>M</sup> {∫<sub>t<sub>i</sub></sub><sup>t<sub>i+1</sub></sup> (S<sub>j</sub> / <sup>σ<sub>j</sub></sup>√(2π)) e<sup>((t-μ<sub>j</sub>)²/(2σ²<sub>j</sub>))</sup> dt} + b
+            </div>
+            <div class="code-block">
+\newcommand{\equationsix}{%
+    \lambda_{i} = \sum_{j=1}^{M} \left\{ \int_{t_{i}}^{t_{i+1}} \frac{S_{j}}{\sqrt[\sigma_{j}]{2\pi}} e^{\left(\frac{(t-\mu_{j})^{2}}{2\sigma^{2}_{j}}\right)} dt\right\} + b
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 7</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Single Gaussian component with integration
+            </div>
+            <div class="equation-text">
+                λ<sub>i</sub> = ∫<sub>t<sub>i</sub></sub><sup>t<sub>i+1</sub></sup> (S<sub>j</sub> / <sup>σ<sub>j</sub></sup>√(2π)) e<sup>((t-μ<sub>j</sub>)²/(2σ²<sub>j</sub>))</sup> dt + b
+            </div>
+            <div class="code-block">
+\newcommand{\equationseven}{%
+    \lambda_{i} = \int_{t_{i}}^{t_{i+1}} \frac{S_{j}}{\sqrt[\sigma_{j}]{2\pi}} e^{\left(\frac{(t-\mu_{j})^{2}}{2\sigma^{2}_{j}}\right)} dt + b
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 8</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Poisson probability distribution
+            </div>
+            <div class="equation-text">
+                p(h<sub>i</sub> = k) = (λ<sub>i</sub><sup>k</sup> e<sup>-λ<sub>i</sub></sup>) / k!
+            </div>
+            <div class="code-block">
+\newcommand{\equationeight}{%
+    p(h_{i} = k) = \frac{\lambda_{i}^{k}e^{-\lambda_{i}}}{k!}
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 9</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Return signal as product of system components
+            </div>
+            <div class="equation-text">
+                R<sub>return</sub> = P<sub>laser</sub>(t) · M<sub>target</sub>(t) · J<sub>TDC</sub>(t) · J<sub>SPAD</sub>(t)
+            </div>
+            <div class="code-block">
+\newcommand{\equationnine}{%
+    R_{\text{return}} = P_{\text{laser}}(t) \cdot M_{\text{target}}(t) \cdot J_{\text{TDC}}(t) \cdot J_{\text{SPAD}}(t)
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 10</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Round-trip time for time-of-flight measurement
+            </div>
+            <div class="equation-text">
+                T<sub>rt</sub> = 2(d<sub>target</sub> / c)
+            </div>
+            <div class="code-block">
+\newcommand{\equationten}{%
+    T_{\text{rt}} = 2 \frac{d_{\text{target}}}{c}
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 11</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Loss function for height and width prediction (with constraint: α ∈ {0,1})
+            </div>
+            <div class="equation-text">
+                Loss<sub>h,w</sub> = Σ<sub>i=0</sub><sup>a</sup> Σ<sub>j=0</sub><sup>g²</sup> α<sub>ji</sub><sup>trg</sup> [(h<sub>gt</sub> - h<sub>pred</sub>)² + (w<sub>gt</sub> - w<sub>pred</sub>)²], α ∈ {0,1}
+            </div>
+            <div class="code-block">
+\newcommand{\equationeleven}{%
+    \text{Loss}_{h,w} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (h_{\text{gt}} - h_{\text{pred}})^{2} + (w_{\text{gt}} - w_{\text{pred}})^{2} \right], \quad \alpha \in \{0,1\}
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 12</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Classification loss function with double summation
+            </div>
+            <div class="equation-text">
+                Loss<sub>C</sub> = Σ<sub>i=0</sub><sup>a</sup> Σ<sub>j=0</sub><sup>g²</sub> α<sub>ji</sub><sup>trg</sup> [(C<sub>gt</sub> - C<sub>pred</sub>)²], C<sub>gt</sub> ∈ {1}
+            </div>
+            <div class="code-block">
+\newcommand{\equationtwelve}{%
+    \text{Loss}_{C} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (C_{\text{gt}} - C_{\text{pred}})^{2} \right], \quad C_{\text{gt}} \in \{1\}
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 13</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Classification probability loss function with constraint
+            </div>
+            <div class="equation-text">
+                Loss<sub>p<sub>gt</sub><sup>cls</sup></sub> = Σ<sub>i=0</sub><sup>a</sup> Σ<sub>j=0</sub><sup>g²</sup> α<sub>ji</sub><sup>trg</sup> [(p<sub>gt</sub><sup>cls</sup> - p<sub>pred</sub><sup>cls</sup>)²], 0 ≤ p<sub>pred</sub><sup>cls</sup> ≤ 1
+            </div>
+            <div class="code-block">
+\newcommand{\equationthirteen}{%
+    \text{Loss}_{p_{\text{gt}}^{\text{cls}}} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (p_{\text{gt}}^{\text{cls}} - p_{\text{pred}}^{\text{cls}})^{2} \right], \quad 0 \leq p_{\text{pred}}^{\text{cls}} \leq 1
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 14</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Material classification probability loss function with constraint
+            </div>
+            <div class="equation-text">
+                Loss<sub>p<sub>gt</sub><sup>mat_cls</sup></sub> = Σ<sub>i=0</sub><sup>a</sup> Σ<sub>j=0</sub><sup>g²</sup> α<sub>ji</sub><sup>trg</sup> [(p<sub>gt</sub><sup>mat_cls</sup> - p<sub>pred</sub><sup>mat_cls</sup>)²], 0 ≤ p<sub>gt</sub><sup>mat_cls</sup> ≤ 1
+            </div>
+            <div class="code-block">
+\newcommand{\equationfourteen}{%
+    \text{Loss}_{p_{\text{gt}}^{\text{mat\_cls}}} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (p_{\text{gt}}^{\text{mat\_cls}} - p_{\text{pred}}^{\text{mat\_cls}})^{2} \right], \quad 0 \leq p_{\text{gt}}^{\text{mat\_cls}} \leq 1
+}
+            </div>
+        </div>
+
+        <div class="equation">
+            <div class="equation-id">Equation ID: 15</div>
+            <div class="equation-meta">
+                <strong>Status:</strong> <span class="status-ready">Ready</span> | 
+                <strong>Location:</strong> - | 
+                <strong>Description:</strong> Coordinate loss function for x and y positions with constraint
+            </div>
+            <div class="equation-text">
+                Loss<sub>x,y</sub> = Σ<sub>i=0</sub><sup>a</sup> Σ<sub>j=0</sub><sup>g²</sup> α<sub>ji</sub><sup>trg</sup> [(x<sub>gt</sub> - x<sub>pred</sub>)² + (y<sub>gt</sub> - y<sub>pred</sub>)²], α ∈ {0,1}
+            </div>
+            <div class="code-block">
+\newcommand{\equationfifteen}{%
+    \text{Loss}_{x,y} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (x_{\text{gt}} - x_{\text{pred}})^{2} + (y_{\text{gt}} - y_{\text{pred}})^{2} \right], \quad \alpha \in \{0,1\}
+}
+            </div>
+        </div>
+
+        <h2>Equation Registry</h2>
+        <table class="registry-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Speed of light equation (c = λv)</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Target distance calculation for ToF measurement</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Softmax function (probability distribution)</td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Linear model with residual error</td>
+                </tr>
+                <tr>
+                    <td><strong>5</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Summation-based linear model with residual error</td>
+                </tr>
+                <tr>
+                    <td><strong>6</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Gaussian mixture model with integration</td>
+                </tr>
+                <tr>
+                    <td><strong>7</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Single Gaussian component with integration</td>
+                </tr>
+                <tr>
+                    <td><strong>8</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Poisson probability distribution</td>
+                </tr>
+                <tr>
+                    <td><strong>9</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Return signal as product of system components</td>
+                </tr>
+                <tr>
+                    <td><strong>10</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Round-trip time for time-of-flight measurement</td>
+                </tr>
+                <tr>
+                    <td><strong>11</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Loss function for height and width prediction</td>
+                </tr>
+                <tr>
+                    <td><strong>12</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Classification loss function with double summation</td>
+                </tr>
+                <tr>
+                    <td><strong>13</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Classification probability loss function with constraint</td>
+                </tr>
+                <tr>
+                    <td><strong>14</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Material classification probability loss function with constraint</td>
+                </tr>
+                <tr>
+                    <td><strong>15</strong></td>
+                    <td>-</td>
+                    <td><span class="status-ready">Ready</span></td>
+                    <td>Coordinate loss function for x and y positions with constraint</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Available Commands</h2>
+        <div class="command-list">
+            <h3>1. Unnumbered Display Equation</h3>
+            <div class="code-block">
+\insertequation{EQUATION_ID}
+            </div>
+            <p>Inserts the equation in display mode (centered, on its own line) without a number.</p>
+
+            <h3>2. Numbered Equation (List of Equations)</h3>
+            <div class="code-block">
+\insertequationnumbered{EQUATION_ID}{LABEL}
+            </div>
+            <p>Inserts the equation with a number, adds it to the List of Equations, and creates a label for cross-referencing with <code>\ref{LABEL}</code>.</p>
+
+            <h3>3. Inline Equation</h3>
+            <div class="code-block">
+\insertequationinline{EQUATION_ID}
+            </div>
+            <p>Inserts the equation inline with the text (within a paragraph).</p>
+
+            <h3>4. Custom Environment</h3>
+            <div class="code-block">
+\insertequationenv{EQUATION_ID}{ENVIRONMENT}
+            </div>
+            <p>Inserts the equation in a custom LaTeX environment (e.g., <code>align</code>, <code>gather</code>, <code>multline</code>, etc.).</p>
+        </div>
+
+        <h2>Technical Details</h2>
+        <p>The equation system integrates with the existing List of Equations functionality in <code>thesis.tex</code>. When using <code>\insertequationnumbered</code>, equations will automatically appear in the List of Equations section.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 2px solid #ecf0f1;">
+        <p style="text-align: center; color: #7f8c8d; font-size: 12px;">
+            Last updated: <span id="lastUpdated"></span>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
+
