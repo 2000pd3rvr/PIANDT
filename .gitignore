@@ -6,16 +6,4 @@ venv/
 .env
 *.log
 
-# Binaries excluded for HF Space (HF requires Xet for binary storage; these stay local / on GitHub history)
-images/agent.gif
-images/agent.png
-images/in.html.gif
-images/out.html.gif
-images/proc.jpg
-patents/background_literature_related_patents.pdf
-patents/triad_information_architecture_patent.pdf
-# Same for backup folder (so push to HF succeeds)
-PIANDT__backup/images/*.gif
-PIANDT__backup/images/*.png
-PIANDT__backup/images/*.jpg
-PIANDT__backup/patents/*.pdf
+# Binaries now tracked with Git LFS (see .gitattributes) so they work on both GH and HF
