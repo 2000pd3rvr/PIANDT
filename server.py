@@ -24,7 +24,7 @@ SAFARI_IOS_PAGE = """<!DOCTYPE html>
 <body>
   <div class="card">
     <h1>Private Space &ndash; use another browser</h1>
-    <p>Private Spaces may not work in Safari or on iOS. Open the link below in <strong>Chrome</strong> or <strong>Firefox</strong> (on Mac or Windows) to view this Space.</p>
+    <p>This is a <strong>private</strong> Space. Private Spaces often do not work in Safari or on iOS. To view this page, please open the link below in <strong>Chrome</strong> or <strong>Firefox</strong> (on Mac or Windows).</p>
     <p class="url" id="url"></p>
     <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('url').textContent); this.textContent='Copied!';">Copy link</button>
   </div>
