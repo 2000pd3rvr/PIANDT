@@ -1,0 +1,201 @@
+% Equations Database
+% ==================
+% This file contains all equations to be inserted in the thesis document.
+% Each equation has a unique ID and can be inserted anywhere in the document.
+%
+% INSERTION INSTRUCTIONS:
+% -----------------------
+% To insert an equation in the document, use:
+% \insertequation{EQUATION_ID}
+%
+% To insert a numbered equation (for list of equations), use:
+% \insertequationnumbered{EQUATION_ID}{LABEL}
+%
+% Example: \insertequation{1}
+% Example: \insertequationnumbered{1}{eq:example}
+%
+% The numbered version will appear in the List of Equations.
+
+% ============================================
+% EQUATION DEFINITIONS
+% ============================================
+
+% Equation ID: 1
+% Status: Ready for insertion
+% Description: Speed of light equation (wavelength-frequency relationship)
+\newcommand{\equationone}{%
+    c = \lambda v
+}
+
+% Equation ID: 2
+% Status: Ready for insertion
+% Description: Target distance calculation for indirect time-of-flight measurement
+\newcommand{\equationtwo}{%
+    d_{\text{target}} = \frac{c \cdot \varphi}{4 \pi \nu}
+}
+
+% Equation ID: 3
+% Status: Ready for insertion
+% Description: Softmax function (probability distribution for classification)
+\newcommand{\equationthree}{%
+    p_{\text{class}} = \frac{e^{\text{logit}_{i}}}{\sum_{j=1}^{K_c} e^{\text{logit}_{j}}}
+}
+
+% Equation ID: 4
+% Status: Ready for insertion
+% Description: Linear model with residual error
+\newcommand{\equationfour}{%
+    U = r_{m} \cdot p_{m} + e
+}
+
+% Equation ID: 5
+% Status: Ready for insertion
+% Description: Summation-based linear model with residual error
+\newcommand{\equationfive}{%
+    U = \sum_{m=1}^{M} r_{m} \cdot p_{m} + e
+}
+
+% Equation ID: 6
+% Status: Ready for insertion
+% Description: Gaussian mixture model with integration
+\newcommand{\equationsix}{%
+    \lambda_{i} = \sum_{j=1}^{M} \left\{ \int_{t_{i}}^{t_{i+1}} \frac{S_{j}}{\sqrt[\sigma_{j}]{2\pi}} e^{\left(\frac{(t-\mu_{j})^{2}}{2\sigma^{2}_{j}}\right)} dt\right\} + b
+}
+
+% Equation ID: 7
+% Status: Ready for insertion
+% Description: Single Gaussian component with integration
+\newcommand{\equationseven}{%
+    \lambda_{i} = \int_{t_{i}}^{t_{i+1}} \frac{S_{j}}{\sqrt[\sigma_{j}]{2\pi}} e^{\left(\frac{(t-\mu_{j})^{2}}{2\sigma^{2}_{j}}\right)} dt + b
+}
+
+% Equation ID: 8
+% Status: Ready for insertion
+% Description: Poisson probability distribution
+\newcommand{\equationeight}{%
+    p(h_{i} = k) = \frac{\lambda_{i}^{k}e^{-\lambda_{i}}}{k!}
+}
+
+% Equation ID: 9
+% Status: Ready for insertion
+% Description: Return signal as product of system components
+\newcommand{\equationnine}{%
+    R_{\text{return}} = P_{\text{laser}}(t) \cdot M_{\text{target}}(t) \cdot J_{\text{TDC}}(t) \cdot J_{\text{SPAD}}(t)
+}
+
+% Equation ID: 10
+% Status: Ready for insertion
+% Description: Round-trip time for time-of-flight measurement
+\newcommand{\equationten}{%
+    T_{\text{rt}} = 2 \frac{d_{\text{target}}}{c}
+}
+
+% Equation ID: 11
+% Status: Ready for insertion
+% Description: Loss function for height and width prediction (with constraint: α ∈ {0,1})
+\newcommand{\equationeleven}{%
+    \text{Loss}_{h,w} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (h_{\text{gt}} - h_{\text{pred}})^{2} + (w_{\text{gt}} - w_{\text{pred}})^{2} \right], \quad \alpha \in \{0,1\}
+}
+
+% Equation ID: 12
+% Status: Ready for insertion
+% Description: Classification loss function with double summation
+\newcommand{\equationtwelve}{%
+    \text{Loss}_{C} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (C_{\text{gt}} - C_{\text{pred}})^{2} \right], \quad C_{\text{gt}} \in \{1\}
+}
+
+% Equation ID: 13
+% Status: Ready for insertion
+% Description: Classification probability loss function with constraint
+\newcommand{\equationthirteen}{%
+    \text{Loss}_{p_{\text{gt}}^{\text{cls}}} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (p_{\text{gt}}^{\text{cls}} - p_{\text{pred}}^{\text{cls}})^{2} \right], \quad 0 \leq p_{\text{pred}}^{\text{cls}} \leq 1
+}
+
+% Equation ID: 14
+% Status: Ready for insertion
+% Description: Material classification probability loss function with constraint
+\newcommand{\equationfourteen}{%
+    \text{Loss}_{p_{\text{gt}}^{\text{mat\_cls}}} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (p_{\text{gt}}^{\text{mat\_cls}} - p_{\text{pred}}^{\text{mat\_cls}})^{2} \right], \quad 0 \leq p_{\text{gt}}^{\text{mat\_cls}} \leq 1
+}
+
+% Equation ID: 15
+% Status: Ready for insertion
+% Description: Coordinate loss function for x and y positions with constraint
+\newcommand{\equationfifteen}{%
+    \text{Loss}_{x,y} = \sum_{i=0}^{a} \sum_{j=0}^{g^{2}} \alpha_{ji}^{\text{trg}} \left[ (x_{\text{gt}} - x_{\text{pred}})^{2} + (y_{\text{gt}} - y_{\text{pred}})^{2} \right], \quad \alpha \in \{0,1\}
+}
+
+% ============================================
+% INSERTION COMMANDS
+% ============================================
+
+% Command to insert an equation (unnumbered, inline or display)
+% Usage: \insertequation{EQUATION_ID}
+% Example: \insertequation{1}
+%
+% This will insert the equation in display mode (centered, on its own line)
+\newcommand{\insertequation}[1]{%
+    \begin{equation*}
+        \csname equation#1\endcsname
+    \end{equation*}%
+}
+
+% Command to insert a numbered equation (appears in List of Equations)
+% Usage: \insertequationnumbered{EQUATION_ID}{LABEL}
+% Example: \insertequationnumbered{1}{eq:example}
+%
+% This will:
+% - Insert the equation with a number
+% - Add it to the List of Equations
+% - Create a label for cross-referencing with \ref{LABEL}
+\newcommand{\insertequationnumbered}[2]{%
+    \begin{equation}
+        \csname equation#1\endcsname
+        \label{#2}
+    \end{equation}%
+    \addcontentsline{loe}{equations}{\protect\numberline{\theequation}$\csname equation#1\endcsname$}%
+}
+
+% Command to insert an equation inline (within text)
+% Usage: \insertequationinline{EQUATION_ID}
+% Example: \insertequationinline{1}
+%
+% This will insert the equation inline with the text
+\newcommand{\insertequationinline}[1]{%
+    $\csname equation#1\endcsname$%
+}
+
+% Command to insert an equation in a specific environment
+% Usage: \insertequationenv{EQUATION_ID}{ENVIRONMENT}
+% Example: \insertequationenv{1}{align}
+%
+% Supported environments: equation, equation*, align, align*, gather, gather*, etc.
+\newcommand{\insertequationenv}[2]{%
+    \begin{#2}%
+        \csname equation#1\endcsname
+    \end{#2}%
+}
+
+% ============================================
+% EQUATION REGISTRY (for reference)
+% ============================================
+% 
+% ID | Location | Status | Description
+% ---|----------|--------|------------
+%  1 |  -       | Ready  | Speed of light equation (c = λv)
+%  2 |  -       | Ready  | Target distance calculation for ToF measurement
+%  3 |  -       | Ready  | Softmax function (probability distribution)
+%  4 |  -       | Ready  | Linear model with residual error
+%  5 |  -       | Ready  | Summation-based linear model with residual error
+%  6 |  -       | Ready  | Gaussian mixture model with integration
+%  7 |  -       | Ready  | Single Gaussian component with integration
+%  8 |  -       | Ready  | Poisson probability distribution
+%  9 |  -       | Ready  | Return signal as product of system components
+% 10 |  -       | Ready  | Round-trip time for time-of-flight measurement
+% 11 |  -       | Ready  | Loss function for height and width prediction
+% 12 |  -       | Ready  | Classification loss function with double summation
+% 13 |  -       | Ready  | Classification probability loss function with constraint
+% 14 |  -       | Ready  | Material classification probability loss function with constraint
+% 15 |  -       | Ready  | Coordinate loss function for x and y positions with constraint
+%
+

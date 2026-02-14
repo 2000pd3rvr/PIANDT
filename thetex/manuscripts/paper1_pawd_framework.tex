@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[numbers,compress]{natbib}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Title and author information
+\title{Particle Wave Detection (PAWD): A Unified Framework for Signal Processing in Optical Sensing and Computer Vision}
+\author{A. Akuoko, D. Chitnis, and I. Gyongy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper presents the Particle Wave Detection (PAWD) framework, a unified theoretical foundation for organizing signal processing systems across diverse sensing domains. The framework formalizes the wave--particle duality of electromagnetic energy as a design axis, categorizing all sensing and processing pipelines into four distinct regimes defined by two orthogonal decisions: (1) whether measurements are resolved in intensity (spatial amplitude) or time (temporal response), and (2) whether processing is spectral (wavelength-resolved) or non-spectral (achromatic). These four regimes---intensity-spectral, intensity non-spectral, temporal-spectral, and temporal non-spectral---map directly onto common optical instruments and signal-processing pipelines used in computer vision, remote sensing, radar, sonar, and terahertz systems. The framework is agnostic to carrier frequency and extends naturally to any sensing domain where energy--matter interactions are measured over time, frequency, or space. PAWD provides a common language for understanding trade-offs between spectral and non-spectral processing, between spatial and temporal representations, and between model complexity and information content. We demonstrate how PAWD guides the design of practical solutions for material detection, spatiotemporal object detection, and liquid purity assessment, all of which rely on temporal non-spectral processing as the primary structural signal channel. Computational complexity analysis reveals that non-spectral temporal processing achieves $\mathcal{O}(N \times B)$ complexity compared to $\mathcal{O}(N \times B \times K)$ for spectral temporal approaches, while maintaining comparable material discrimination performance. The framework establishes a foundation for reproducible research and offers a structured approach for future work on signal processing systems across multiple sensing modalities.
+\end{abstract}
+
+\section{Introduction}
+
+The behavior of electromagnetic energy underpins all optical sensing and signal-processing systems, yet its dual wave--particle nature makes it difficult to impose a single, unified modeling paradigm. Classical theories evolved from Newton's corpuscular view of light to wave-based formulations and, eventually, to modern quantum electrodynamics, where energy exhibits both particle-like and wave-like characteristics depending on the measurement context. In practice, signal-processing pipelines instantiated in imaging, ranging, and spectroscopy instruments implicitly choose one side of this duality: they either operate in a spectral (wave-based) representation or in a particle-like, count-based representation.
+
+The Particle Wave Detection (PAWD) framework makes this choice explicit and uses it to organize signal-acquisition and processing strategies across diverse sensing domains. PAWD is motivated by the observation that many modern systems, especially those used in robotics, machine perception, radar, sonar, and terahertz imaging, are hybrids that implicitly choose between wave-based and particle-based representations. A conventional digital camera, for example, measures photon counts at each pixel (a particle-like process) but interprets them through color filter arrays and demosaicing in a spectral (wave-based) space. Time-of-flight (ToF) imagers, single-photon avalanche diode (SPAD) dToF sensors, and LiDAR units similarly convert incident photons into digital counts, then aggregate or filter these measurements in either spectral or non-spectral domains, depending on the task \cite{su2016,becker2023}. Similarly, radar systems can operate in frequency-domain (spectral) or time-domain (non-spectral) modes, while sonar systems exploit both temporal and spectral representations depending on the application.
+
+Existing literature shows that combining temporal and spatial measurements can dramatically improve depth and object detection performance compared with intensity-only pipelines, particularly in cluttered or safety-critical scenes \cite{moramartin2021,lyons2019}. However, the underlying energy-model assumptions of these systems are rarely articulated, which obscures how and why certain processing regimes succeed.
+
+The PAWD framework treats the wave--particle duality as a design axis rather than a purely philosophical construct. It interprets every sensing and processing chain as choosing one of four regimes defined by two orthogonal decisions: (1) whether measurements are resolved in intensity (spatial amplitude) or time (temporal response), and (2) whether processing is spectral (wavelength-resolved) or non-spectral (achromatic). These four regimes---intensity-spectral, intensity non-spectral, temporal-spectral, and temporal non-spectral---map directly onto common optical instruments and signal-processing pipelines used in computer vision, remote sensing, radar, sonar, and terahertz systems. Although the original motivation for PAWD is optical material detection with SPAD dToF sensors, the framework is agnostic to carrier frequency and extends naturally to other sensing domains where energy--matter interactions are measured over time, frequency, or space.
+
+\section{The PAWD Framework}
+
+\subsection{Four-Regime Classification}
+
+The PAWD framework partitions all sensing and processing systems into four distinct regimes based on two fundamental choices:
+
+\begin{enumerate}
+    \item \textbf{Measurement domain}: Intensity-resolved (spatial amplitude) versus time-resolved (temporal response)
+    \item \textbf{Processing approach}: Spectral (wavelength-resolved) versus non-spectral (achromatic)
+\end{enumerate}
+
+This classification yields four regimes:
+
+\begin{description}
+    \item[\textbf{Intensity-Spectral}] Systems that measure spatially resolved, wavelength-dependent signals. Examples include RGB cameras, hyperspectral imagers, and multispectral imaging systems. These systems operate on multi-channel images where each channel corresponds to a specific wavelength band.
+    
+    \item[\textbf{Intensity Non-Spectral}] Systems that measure spatial intensity without explicit spectral separation. Examples include greyscale cameras, infrared imagers, and monochrome sensors. These systems produce single-channel intensity images.
+    
+    \item[\textbf{Temporal-Spectral}] Systems that resolve both photon arrival time and wavelength. These systems capture wavelength-resolved temporal histograms, enabling joint spectral--temporal analysis of material-dependent optical responses.
+    
+    \item[\textbf{Temporal Non-Spectral}] Systems that measure time-resolved signals from monochromatic or narrowband sources without explicit wavelength decomposition. Examples include SPAD-based dToF sensors operating with single-wavelength illumination, pulse-Doppler radar systems operating in time-domain mode, and sonar systems using temporal echo analysis without frequency decomposition.
+\end{description}
+
+The PAWD framework is not limited to optical sensing. Radar systems, for example, can be classified as intensity-spectral (frequency-domain radar imaging), intensity non-spectral (time-domain radar imaging), temporal-spectral (pulse-Doppler radar with frequency analysis), or temporal non-spectral (pulse-Doppler radar in time-domain mode). Similarly, sonar systems span all four regimes depending on whether they exploit frequency content, temporal impulse responses, or both. Terahertz systems can also be classified into the same four regimes. By expressing these diverse systems in a common language, PAWD makes explicit the trade-offs between spectral and non-spectral processing, between spatial and temporal representations, and between model complexity and information content across multiple sensing modalities.
+
+\subsection{Optical Properties and Material Detection}
+
+Material detection represents the primary application domain guided by the PAWD framework. Materials exhibit unique optical properties that serve as key identifiers for classification. These properties manifest through three primary interaction mechanisms:
+
+\begin{enumerate}
+    \item \textbf{Specular reflection}: Smooth surfaces concentrate reflected energy into narrow, mirror-like lobes aligned with the law of reflection.
+    \item \textbf{Diffuse reflection}: Rough surfaces scatter incident photons over broad angular ranges, producing view-independent appearance.
+    \item \textbf{Subsurface scattering}: Translucent materials allow photons to penetrate beneath the surface, undergo multiple internal scattering events, and re-emerge at displaced positions and delayed times.
+\end{enumerate}
+
+In temporal non-spectral processing, these optical properties encode material-specific information in the shape of photon arrival histograms without requiring explicit spectral decomposition. Subsurface scattering manifests as systematic elongation of histogram peaks, with translucent materials exhibiting broader peaks and more pronounced exponential tails than opaque references observed at the same geometric range.
+
+\section{Signal Processing Models}
+
+\subsection{Non-Spectral Temporal Signal Processing}
+
+For a pure material surface, the temporal signal per bin is modeled as a Gaussian distribution. The per-bin expected photon count approximation is given by:
+
+\begin{equation}
+\mu_i = \frac{S}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(t_i - t_0)^2}{2\sigma^2}\right)
+\label{eq:pure_material_gaussian}
+\end{equation}
+
+where $\mu_i$ represents the expected photon count approximation in bin $i$ (not the whole peak), $S$ is the total signal photons across the entire peak, $\sigma$ is the standard deviation of the Gaussian profile, and $t_0$ is the peak arrival time. This equation provides a per-bin approximation where each bin $i$ receives a fraction of the total signal $S$ based on its temporal position relative to the peak.
+
+Since all bins are subject to shot noise, the individual photon count $h_i$ for each bin $i$ is drawn from a Poisson distribution with mean $\mu_i + b$, where $\mu_i$ is the per-bin expected photon count from Equation~\ref{eq:pure_material_gaussian} and $b$ represents ambient noise photons per bin. The probability mass function (PMF) for each bin is expressed as:
+
+\begin{equation}
+P(h_i = k) = \frac{(\mu_i + b)^k e^{-(\mu_i + b)}}{k!}
+\label{eq:poisson_pmf}
+\end{equation}
+
+For multi-material surfaces comprising $M$ total materials, the per-bin expected photon count approximation is derived from a Gaussian mixture model:
+
+\begin{equation}
+\mu_i = \sum_{m=1}^{M} \frac{S_m}{\sqrt{2\pi\sigma_m^2}} \exp\left(-\frac{(t_i - t_{0,m})^2}{2\sigma_m^2}\right) + b
+\label{eq:gaussian_mixture}
+\end{equation}
+
+where $S_m$ is the total signal photons for material $m$ across the entire peak, $\sigma_m$ is the standard deviation, and $t_{0,m}$ is the peak time for material $m$. This equation provides a per-bin approximation where the expected photon count in each bin $i$ is the sum of contributions from all $M$ materials, each following a Gaussian distribution, plus the ambient noise $b$.
+
+\subsection{Spectral Temporal Signal Processing}
+
+Spectral temporal signal processing extends the non-spectral temporal models by incorporating wavelength-dependent variations. For a pure material surface at wavelength $\lambda$, the per-bin expected photon count approximation is modeled as:
+
+\begin{equation}
+\mu_{i,\lambda} = \frac{S_\lambda}{\sqrt{2\pi\sigma_\lambda^2}} \exp\left(-\frac{(t_i - t_{0,\lambda})^2}{2\sigma_\lambda^2}\right)
+\label{eq:spectral_temporal_pure_material}
+\end{equation}
+
+For multi-material surfaces, the wavelength-dependent Gaussian mixture model is:
+
+\begin{equation}
+\mu_{i,\lambda} = \sum_{m=1}^{M} \frac{S_{m,\lambda}}{\sqrt{2\pi\sigma_{m,\lambda}^2}} \exp\left(-\frac{(t_i - t_{0,m,\lambda})^2}{2\sigma_{m,\lambda}^2}\right) + b_\lambda
+\label{eq:spectral_temporal_mixture}
+\end{equation}
+
+where $S_{m,\lambda}$ is the total signal photons for material $m$ at wavelength $\lambda$ across the entire peak, and $b_\lambda$ denotes the wavelength-dependent ambient noise level per bin.
+
+\section{Computational Complexity Analysis}
+
+\subsection{Non-Spectral Temporal Processing}
+
+The computational complexity of processing non-spectral temporal signals in SPAD-based time-of-flight systems scales with two primary dimensions: the detector array size $N$ (total number of pixels) and the temporal resolution $B$ (number of time bins per pixel). In the worst-case scenario, signal accumulation occurs once across the total array size $N$ and once across the total number of bins $B$ for the temporal signal spread per pixel, resulting in memory and time complexity of $\mathcal{O}(N \times B)$ \cite{knuth1976}.
+
+Two boundary cases illustrate the relationship between temporal and spatial complexity:
+\begin{itemize}
+    \item If all photon arrival times are compressed into a single bin ($B = 1$), the complexity reduces to $\mathcal{O}(N)$, matching that of achromatic intensity pixel updates.
+    \item When processing a single pixel with a large number of bins ($N = 1$), the algorithm scans the total number of bins once, resulting in linear complexity $\mathcal{O}(B)$.
+\end{itemize}
+
+\subsection{Spectral Temporal Processing}
+
+The computational complexity of spectral temporal signal processing scales with three primary dimensions: the detector array size $N$, the temporal resolution $B$ (number of time bins per pixel), and the spectral dimensionality $K$ (number of wavelength channels). In the most general case, pixel update operations must accumulate signals across all three dimensions, resulting in complexity that grows as $\mathcal{O}(N \times B \times K)$ \cite{knuth1976}.
+
+The fundamental trade-off in spectral temporal processing lies in the increased dimensionality: while spectral resolution enables enhanced material discrimination through wavelength-dependent signatures \cite{inagaki2020,heinz2001}, the computational overhead grows multiplicatively with spectral channels, temporal bins, and array size. This complexity scaling motivates the non-spectral temporal approach, where material discrimination is achieved through temporal signatures alone without explicit wavelength decomposition, reducing complexity from $\mathcal{O}(N \times B \times K)$ to $\mathcal{O}(N \times B)$ while maintaining comparable material detection performance \cite{su2016,becker2023}.
+
+\section{Applications and Experimental Validation}
+
+The PAWD framework guides the design of three practical solutions:
+
+\begin{enumerate}
+    \item \textbf{Long-range material detection}: Flat homogeneous surface material classification using temporal non-spectral signals, achieving $\sim$98\% accuracy at extended ranges (up to 4\,m).
+    
+    \item \textbf{Spatiotemporal object detection}: Fusion of RGB spatial images with dToF temporal signals for enhanced object detection, achieving 94--98\% accuracy across multiple architectures (YOLOv3, YOLOv8, DINOv3).
+    
+    \item \textbf{Liquid purity assessment}: Non-invasive milk purity detection using temporal non-spectral signals, achieving $\sim$97\% detection accuracy for both visible and invisible contaminants.
+\end{enumerate}
+
+All three applications demonstrate that temporal non-spectral processing can achieve material discrimination performance comparable to more expensive hyperspectral pipelines, while maintaining lower computational complexity and hardware requirements.
+
+\section{Discussion}
+
+The PAWD framework provides several key insights:
+
+\begin{enumerate}
+    \item \textbf{Explicit design choices}: By making the wave--particle duality explicit, PAWD enables systematic reasoning about which processing regime is most appropriate for a given application.
+    
+    \item \textbf{Complexity trade-offs}: The framework quantifies the computational cost of spectral versus non-spectral processing, enabling informed decisions about when the additional complexity of spectral methods is justified.
+    
+    \item \textbf{Hybrid system design}: PAWD clarifies how spatial and temporal information can be combined, with spatial intensity encoding geometric layout and temporal signals encoding structural properties such as material composition and depth.
+    
+    \item \textbf{Reproducibility}: The framework provides a common language and structured foundation for reproducible research across diverse signal processing domains.
+    
+    \item \textbf{Cross-domain applicability}: PAWD extends beyond optical sensing to radar, sonar, terahertz, and other sensing modalities, providing a unified framework for understanding signal processing choices across different physical domains.
+\end{enumerate}
+
+\section{Conclusion}
+
+The Particle Wave Detection (PAWD) framework formalizes the wave--particle duality of electromagnetic energy as a design axis for organizing signal processing systems across diverse sensing domains. By categorizing all sensing and processing pipelines into four distinct regimes, PAWD provides a unified theoretical foundation that bridges sensing principles across optical, radar, sonar, terahertz, and other modalities. The framework is agnostic to carrier frequency and extends naturally to any domain where energy--matter interactions are measured over time, frequency, or space. PAWD demonstrates that temporal non-spectral processing can achieve material discrimination performance comparable to spectral approaches while maintaining lower computational complexity, establishing a pathway toward more efficient and practical signal processing systems. The framework provides a common language for understanding design choices, complexity trade-offs, and information content across multiple sensing modalities, enabling systematic reasoning about which processing regime is most appropriate for a given application.
+
+\bibliographystyle{IEEEtranN}
+\bibliography{../references}
+
+\end{document}
+

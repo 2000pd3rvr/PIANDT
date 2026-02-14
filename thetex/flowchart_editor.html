@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TikZ Flowchart Interactive Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .editor-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .preview-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-top: 0;
+            color: #333;
+        }
+        h2 {
+            color: #555;
+            font-size: 18px;
+            margin-top: 0;
+        }
+        #canvas {
+            border: 2px solid #ddd;
+            background: white;
+            cursor: crosshair;
+            display: block;
+            margin: 20px auto;
+            touch-action: none;
+        }
+        .draggable {
+            cursor: move;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        .control-group {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="range"] {
+            flex: 1;
+        }
+        .value {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            font-family: monospace;
+            background: white;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 12px 24px;
+            margin: 10px 5px;
+            font-size: 14px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button.secondary {
+            background: #6c757d;
+        }
+        button.secondary:hover {
+            background: #545b62;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .element-info {
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .selected {
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+        }
+        .instructions {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+        .instructions ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="editor-panel">
+            <h1>TikZ Flowchart Editor</h1>
+            
+            <div class="instructions">
+                <h3>Instructions</h3>
+                <ul>
+                    <li><strong>Click and drag lines on the canvas</strong> to move them horizontally or vertically</li>
+                    <li><strong>Use sliders</strong> for precise adjustments</li>
+                    <li><strong>Click "Export LaTeX"</strong> to get updated code</li>
+                    <li><strong>Click "Reset"</strong> to restore original positions</li>
+                    <li><strong>Blue lines</strong> = top section, <strong>Red lines</strong> = bottom section</li>
+                </ul>
+            </div>
+
+            <div class="controls">
+                <h2>Horizontal Lines</h2>
+                
+                <div class="control-group">
+                    <label>Top Horizontal Line - X Start:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topHLineXStart" min="-8" max="8" step="0.1" value="-4">
+                        <span class="value" id="topHLineXStartVal">-4.0</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Top Horizontal Line - X End:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topHLineXEnd" min="-8" max="8" step="0.1" value="4">
+                        <span class="value" id="topHLineXEndVal">4.0</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Top Horizontal Line - Y Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topHLineY" min="-2" max="2" step="0.05" value="0">
+                        <span class="value" id="topHLineYVal">0.0</span> cm
+                    </div>
+                    <div class="element-info">Relative to PAWD framework bottom (0 = default position)</div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Bottom Horizontal Line - X Start:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomHLineXStart" min="-8" max="8" step="0.1" value="-4">
+                        <span class="value" id="bottomHLineXStartVal">-4.0</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Bottom Horizontal Line - X End:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomHLineXEnd" min="-8" max="8" step="0.1" value="4">
+                        <span class="value" id="bottomHLineXEndVal">4.0</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Bottom Horizontal Line - Y Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomHLineY" min="-2" max="2" step="0.05" value="0">
+                        <span class="value" id="bottomHLineYVal">0.0</span> cm
+                    </div>
+                    <div class="element-info">Relative to items bottom (0 = default position)</div>
+                </div>
+
+                <h2>Vertical Lines (Top Section)</h2>
+                
+                <div class="control-group">
+                    <label>Vertical Line 1 (Top) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topVLine1" min="-8" max="8" step="0.1" value="-4">
+                        <span class="value" id="topVLine1Val">-4.0</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line 2 (Top) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topVLine2" min="-8" max="8" step="0.1" value="-1.3">
+                        <span class="value" id="topVLine2Val">-1.3</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line 3 (Top) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topVLine3" min="-8" max="8" step="0.1" value="1.3">
+                        <span class="value" id="topVLine3Val">1.3</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line 4 (Top) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="topVLine4" min="-8" max="8" step="0.1" value="4">
+                        <span class="value" id="topVLine4Val">4.0</span> cm
+                    </div>
+                </div>
+
+                <h2>Vertical Lines (Bottom Section)</h2>
+                
+                <div class="control-group">
+                    <label>Vertical Line 1 (Bottom) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomVLine1" min="-8" max="8" step="0.1" value="-4">
+                        <span class="value" id="bottomVLine1Val">-4.0</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line 2 (Bottom) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomVLine2" min="-8" max="8" step="0.1" value="-1.3">
+                        <span class="value" id="bottomVLine2Val">-1.3</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line 3 (Bottom) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomVLine3" min="-8" max="8" step="0.1" value="1.3">
+                        <span class="value" id="bottomVLine3Val">1.3</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line 4 (Bottom) - X Position:</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomVLine4" min="-8" max="8" step="0.1" value="4">
+                        <span class="value" id="bottomVLine4Val">4.0</span> cm
+                    </div>
+                </div>
+
+                <h2>Vertical Positioning</h2>
+                
+                <div class="control-group">
+                    <label>Items Vertical Position (Y Shift):</label>
+                    <div class="slider-container">
+                        <input type="range" id="itemsYShift" min="0.5" max="1.5" step="0.05" value="0.9">
+                        <span class="value" id="itemsYShiftVal">0.9</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line Length (Top):</label>
+                    <div class="slider-container">
+                        <input type="range" id="topVLineLength" min="0.2" max="1.0" step="0.05" value="0.5">
+                        <span class="value" id="topVLineLengthVal">0.5</span> cm
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Vertical Line Length (Bottom):</label>
+                    <div class="slider-container">
+                        <input type="range" id="bottomVLineLength" min="0.2" max="1.0" step="0.05" value="0.5">
+                        <span class="value" id="bottomVLineLengthVal">0.5</span> cm
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button onclick="exportLaTeX()">Export LaTeX Code</button>
+                <button class="secondary" onclick="reset()">Reset to Original</button>
+                <button class="secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+            </div>
+        </div>
+        
+        <div class="preview-panel">
+            <h2>Visual Preview</h2>
+            <canvas id="canvas" width="600" height="800"></canvas>
+            <div id="output"></div>
+        </div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = 30; // pixels per cm
+        
+        // State
+        let isDragging = false;
+        let dragElement = null;
+        let dragOffset = { x: 0, y: 0 };
+        
+        // Original values
+        const original = {
+            topHLineXStart: -4,
+            topHLineXEnd: 4,
+            topHLineY: 0,
+            bottomHLineXStart: -4,
+            bottomHLineXEnd: 4,
+            bottomHLineY: 0,
+            topVLine1: -4,
+            topVLine2: -1.3,
+            topVLine3: 1.3,
+            topVLine4: 4,
+            bottomVLine1: -4,
+            bottomVLine2: -1.3,
+            bottomVLine3: 1.3,
+            bottomVLine4: 4,
+            itemsYShift: 0.9,
+            topVLineLength: 0.5,
+            bottomVLineLength: 0.5
+        };
+        
+        function getValue(id) {
+            return parseFloat(document.getElementById(id).value);
+        }
+        
+        function setValue(id, val) {
+            document.getElementById(id).value = val;
+            document.getElementById(id + 'Val').textContent = val.toFixed(2);
+        }
+        
+        function updateDisplay() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = 200;
+            
+            // Draw top section: three nodes vertically
+            const nodeWidth = 3 * scale;
+            const nodeHeight = 1 * scale;
+            const nodeSpacing = 2.5 * scale;
+            
+            // Node 1: Observed scene
+            const node1Y = centerY - nodeSpacing * 2;
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fillRect(centerX - nodeWidth/2, node1Y - nodeHeight/2, nodeWidth, nodeHeight);
+            ctx.strokeRect(centerX - nodeWidth/2, node1Y - nodeHeight/2, nodeWidth, nodeHeight);
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Observed scene', centerX, node1Y);
+            
+            // Node 2: Measured signal
+            const node2Y = centerY - nodeSpacing;
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fillRect(centerX - nodeWidth/2, node2Y - nodeHeight/2, nodeWidth, nodeHeight);
+            ctx.strokeRect(centerX - nodeWidth/2, node2Y - nodeHeight/2, nodeWidth, nodeHeight);
+            ctx.fillText('Measured signal', centerX, node2Y);
+            
+            // Node 3: PAWD framework
+            const node3Y = centerY;
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fillRect(centerX - nodeWidth/2, node3Y - nodeHeight/2, nodeWidth, nodeHeight);
+            ctx.strokeRect(centerX - nodeWidth/2, node3Y - nodeHeight/2, nodeWidth, nodeHeight);
+            ctx.fillText('PAWD framework', centerX, node3Y);
+            
+            // Draw arrows between nodes
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(centerX, node1Y + nodeHeight/2 + 0.3*scale);
+            ctx.lineTo(centerX, node2Y - nodeHeight/2 - 0.3*scale);
+            ctx.stroke();
+            
+            // Arrowhead
+            ctx.beginPath();
+            ctx.moveTo(centerX - 5, node2Y - nodeHeight/2 - 0.3*scale - 5);
+            ctx.lineTo(centerX, node2Y - nodeHeight/2 - 0.3*scale);
+            ctx.lineTo(centerX + 5, node2Y - nodeHeight/2 - 0.3*scale - 5);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX, node2Y + nodeHeight/2 + 0.3*scale);
+            ctx.lineTo(centerX, node3Y - nodeHeight/2 - 0.3*scale);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX - 5, node3Y - nodeHeight/2 - 0.3*scale - 5);
+            ctx.lineTo(centerX, node3Y - nodeHeight/2 - 0.3*scale);
+            ctx.lineTo(centerX + 5, node3Y - nodeHeight/2 - 0.3*scale - 5);
+            ctx.stroke();
+            
+            // Short vertical line from PAWD framework
+            const pawdBottomY = node3Y + nodeHeight/2 + 0.5*scale;
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(centerX, node3Y + nodeHeight/2);
+            ctx.lineTo(centerX, pawdBottomY);
+            ctx.stroke();
+            
+            // Top horizontal line
+            const topHLineXStart = getValue('topHLineXStart');
+            const topHLineXEnd = getValue('topHLineXEnd');
+            const topHLineY = pawdBottomY + getValue('topHLineY') * scale;
+            ctx.strokeStyle = '#0066cc';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(centerX + topHLineXStart * scale, topHLineY);
+            ctx.lineTo(centerX + topHLineXEnd * scale, topHLineY);
+            ctx.stroke();
+            
+            // Top vertical lines
+            const topVLinePositions = [
+                getValue('topVLine1'),
+                getValue('topVLine2'),
+                getValue('topVLine3'),
+                getValue('topVLine4')
+            ];
+            const topVLineLength = getValue('topVLineLength');
+            ctx.strokeStyle = '#0066cc';
+            ctx.lineWidth = 3;
+            topVLinePositions.forEach(x => {
+                ctx.beginPath();
+                ctx.moveTo(centerX + x * scale, topHLineY);
+                ctx.lineTo(centerX + x * scale, topHLineY + topVLineLength * scale);
+                ctx.stroke();
+            });
+            
+            // Four items (boxes)
+            const itemsYShift = getValue('itemsYShift');
+            const itemsY = pawdBottomY + itemsYShift * scale;
+            const itemWidth = 2.2 * scale;
+            const itemHeight = 1 * scale;
+            const itemPositions = [
+                getValue('topVLine1'),
+                getValue('topVLine2'),
+                getValue('topVLine3'),
+                getValue('topVLine4')
+            ];
+            const itemLabels = ['Intensity\nspectral', 'Intensity\nnon-spectral', 'Temporal\nspectral', 'Temporal\nnon-spectral'];
+            
+            itemPositions.forEach((x, i) => {
+                ctx.fillStyle = '#e0e0e0';
+                ctx.fillRect(centerX + x * scale - itemWidth/2, itemsY - itemHeight/2, itemWidth, itemHeight);
+                ctx.strokeRect(centerX + x * scale - itemWidth/2, itemsY - itemHeight/2, itemWidth, itemHeight);
+                ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
+                const lines = itemLabels[i].split('\n');
+                lines.forEach((line, idx) => {
+                    ctx.fillText(line, centerX + x * scale, itemsY - itemHeight/4 + idx * 12);
+                });
+            });
+            
+            // Bottom horizontal line
+            const bottomHLineXStart = getValue('bottomHLineXStart');
+            const bottomHLineXEnd = getValue('bottomHLineXEnd');
+            const itemsBottomY = itemsY + itemHeight/2 + itemsYShift * scale;
+            const bottomHLineY = itemsBottomY + getValue('bottomHLineY') * scale;
+            ctx.strokeStyle = '#cc0000';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(centerX + bottomHLineXStart * scale, bottomHLineY);
+            ctx.lineTo(centerX + bottomHLineXEnd * scale, bottomHLineY);
+            ctx.stroke();
+            
+            // Bottom vertical lines (going upward from horizontal line)
+            const bottomVLinePositions = [
+                getValue('bottomVLine1'),
+                getValue('bottomVLine2'),
+                getValue('bottomVLine3'),
+                getValue('bottomVLine4')
+            ];
+            const bottomVLineLength = getValue('bottomVLineLength');
+            ctx.strokeStyle = '#cc0000';
+            ctx.lineWidth = 3;
+            bottomVLinePositions.forEach(x => {
+                ctx.beginPath();
+                ctx.moveTo(centerX + x * scale, bottomHLineY);
+                ctx.lineTo(centerX + x * scale, bottomHLineY - bottomVLineLength * scale);
+                ctx.stroke();
+            });
+        }
+        
+        function updateValue(id) {
+            const slider = document.getElementById(id);
+            const valueSpan = document.getElementById(id + 'Val');
+            valueSpan.textContent = parseFloat(slider.value).toFixed(2);
+            updateDisplay();
+        }
+        
+        // Add event listeners for all sliders
+        const sliderIds = [
+            'topHLineXStart', 'topHLineXEnd', 'topHLineY',
+            'bottomHLineXStart', 'bottomHLineXEnd', 'bottomHLineY',
+            'topVLine1', 'topVLine2', 'topVLine3', 'topVLine4',
+            'bottomVLine1', 'bottomVLine2', 'bottomVLine3', 'bottomVLine4',
+            'itemsYShift', 'topVLineLength', 'bottomVLineLength'
+        ];
+        
+        sliderIds.forEach(id => {
+            document.getElementById(id).addEventListener('input', () => updateValue(id));
+        });
+        
+        function exportLaTeX() {
+            const topHLineXStart = getValue('topHLineXStart');
+            const topHLineXEnd = getValue('topHLineXEnd');
+            const topHLineY = getValue('topHLineY');
+            const bottomHLineXStart = getValue('bottomHLineXStart');
+            const bottomHLineXEnd = getValue('bottomHLineXEnd');
+            const bottomHLineY = getValue('bottomHLineY');
+            const topVLine1 = getValue('topVLine1');
+            const topVLine2 = getValue('topVLine2');
+            const topVLine3 = getValue('topVLine3');
+            const topVLine4 = getValue('topVLine4');
+            const bottomVLine1 = getValue('bottomVLine1');
+            const bottomVLine2 = getValue('bottomVLine2');
+            const bottomVLine3 = getValue('bottomVLine3');
+            const bottomVLine4 = getValue('bottomVLine4');
+            const itemsYShift = getValue('itemsYShift');
+            const topVLineLength = getValue('topVLineLength');
+            const bottomVLineLength = getValue('bottomVLineLength');
+            
+            const latex = `\\begin{figure}[htbp]
+\\centering
+\\begin{tikzpicture}[node distance=2.5cm, auto]
+    % Define nodes vertically
+    \\node[rectangle, draw, fill=gray!20, text width=3cm, text centered, minimum height=1cm] (scene) {Observed scene};
+    \\node[rectangle, draw, fill=gray!20, text width=3cm, text centered, minimum height=1cm, below of=scene] (signal) {Measured signal};
+    \\node[rectangle, draw, fill=gray!20, text width=3cm, text centered, minimum height=1cm, below of=signal] (pawd) {PAWD framework};
+    
+    % Draw arrows vertically with gaps (not touching boxes)
+    \\draw[->, thick] ([yshift=-0.3cm]scene.south) -- ([yshift=0.3cm]signal.north);
+    \\draw[->, thick] ([yshift=-0.3cm]signal.south) -- ([yshift=0.3cm]pawd.north);
+    
+    % Short vertical line from PAWD framework
+    \\draw[thick] (pawd.south) -- ++(0,-0.5cm) coordinate (pawd_bottom);
+    
+    % Horizontal line spanning 4 items
+    \\draw[thick] ([xshift=${topHLineXStart}cm, yshift=${topHLineY}cm]pawd_bottom) -- ([xshift=${topHLineXEnd}cm, yshift=${topHLineY}cm]pawd_bottom);
+    
+    % Four items arranged horizontally
+    \\node[rectangle, draw, fill=gray!20, text width=2.2cm, text centered, minimum height=1cm, below of=pawd_bottom, xshift=${topVLine1}cm, yshift=${itemsYShift}cm] (item1) {Intensity\\\\spectral};
+    \\node[rectangle, draw, fill=gray!20, text width=2.2cm, text centered, minimum height=1cm, below of=pawd_bottom, xshift=${topVLine2}cm, yshift=${itemsYShift}cm] (item2) {Intensity\\\\non-spectral};
+    \\node[rectangle, draw, fill=gray!20, text width=2.2cm, text centered, minimum height=1cm, below of=pawd_bottom, xshift=${topVLine3}cm, yshift=${itemsYShift}cm] (item3) {Temporal\\\\spectral};
+    \\node[rectangle, draw, fill=gray!20, text width=2.2cm, text centered, minimum height=1cm, below of=pawd_bottom, xshift=${topVLine4}cm, yshift=${itemsYShift}cm] (item4) {Temporal\\\\non-spectral};
+    
+    % Short vertical lines from horizontal line to each item
+    \\draw[thick] ([xshift=${topVLine1}cm, yshift=${topHLineY}cm]pawd_bottom) -- ++(0,-${topVLineLength}cm);
+    \\draw[thick] ([xshift=${topVLine2}cm, yshift=${topHLineY}cm]pawd_bottom) -- ++(0,-${topVLineLength}cm);
+    \\draw[thick] ([xshift=${topVLine3}cm, yshift=${topHLineY}cm]pawd_bottom) -- ++(0,-${topVLineLength}cm);
+    \\draw[thick] ([xshift=${topVLine4}cm, yshift=${topHLineY}cm]pawd_bottom) -- ++(0,-${topVLineLength}cm);
+    
+    % Second horizontal line below the 4 items
+    \\coordinate (items_bottom) at ([yshift=-${itemsYShift}cm]item2.south);
+    
+    % Horizontal line below items
+    \\draw[thick] ([xshift=${bottomHLineXStart}cm, yshift=${bottomHLineY}cm]items_bottom) -- ([xshift=${bottomHLineXEnd}cm, yshift=${bottomHLineY}cm]items_bottom);
+    
+    % Four vertical lines pointing upward (sitting on top of bottom horizontal line)
+    \\draw[thick] ([xshift=${bottomVLine1}cm, yshift=${bottomHLineY}cm]items_bottom) -- ++(0,-${bottomVLineLength}cm);
+    \\draw[thick] ([xshift=${bottomVLine2}cm, yshift=${bottomHLineY}cm]items_bottom) -- ++(0,-${bottomVLineLength}cm);
+    \\draw[thick] ([xshift=${bottomVLine3}cm, yshift=${bottomHLineY}cm]items_bottom) -- ++(0,-${bottomVLineLength}cm);
+    \\draw[thick] ([xshift=${bottomVLine4}cm, yshift=${bottomHLineY}cm]items_bottom) -- ++(0,-${bottomVLineLength}cm);
+\\end{tikzpicture}
+\\caption{Flow chart showing the processing pipeline from observed scene through measured signal to the PAWD framework.}
+\\label{fig:flowchart}
+\\end{figure}`;
+            
+            document.getElementById('output').textContent = latex;
+        }
+        
+        function reset() {
+            Object.keys(original).forEach(key => {
+                setValue(key, original[key]);
+            });
+            updateDisplay();
+        }
+        
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            if (output.textContent) {
+                navigator.clipboard.writeText(output.textContent).then(() => {
+                    alert('LaTeX code copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+            } else {
+                alert('Please export LaTeX code first!');
+            }
+        }
+        
+        // Helper function to get line positions
+        function getLinePositions() {
+            const centerX = canvas.width / 2;
+            const centerY = 200;
+            const nodeHeight = 1 * scale;
+            const nodeSpacing = 2.5 * scale;
+            const node3Y = centerY;
+            const pawdBottomY = node3Y + nodeHeight/2 + 0.5*scale;
+            const itemsYShift = getValue('itemsYShift');
+            const itemsY = pawdBottomY + itemsYShift * scale;
+            const itemHeight = 1 * scale;
+            const itemsBottomY = itemsY + itemHeight/2 + itemsYShift * scale;
+            const topHLineY = pawdBottomY + getValue('topHLineY') * scale;
+            const bottomHLineY = itemsBottomY + getValue('bottomHLineY') * scale;
+            
+            return {
+                centerX,
+                pawdBottomY,
+                itemsBottomY,
+                topHLineY,
+                bottomHLineY,
+                topVLineLength: getValue('topVLineLength'),
+                bottomVLineLength: getValue('bottomVLineLength')
+            };
+        }
+        
+        // Check if point is near a line
+        function getLineAtPoint(x, y) {
+            const pos = getLinePositions();
+            const hitThreshold = 10; // pixels
+            
+            // Check top horizontal line
+            const topHLineXStart = getValue('topHLineXStart');
+            const topHLineXEnd = getValue('topHLineXEnd');
+            const topHLineY = pos.topHLineY;
+            if (Math.abs(y - topHLineY) < hitThreshold) {
+                const lineX = pos.centerX + (topHLineXStart + topHLineXEnd) / 2 * scale;
+                if (Math.abs(x - lineX) < Math.abs(topHLineXEnd - topHLineXStart) * scale / 2 + hitThreshold) {
+                    return { type: 'topHLine', y: topHLineY };
+                }
+            }
+            
+            // Check bottom horizontal line
+            const bottomHLineXStart = getValue('bottomHLineXStart');
+            const bottomHLineXEnd = getValue('bottomHLineXEnd');
+            const bottomHLineY = pos.bottomHLineY;
+            if (Math.abs(y - bottomHLineY) < hitThreshold) {
+                const lineX = pos.centerX + (bottomHLineXStart + bottomHLineXEnd) / 2 * scale;
+                if (Math.abs(x - lineX) < Math.abs(bottomHLineXEnd - bottomHLineXStart) * scale / 2 + hitThreshold) {
+                    return { type: 'bottomHLine', y: bottomHLineY };
+                }
+            }
+            
+            // Check top vertical lines
+            const topVLinePositions = [
+                { id: 'topVLine1', x: getValue('topVLine1') },
+                { id: 'topVLine2', x: getValue('topVLine2') },
+                { id: 'topVLine3', x: getValue('topVLine3') },
+                { id: 'topVLine4', x: getValue('topVLine4') }
+            ];
+            for (let line of topVLinePositions) {
+                const lineX = pos.centerX + line.x * scale;
+                const lineYStart = pos.topHLineY;
+                const lineYEnd = pos.topHLineY + pos.topVLineLength * scale;
+                if (Math.abs(x - lineX) < hitThreshold && y >= lineYStart && y <= lineYEnd) {
+                    return { type: 'topVLine', id: line.id, x: lineX };
+                }
+            }
+            
+            // Check bottom vertical lines
+            const bottomVLinePositions = [
+                { id: 'bottomVLine1', x: getValue('bottomVLine1') },
+                { id: 'bottomVLine2', x: getValue('bottomVLine2') },
+                { id: 'bottomVLine3', x: getValue('bottomVLine3') },
+                { id: 'bottomVLine4', x: getValue('bottomVLine4') }
+            ];
+            for (let line of bottomVLinePositions) {
+                const lineX = pos.centerX + line.x * scale;
+                const lineYStart = pos.bottomHLineY - pos.bottomVLineLength * scale;
+                const lineYEnd = pos.bottomHLineY;
+                if (Math.abs(x - lineX) < hitThreshold && y >= lineYStart && y <= lineYEnd) {
+                    return { type: 'bottomVLine', id: line.id, x: lineX };
+                }
+            }
+            
+            return null;
+        }
+        
+        // Mouse event handlers for dragging
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const line = getLineAtPoint(x, y);
+            if (line) {
+                isDragging = true;
+                dragElement = line;
+                dragOffset = { x: x - (line.x || 0), y: y - (line.y || 0) };
+                canvas.style.cursor = 'move';
+            }
+        });
+        
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            if (isDragging && dragElement) {
+                const pos = getLinePositions();
+                
+                if (dragElement.type === 'topHLine' || dragElement.type === 'bottomHLine') {
+                    // Dragging horizontal line - move vertically
+                    const currentY = dragElement.type === 'topHLine' ? pos.topHLineY : pos.bottomHLineY;
+                    const baseY = dragElement.type === 'topHLine' ? pos.pawdBottomY : pos.itemsBottomY;
+                    const newY = (y - dragOffset.y);
+                    const deltaY = (newY - baseY) / scale;
+                    
+                    // Update Y position directly
+                    if (dragElement.type === 'topHLine') {
+                        const clampedY = Math.max(-2, Math.min(2, deltaY));
+                        setValue('topHLineY', clampedY);
+                    } else {
+                        const clampedY = Math.max(-2, Math.min(2, deltaY));
+                        setValue('bottomHLineY', clampedY);
+                    }
+                } else if (dragElement.type === 'topVLine' || dragElement.type === 'bottomVLine') {
+                    // Dragging vertical line - move horizontally
+                    const newX = (x - pos.centerX) / scale;
+                    const clampedX = Math.max(-8, Math.min(8, newX));
+                    setValue(dragElement.id, clampedX);
+                }
+                
+                updateDisplay();
+            } else {
+                // Check if hovering over a draggable line
+                const line = getLineAtPoint(x, y);
+                canvas.style.cursor = line ? 'move' : 'crosshair';
+            }
+        });
+        
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+            dragElement = null;
+            canvas.style.cursor = 'crosshair';
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            isDragging = false;
+            dragElement = null;
+            canvas.style.cursor = 'crosshair';
+        });
+        
+        // Touch support for mobile
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            
+            const line = getLineAtPoint(x, y);
+            if (line) {
+                isDragging = true;
+                dragElement = line;
+                dragOffset = { x: x - (line.x || 0), y: y - (line.y || 0) };
+            }
+        });
+        
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (isDragging && dragElement && e.touches.length > 0) {
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                const pos = getLinePositions();
+                
+                if (dragElement.type === 'topVLine' || dragElement.type === 'bottomVLine') {
+                    const newX = (x - pos.centerX) / scale;
+                    const clampedX = Math.max(-8, Math.min(8, newX));
+                    setValue(dragElement.id, clampedX);
+                    updateDisplay();
+                }
+            }
+        });
+        
+        canvas.addEventListener('touchend', () => {
+            isDragging = false;
+            dragElement = null;
+        });
+        
+        // Initial display
+        updateDisplay();
+        sliderIds.forEach(id => updateValue(id));
+    </script>
+</body>
+</html>
+

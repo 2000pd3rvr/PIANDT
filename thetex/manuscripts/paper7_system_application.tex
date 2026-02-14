@@ -1,0 +1,89 @@
+\documentclass[10pt,twocolumn]{article}
+
+% Packages for IEEE IoT or ACM format
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[numbers,compress]{natbib}
+\usepackage{geometry}
+\geometry{margin=0.8in}
+
+% Title and author information
+\title{A Web-Based Framework for Real-Time Material Detection Using SPAD Sensors: System Architecture and Deployment}
+\author{A. Akuoko, D. Chitnis, and I. Gyongy}
+\date{\today}
+
+\begin{abstract}
+This paper presents a web-based framework for real-time material detection using single-photon avalanche diode (SPAD) time-of-flight sensors. The system architecture integrates SPAD sensor hardware with Python Flask web applications, enabling user-friendly testing and inference through browser-based interfaces. A custom Python pickle object with \texttt{.sto} extension was developed to store spatial and structural features in a serialised, immutable format for efficient loading. The framework supports multiple deployment scenarios: flat homogeneous material detection, spatiotemporal object detection, and liquid purity assessment. The system achieves real-time performance with inference times ranging from 1--5\,ms for material classification and 68--99\,ms for spatial object detection on CPU hardware. The web-based deployment architecture enables practical accessibility for non-technical users while maintaining high accuracy (94--99\%) across different detection tasks. This work demonstrates how compact, low-cost SPAD-based systems can be deployed as accessible web applications for material-aware computer vision tasks.
+\end{abstract}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Practical deployment of material detection systems requires user-friendly interfaces that enable non-technical users to leverage advanced sensing capabilities. While SPAD-based time-of-flight sensors offer exceptional material discrimination performance \cite{su2016,becker2023,tafone2023}, their practical adoption has been limited by the complexity of signal processing and the need for specialized software expertise.
+
+This paper presents a web-based framework that addresses these limitations by providing browser-accessible interfaces for real-time material detection. The framework integrates SPAD sensor hardware with Python Flask web applications, enabling practical deployment scenarios for material detection, spatiotemporal object detection, and liquid purity assessment. The system architecture follows the PAWD framework principles for non-spectral temporal signal processing \cite{tontini2020}.
+
+\section{System Architecture}
+
+\subsection{Hardware Integration}
+
+The system employs a 4$\times$4 zone SPAD detector with an active invisible narrow band (~940\,nm) source. The sensor captures time-resolved signals processed with no regard to spectral composition, following the achromatic (non-spectral) processing approach established in the PAWD framework.
+
+\subsection{Data Format}
+
+A custom Python pickle object with \texttt{.sto} extension was developed to store spatial and structural features in a serialised, immutable format for efficient loading. This format enables efficient storage and retrieval of spatiotemporal data, supporting the fusion of RGB spatial information with one-dimensional time-resolved temporal signals.
+
+\subsection{Web Application Framework}
+
+Python Flask web applications provide user-friendly interfaces for testing and inference. The framework supports three primary deployment scenarios:
+
+\begin{enumerate}
+    \item \textbf{Flat homogeneous material detection}: Web interface for remote material classification from planar surfaces
+    \item \textbf{Spatiotemporal object detection}: Dual-model architecture combining spatial object detection with material classification
+    \item \textbf{Liquid purity assessment}: Browser-based milk purity testing for food safety applications
+\end{enumerate}
+
+\section{Performance Characteristics}
+
+\subsection{Inference Speed}
+
+The material classifier achieves exceptional inference speeds ranging from 1--5\,ms for all validation samples. This performance is attributed to the efficient processing of one-dimensional transient image data, which requires less computational overhead compared to two-dimensional spatial image processing.
+
+Spatial object detection models achieve inference times of 68--99\,ms for 224$\times$224 pixel inputs on CPU hardware. The combined dual detection system achieves near-real-time performance ($\sim$8\,ms) when using YOLOv8 with the material classifier.
+
+\subsection{Accuracy Performance}
+
+The system achieves high accuracy across different detection tasks:
+
+\begin{itemize}
+    \item Flat homogeneous material detection: Over 99\% accuracy for in-distribution samples
+    \item Spatiotemporal object detection: 94--98\% accuracy for spatial models, 99\% for material classification
+    \item Milk purity detection: Approximately 98\% training accuracy, 93.33\% validation accuracy
+\end{itemize}
+
+\section{Deployment Scenarios}
+
+\subsection{Domestic Applications}
+
+The web-based framework enables domestic deployment for consumer food safety testing. Users can access the milk purity detection interface through a standard web browser, upload transient data, and receive immediate purity assessment results without requiring specialized software installation or technical expertise.
+
+\subsection{Commercial Applications}
+
+The framework supports commercial deployment scenarios where material detection capabilities must be accessible to non-technical operators. The browser-based interface eliminates the need for specialized training while maintaining high accuracy and reliability.
+
+\section{Conclusion}
+
+The web-based framework demonstrates how compact, low-cost SPAD-based systems can be deployed as accessible web applications for material-aware computer vision tasks. The system achieves real-time performance with high accuracy, enabling practical deployment for both domestic and commercial applications. The framework establishes a pathway toward more accessible material detection systems that empower non-technical users to leverage advanced sensing capabilities.
+
+\bibliographystyle{IEEEtranN}
+\bibliography{../references}
+
+\end{document}
+

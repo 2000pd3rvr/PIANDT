@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+
+% Packages for Nature Food or Food Chemistry format
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[numbers,compress]{natbib}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Title and author information
+\title{Non-Invasive Milk Purity Detection Using Single-Photon Time-of-Flight Sensing: A Low-Cost Solution for Food Safety Assessment}
+\author{A. Akuoko, D. Chitnis, and I. Gyongy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Material purity detection of homogenised fluid (consumable milk) using SPAD time-of-flight sensors represents a practical application of single-photon detection technology for food safety assessment. The SPAD sensor captures time-resolved transient signals from homogenised milk, where each photon's arrival time encodes information about the material's optical properties, scattering characteristics, and internal composition. When contaminants are present, they alter the temporal response signature of the milk, creating detectable differences in transient image profiles that can be distinguished from pure milk samples through machine learning classification. The system's ability to detect invisible contamination, such as hydrogen peroxide, demonstrates its effectiveness for real-world food safety applications where visual inspection fails. The approach offers significant advantages over traditional purity assessment methods: it is non-invasive, requiring no sample extraction or container opening; it is compact and low-cost compared to bulky optical spectroscopy setups; it provides rapid detection with processing times ranging from 1--5\,ms; and it generalises across different manufacturers and fat compositions, as validated through experiments sourcing milk products from various manufacturers, different fat contents, and across different days. The system achieves approximately 98\% training accuracy and 93.33\% validation accuracy for binary purity classification, with the ability to detect invisible contamination at approximately 96\% accuracy. Overall, eight comprehensive experiments establish the proposed solution as a rigorous and reliable framework for milk purity assessment, positioning it as a viable candidate for both domestic and commercial deployment.
+\end{abstract}
+
+\section{Introduction}
+
+Milk purity assessment has been an enduring concern in dairy science and quality control, driven by the need to detect both material contaminants and degradation of otherwise consumable products \cite{walstra1999,goodman1986}. Among available technologies, optical techniques (including visible and near-infrared (NIR) spectroscopy and imaging-based methods) are widely adopted because they offer rapid, non-destructive measurements of bulk optical properties \cite{aernouts2015,melfsen2012,joolaei2025}. However, conventional NIR spectrometers are often costly and operationally complex, while image-based approaches remain sensitive to illumination conditions, camera characteristics, and subtle changes in appearance that may not correlate reliably with contamination state \cite{sun2009,chandra2024}.
+
+This work investigates whether a high-gain time-of-flight detector based on a Single-Photon Avalanche Diode (SPAD) can provide a more robust basis for purity assessment by exploiting transient photon transport rather than solely relying on spectral or RGB intensity cues \cite{nielsen2013,gyongy2021}. The homogenisation process ensures uniform distribution of fat globules and particles throughout the milk, eliminating temporal instability issues that would otherwise make purity measurement unreliable, as the liquid nature of inhomogeneous milk causes particle configurations to change over time, making ground truth labels inconsistent when the liquid is shaken or moved.
+
+\section{Methodology}
+
+\subsection{Material Samples}
+
+Material impurities were classified based on matter states (solid, liquid, and gas), providing a systematic taxonomy for contamination sources. Non-material contamination arises from storage conditions and temporal degradation rather than the introduction of foreign matter. Active non-material impurity samples were prepared through two distinct mechanisms: (i) storing milk under suboptimal temperature conditions, resulting in physical transformations such as clotting and suspension, and (ii) maintaining fresh samples beyond their best-before or expiry dates.
+
+Control samples comprised homogenised whole milk with 3.7\% fat content. Validation experiments investigated generalisability across different manufacturers and performance across varying fat contents (0.3\%, 1.8\%, and 14\%, in addition to the standard 3.7\% fat control).
+
+\subsection{Instrumentation}
+
+The SPAD sensor employed in this work utilises a monochromatic infrared source operating at ~940\,nm wavelength. Despite this monochromatic illumination, signal processing adheres to achromatic principles, meaning the constituent wavelengths present in the signal are irrelevant to the processing methodology. The transient image acquisition setup consists of a SPAD sensor with an integrated non-spectral source positioned approximately 20--30\,cm from the target material.
+
+\subsection{Data Collection and Preprocessing}
+
+Approximately two thousand transient images were acquired per class for preprocessing. Despite close-range signal detection, Poisson and ambient noise contributions remain unavoidable in SPAD-based transient measurements. Data preprocessing addresses these limitations through algorithmic noise estimation and subtraction: ambient noise is estimated from initial histogram bins where target signals do not accumulate, while Poisson noise is mitigated through mean value estimation and subtraction across all time bins.
+
+\subsection{Classification Architecture}
+
+The multi-zone milk classifier employs the same multizone input classifier architecture as described for flat surface material detection. The proposed network is a feedforward 2D CNN designed for material classification. The input tensor has shape $(N_b, 3, 16, 16)$, where $N_b$ is the batch size and the three channels correspond to three stacked transient-derived modalities per zone.
+
+For the contaminants' classifier, the model outputs logits for all purity and impurity classes. The remaining models are binary classifiers designed to assess purity across different dimensions. To ensure methodological validity, complementary analytical techniques such as principal component analysis (PCA) have been employed to validate relationships between different variables and establish confidence in the results.
+
+\section{Experimental Results}
+
+\subsection{Experiment 1: Homogeneous vs Inhomogeneous Milk}
+
+This study investigated the effect of material homogeneity on purity assessment using SPAD-sourced transient images. Visualization of the first three principal components revealed minimal overlap between homogenised and non-homogenised milk features, despite both samples originating from the same producer. In contrast, samples of the same type demonstrated greater feature overlap, indicating more generalizable purity metrics within homogeneous samples. Based on these findings, only homogenised samples were considered in subsequent purity assessment experiments.
+
+\subsection{Experiment 2: Feature Learnability}
+
+The experiment employed a multi-label classifier using all material-contaminated samples, non-material-contaminated samples, and control samples as distinct classes. The classifier achieved approximately 80\% convergence. PCA results indicate learnability of all features, even among material-of-interest (MOI) samples with strong feature similarities, confirming the discriminative capability of the learned representations.
+
+\subsection{Experiment 3: Binary Purity Detection}
+
+A binary convolutional neural network classifier was trained to recognise optical transients corresponding to the consumable (pure) state as the positive class, with all contaminated or degraded states forming the negative class. The classifier achieved approximately 98\% training accuracy after convergence, indicating that the transient features extracted from SPAD measurements were highly separable for the pure versus impure classes. Validation on previously unseen homogenised milk samples yielded an accuracy of about 93.33\%, demonstrating that the learned decision boundary generalises beyond the training set.
+
+\subsection{Experiment 4: Invisible Contamination Detection}
+
+This experiment probed one of the most critical limitations of conventional spectrophotometric and imaging-based purity assessment: the inability to reliably detect contamination that produces no discernible change in visible colour or texture. Two representative contaminants were selected: a solid-phase impurity (sugar) and a liquid-phase impurity (hydrogen peroxide). Throughout the mixing process, the resulting impure mixtures remained visually indistinguishable from the corresponding pure controls when inspected under standard ambient lighting.
+
+On this validation set, the classifier achieved an accuracy of approximately 96\% in discriminating pure from invisibly impure homogenised milk, despite the absence of any obvious visual cue in the contaminated mixtures. Visualization of the first three principal components revealed a noticeable but incomplete separation between classes, with a region of overlap, indicating that the class boundary is moderately non-linear in the raw feature space.
+
+\subsection{Experiments 5--8: Generalisability}
+
+Subsequent experiments validated generalisability across different manufacturers, fat contents, and non-consumable milk products. The system demonstrated consistent performance across multiple manufacturers producing the same product type, indicating that the binary purity detection model learns generalizable purity features that transfer across brands. Performance remained robust across varying fat contents (0.3\%, 1.8\%, 3.7\%, and 14\%), demonstrating that the model captures fundamental purity characteristics independent of fat composition variations.
+
+\section{Discussion}
+
+The achieved performance (approximately 98\% training accuracy and 93.33\% validation accuracy) is consistent with previous relevant work in material classification using time-of-flight measurements. The consistency of high performance across independent studies, employing different machine learning approaches and material classification tasks, provides strong evidence that the observed accuracy stems from the inherent material-discriminative information encoded in transient time-of-flight signals.
+
+The system's ability to detect invisible contamination (96\% accuracy) addresses a critical limitation of conventional RGB imaging approaches, which depend almost entirely on changes in apparent surface or bulk appearance. The strong performance of the binary SPAD-based classifier in this setting underscores the value of deep neural networks in learning non-linear decision boundaries in high-dimensional transient feature spaces, enabling the detection of contamination that is effectively invisible to conventional RGB imaging.
+
+\section{Conclusion}
+
+Overall, the eight comprehensive experiments, supported by independent validation, establish the proposed solution as a rigorous and reliable framework for milk purity assessment. The model detects invisible contamination, generalises across manufacturers and fat compositions, and maintains consistency across temporal variations in acquisition, positioning it as a viable candidate for both domestic and commercial deployment. The approach offers a simple, cost-effective means to empower average non-technical consumers to test food safety while encouraging food safety practices and building consumer trust.
+
+\bibliographystyle{IEEEtranN}
+\bibliography{../references}
+
+\end{document}
+

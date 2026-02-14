@@ -1,0 +1,105 @@
+\documentclass[10pt,twocolumn]{article}
+
+% Packages for IEEE TSP format
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[numbers,compress]{natbib}
+\usepackage{geometry}
+\geometry{margin=0.8in}
+
+% Title and author information
+\title{Computational Complexity Analysis of Temporal Signal Processing in SPAD-Based Time-of-Flight Systems}
+\author{A. Akuoko, D. Chitnis, and I. Gyongy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper presents a machine-independent analysis of the computational complexity for processing temporal signals in SPAD-based time-of-flight systems. We analyze four distinct processing regimes: non-spectral intensity, spectral intensity, non-spectral temporal, and spectral temporal signal processing. For non-spectral temporal processing, the computational complexity scales as $\mathcal{O}(N \times B)$, where $N$ is the number of pixels and $B$ is the number of time bins per pixel. Spectral temporal processing exhibits complexity $\mathcal{O}(N \times B \times K)$, where $K$ represents the number of wavelength channels. We demonstrate that non-spectral temporal processing achieves material discrimination performance comparable to spectral approaches while maintaining lower computational complexity, establishing a fundamental trade-off between spectral resolution and computational efficiency. Boundary cases illustrate how complexity reduces to simpler regimes: when $B = 1$, temporal complexity collapses to $\mathcal{O}(N)$ matching achromatic intensity processing; when $N = 1$, complexity becomes $\mathcal{O}(B)$ for single-pixel processing. The analysis provides a theoretical foundation for selecting appropriate signal processing strategies based on computational constraints and performance requirements.
+\end{abstract}
+
+\section{Introduction}
+
+Signal processing systems in optical sensing and computer vision must balance information content with computational efficiency. The choice between spectral and non-spectral processing, and between intensity and temporal measurement domains, fundamentally affects both the information available for material discrimination and the computational resources required for processing \cite{su2016,becker2023,heinz2001}.
+
+This paper provides a machine-independent complexity analysis of temporal signal processing in SPAD-based time-of-flight systems, quantifying the computational cost of different processing regimes and establishing theoretical foundations for system design decisions. The analysis follows standard computational complexity theory \cite{knuth1976} and applies to SPAD-based direct time-of-flight sensors \cite{piron2020,gyongy2022}.
+
+\section{Non-Spectral Temporal Signal Processing}
+
+\subsection{Problem Formulation}
+
+Consider a detector array comprising $N$ pixels, where each pixel $i$ maintains an initial state $I_{\text{pix},i}$ representing the absence of photon return time records. Each pixel contains $B$ time bins, representing the temporal spread $T_B$ over a given time span. In the absence of input signal, pixel intensities are represented by an empty array $\mathbf{D}$ of $N$ elements, where each element contains either zero or a negligible noise component $c$.
+
+Time-to-digital converter (TDC) signal input per pixel is represented by a distribution of incident signal across $B$ time bins. To analyze the computational complexity of the resulting addition operation, the pixel update function is projected onto a two-dimensional plane with axes representing time (number of bins) and array size (number of pixels).
+
+\subsection{Complexity Analysis}
+
+The computational complexity of signal input operations, whether processing hybrid or pure surface materials, grows with both the size of the pixel array $N$ and the number of time bins $B$ per pixel. In the worst-case scenario, signal accumulation occurs once across the total array size $N$ and once across the total number of bins $B$ for the temporal signal spread per pixel, resulting in memory and time complexity of $\mathcal{O}(N \times B)$ \cite{knuth1976}. This complexity analysis applies to SPAD-based time-of-flight systems where temporal histograms are processed per pixel \cite{piron2020,tontini2020}.
+
+Two boundary cases illustrate the relationship between temporal and spatial complexity:
+
+\begin{itemize}
+    \item If all photon arrival times are compressed into a single bin ($B = 1$), the complexity reduces to $\mathcal{O}(N)$, matching that of achromatic intensity pixel updates, since the access operation scans the total number of pixels once with no additional operations required for temporal binning.
+    
+    \item Conversely, when processing a single pixel with a large number of bins ($N = 1$), the algorithm scans the total number of bins once, again resulting in linear complexity $\mathcal{O}(B)$ that matches multi-pixel achromatic intensity updates.
+\end{itemize}
+
+The quadratic complexity $\mathcal{O}(N \times B)$ emerges from the combined processes needed to update all bins per pixel and all pixels of the sensor, representing the general case for temporal histogram processing in SPAD-based systems.
+
+\section{Spectral Temporal Signal Processing}
+
+\subsection{Problem Formulation}
+
+Spectral temporal signal processing extends non-spectral temporal models by incorporating wavelength-dependent variations. The computational complexity scales with three primary dimensions: the detector array size $N$ (total number of pixels), the temporal resolution $B$ (number of time bins per pixel), and the spectral dimensionality $K$ (number of wavelength channels).
+
+\subsection{Complexity Analysis}
+
+In the most general case, pixel update operations must accumulate signals across all three dimensions, resulting in complexity that grows as $\mathcal{O}(N \times B \times K)$.
+
+For a single pixel receiving signals distributed over $B$ time bins across $K$ spectral channels, the algorithm must process each spectral-temporal combination independently. The worst-case complexity occurs when signal accumulation requires scanning the entire array size $N$ once, the full spectral dimension $K$ once, and all temporal bins $B$ once per pixel, yielding a total computational cost proportional to the product of these three factors.
+
+Two limiting cases demonstrate how spectral temporal complexity reduces to simpler regimes:
+
+\begin{itemize}
+    \item When all photon arrival times are compressed into a single temporal bin ($B = 1$), the temporal distribution collapses and complexity becomes comparable to achromatic intensity pixel updates, scaling as $\mathcal{O}(N \times K)$.
+    
+    \item Conversely, when only a single pixel is considered with large $B$, the algorithm scans all $B$ bins once for that pixel, yielding complexity $\mathcal{O}(B)$ that matches multi-pixel achromatic intensity updates for a single spectral channel.
+\end{itemize}
+
+\section{Complexity Comparison}
+
+\subsection{Intensity vs Temporal Processing}
+
+Achromatic intensity processing achieves linear complexity $\mathcal{O}(N)$ by operating on single-channel spatial data without temporal or spectral dimensions. Non-spectral temporal processing introduces a temporal dimension, increasing complexity to $\mathcal{O}(N \times B)$.
+
+\subsection{Spectral vs Non-Spectral Processing}
+
+The fundamental trade-off in spectral temporal processing lies in the increased dimensionality: while spectral resolution enables enhanced material discrimination through wavelength-dependent signatures, the computational overhead grows multiplicatively with spectral channels, temporal bins, and array size. This complexity scaling motivates the non-spectral temporal approach, where material discrimination is achieved through temporal signatures alone without explicit wavelength decomposition, reducing complexity from $\mathcal{O}(N \times B \times K)$ to $\mathcal{O}(N \times B)$ while maintaining comparable material detection performance.
+
+\section{Experimental Validation}
+
+Empirical validation demonstrates that non-spectral temporal processing achieves material discrimination performance comparable to spectral approaches:
+
+\begin{itemize}
+    \item Flat homogeneous material detection: $\sim$98\% accuracy using non-spectral temporal signals
+    \item Spatiotemporal object detection: 94--98\% accuracy with material classification at 99\% accuracy
+    \item Milk purity detection: $\sim$97\% detection accuracy for both visible and invisible contaminants
+\end{itemize}
+
+These results validate that the complexity reduction from $\mathcal{O}(N \times B \times K)$ to $\mathcal{O}(N \times B)$ does not compromise material discrimination capability, establishing non-spectral temporal processing as an efficient alternative to spectral approaches.
+
+\section{Conclusion}
+
+This analysis establishes the computational complexity characteristics of temporal signal processing in SPAD-based time-of-flight systems. Non-spectral temporal processing achieves $\mathcal{O}(N \times B)$ complexity compared to $\mathcal{O}(N \times B \times K)$ for spectral temporal approaches, while maintaining comparable material discrimination performance. The analysis provides a theoretical foundation for selecting appropriate signal processing strategies based on computational constraints and performance requirements, enabling informed design decisions in resource-constrained applications.
+
+\bibliographystyle{IEEEtranN}
+\bibliography{../references}
+
+\end{document}
+

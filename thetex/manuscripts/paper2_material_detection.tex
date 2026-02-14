@@ -1,0 +1,103 @@
+\documentclass[10pt,twocolumn]{article}
+
+% Packages for IEEE TIM or Optics Express format
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[numbers,compress]{natbib}
+\usepackage{geometry}
+\geometry{margin=0.8in}
+
+% Title and author information
+\title{Long-Range Material Classification from Time-Resolved SPAD Signals: A Robust Approach for Flat Surface Detection}
+\author{A. Akuoko, D. Chitnis, and I. Gyongy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper presents material detection for flat homogeneous surfaces through modeling of subsurface scattering and reflectivity profiles of returned signals from planar objects positioned at arbitrary distances from the detector. Given a target of interest, the model extracts target material identity, target distance, foreground object material and distance, and background object material and distance. Training across varied standoff distances, pose orientations, and view angles enables robust classification beyond fixed laboratory configurations. A lightweight convolutional neural network classifier processes transient histograms from a 4$\times$4 zone SPAD detector, achieving over 99\% accuracy for in-distribution samples and approximately 90\% accuracy for validation on held-out samples. The system operates at extended ranges (up to 4\,m), enabling continuous distance variation that exceeds the short-range detection capabilities of prior work. Experimental validation demonstrates that temporal non-spectral signals encode sufficient material-discriminative information for robust classification, even when spatial appearance features are similar. The approach addresses fundamental limitations in current vision systems by enabling reliable material detection without requiring expensive spectral instrumentation or complex processing infrastructure.
+\end{abstract}
+
+\section{Introduction}
+
+Remote material detection presents fundamental challenges comparable to understanding matter itself, yet remains essential across diverse applications. Materials exhibit unique optical properties that serve as key identifiers for classification. This work presents experiments demonstrating automated remote detection of flat, homogeneous material surfaces using low-cost hardware and non-spectral signals.
+
+Single-photon avalanche diodes (SPADs) are currently the leading technology for temporal or time-of-flight measurements \cite{piron2020,gyongy2022}. Their rapid evolution has enabled compact, miniaturized, and cost-effective versions that have enabled several applications in research domains, especially machine vision \cite{fasolino2024}. However, SPAD evolution comes with hardware limitations: noise, coarse lateral resolution, and others. This project resolves such challenges with software approaches. Prior work has demonstrated that time-resolved signals from SPAD sensors encode material-specific information through temporal reflectivity profiles \cite{su2016,becker2023,tafone2023}.
+
+Most dToF material detection systems require fixed target positions, which limits classification quality when target distance varies continuously. The presented instrument operates at extended ranges (up to 4\,m), enabling continuous distance variation that exceeds the short-range detection capabilities of prior work. Additionally, many existing material detection systems were developed under highly controlled laboratory conditions, limiting their applicability to realistic everyday scenarios.
+
+\section{Methodology}
+
+\subsection{Signal Acquisition}
+
+The experimental configuration employs a ~940\,nm class 1 laser source with achromatic processing. The SPAD sensor captures time-resolved transient signals, where each photon's arrival time encodes information about the material's optical properties, scattering characteristics, and internal composition \cite{tontini2020,koerner2021}. The temporal signal processing follows the per-bin Gaussian approximation model established in the PAWD framework \cite{tontini2020}.
+
+The approximated Gaussian peak is discretised into $B$ bins, where each bin $i$ has a start time $t_i$ and end time $t_{i+1}$. The start time is given by $t_i = t_0 + (i - B/2) \cdot \Delta t$, where $i$ ranges from 1 to $B$ (the maximum number of bins $B$ in histograms is 144) and $\Delta t$ represents the histogram bin width (approximately 250\,ps). Ambient noise, including dark counts, is assumed to follow a uniform distribution with an average of $b$ photons per bin.
+
+\subsection{Signal Processing Models}
+
+For a pure material surface, the temporal signal per bin is modeled as a Gaussian distribution. The per-bin expected photon count approximation is given by:
+
+\begin{equation}
+\mu_i = \frac{S}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(t_i - t_0)^2}{2\sigma^2}\right)
+\label{eq:pure_material_gaussian}
+\end{equation}
+
+where $\mu_i$ represents the expected photon count approximation in bin $i$ (not the whole peak), $S$ is the total signal photons across the entire peak, $\sigma$ is the standard deviation of the Gaussian profile, and $t_0$ is the peak arrival time.
+
+Since all bins are subject to shot noise, the individual photon count $h_i$ for each bin $i$ is drawn from a Poisson distribution with mean $\mu_i + b$. The probability mass function (PMF) for each bin is expressed as:
+
+\begin{equation}
+P(h_i = k) = \frac{(\mu_i + b)^k e^{-(\mu_i + b)}}{k!}
+\label{eq:poisson_pmf}
+\end{equation}
+
+\subsection{Data Preprocessing}
+
+During data collection, target materials are varied in range distance, orientation, viewing perspective, scale, and view angles to assess and test transient image limitations and invariances. Two in-house algorithms are developed to address these challenges: multi-pixel transient stacking and depth-integrated single-pixel transients.
+
+Ambient noise is estimated algorithmically from recorded timed photon intensity prior to illumination. Shot noise is addressed by estimating Poisson error per time bin. Baseline correction values are estimated independently for each frame, as ambient levels may vary during data acquisition.
+
+\subsection{Classification Architecture}
+
+The multizone input to the classifier is a stack of $4 \times 4$ transient histograms, where each of the 16 zones contributes a one-dimensional cropped transient. These 16 one-dimensional sequences are arranged into a $16 \times 16$ pseudo-image, forming a low-resolution spatial--temporal representation of the scene.
+
+The proposed network is a feedforward 2D CNN designed for four-class material classification of planar surfaces. The input tensor has shape $(N_b,3,16,16)$, where $N_b$ is the batch size and the three channels correspond to three stacked transient-derived modalities per zone. The model outputs logits for four material classes: white glass fiber (WGF), black cardboard (BCB), black non-transparent nylon (BNT), and white non-transparent nylon (WNT).
+
+The network architecture contains 1,061,284 trainable parameters, representing a compact design compared to standard deep learning architectures. The architecture employs a feedforward design with two stages: (a) feature extraction via convolutional blocks, and (b) classification via fully connected layers.
+
+\section{Experimental Results}
+
+\subsection{Multi-Zone Classification Performance}
+
+Using stacked transient images as input, the multi-zone model attains high accuracy across both short- and long-range standoffs for single-distance and multi-distance configurations. When all sample variations are combined (multiple distances, orientations, view angles, and perspectives), the classifier achieves an overall accuracy exceeding 99\%, with robust performance across all four target material classes.
+
+Validation on held-out samples from the trained classes yields approximately 90\% accuracy. Inspection of the corresponding confusion matrices shows that residual errors are dominated by misclassifications between materials with similar appearance, such as black nylon sheet versus black cardboard, indicating that the model is most challenged when both colour and transient signatures are closely aligned.
+
+To probe how well the network has internalized the material-specific transient structure, additional experiments were conducted using samples drawn from untrained background classes. For these out-of-distribution inputs, the desired behaviour is uniformly low confidence across all trained classes. In around 80\% of such cases, the classifier outputs low logits for every class, whereas the remaining 20\% of samples exhibit at least one non-negligible class probability (greater than 0.05).
+
+\subsection{Generative Modeling Validation}
+
+To further assess how learnable the transient features are, two generative autoencoder models are trained to capture the underlying latent space of the material classes. A restricted Boltzmann machine (RBM) and a convolutional autoencoder (CAE) were used to learn latent spaces of trained classes. Both successfully reported very low losses between generator and real input signals, further proving that non-spectral transient images from target surfaces encode signature features of the material.
+
+\section{Discussion}
+
+The achieved performance (over 99\% accuracy for in-distribution samples and approximately 90\% for validation on held-out samples) is consistent with previous relevant work in material classification using time-of-flight measurements. The Princeton work by Su et al.~\cite{su2016} demonstrated that machine learning models can achieve high accuracy (80.9\% validation accuracy using RBF SVM) for material classification using raw time-of-flight measurements. Similarly, Becker and Koerner~\cite{becker2023} reported classification performance of 96\% accuracy for plastic material classification using optical parameter features from direct time-of-flight depth sensors. Recent work by Tafone et al.~\cite{tafone2023} and Yang et al.~\cite{yang2024} further validates the effectiveness of time-of-flight sensors for material recognition tasks.
+
+The consistency of high performance across these independent studies, employing different machine learning approaches and material classification tasks, provides strong evidence that the observed accuracy stems from the inherent material-discriminative information encoded in transient time-of-flight signals rather than dataset-specific artefacts or overfitting.
+
+\section{Conclusion}
+
+This work demonstrates that long-range material detection from flat homogeneous surfaces can be achieved using low-cost SPAD sensors and non-spectral temporal signals. The system achieves over 99\% accuracy for in-distribution samples and approximately 90\% for validation, operating at extended ranges (up to 4\,m) with robust performance across varied distances, orientations, and view angles. The results validate that temporal non-spectral signals encode sufficient material-discriminative information for reliable classification, establishing a pathway toward more practical and accessible material-aware vision systems.
+
+\bibliographystyle{IEEEtranN}
+\bibliography{../references}
+
+\end{document}
+
