@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Serving as the specialized reception interface, the Units MIU incoming signals component captures and documents that captures and documents all communications, requests, and initiatives related to machine intelligence research, development, and applications. This component operates within the In stage of the PIANDT triadic information system, systematically receiving and cataloging signals that exhibit bidirectional interaction patterns. The structured nature of Units MIU incoming signals, organized into discrete, categorizable signal units with explicit triadic mapping, enables full automation of business transactions through machine-readable formats, standardized reception protocols, and programmable routing mechanisms.">
+    <title>Units - In - PIANDT</title>
+            <script>
+        // CRITICAL: Apply theme BEFORE anything else to prevent flash
+        // This script MUST run synchronously and immediately
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                if (savedTheme === 'dark') {
+                    // Apply immediately to html element (always exists)
+                    const html = document.documentElement;
+                    html.classList.add('dark-theme');
+                    // Set inline style to prevent flash - use multiple methods
+                    html.style.backgroundColor = '#1a1a1a';
+                    html.style.setProperty('background-color', '#1a1a1a', 'important');
+                    
+                    // CRITICAL: Inject stylesheet immediately in head for content-text
+                    const darkThemeStyle = document.createElement('style');
+                    darkThemeStyle.id = 'dark-theme-override-style';
+                    darkThemeStyle.textContent = ':root.dark-theme,html.dark-theme,body.dark-theme{--color-text:#ffffff!important;--color-text-light:#ffffff!important}body.dark-theme .content-text,html.dark-theme .content-text,body.dark-theme .content-text *,html.dark-theme .content-text *,body.dark-theme .content-text p,html.dark-theme .content-text p,body.dark-theme .section .content-text,html.dark-theme .section .content-text,body.dark-theme .section .content-text *,html.dark-theme .section .content-text *,body.dark-theme .section .content-text p,html.dark-theme .section .content-text p,body.dark-theme main .content-text,html.dark-theme main .content-text,body.dark-theme main .content-text *,html.dark-theme main .content-text *,body.dark-theme main .content-text p,html.dark-theme main .content-text p,body.dark-theme .container .content-text,html.dark-theme .container .content-text,body.dark-theme .container .content-text *,html.dark-theme .container .content-text *,body.dark-theme .container .content-text p,html.dark-theme .container .content-text p,body.dark-theme .content-grid .content-text,html.dark-theme .content-grid .content-text,body.dark-theme .content-grid .content-text *,html.dark-theme .content-grid .content-text *,body.dark-theme .content-grid .content-text p,html.dark-theme .content-grid .content-text p{color:#ffffff!important;--color-text:#ffffff!important;--color-text-light:#ffffff!important}body.dark-theme main,html.dark-theme main,body.dark-theme .section,html.dark-theme .section,body.dark-theme .container,html.dark-theme .container,body.dark-theme .content-grid,html.dark-theme .content-grid{background-color:#1a1a1a!important;color:#ffffff!important;--color-text:#ffffff!important;--color-text-light:#ffffff!important}body.dark-theme .content-grid h1,html.dark-theme .content-grid h1,body.dark-theme .content-text h1,html.dark-theme .content-text h1{color:#ffffff!important}';
+                    if (document.head) {
+                        document.head.appendChild(darkThemeStyle);
+                    } else {
+                        (function checkHead() {
+                            if (document.head) {
+                                document.head.appendChild(darkThemeStyle);
+                            } else {
+                                setTimeout(checkHead, 0);
+                            }
+                        })();
+                    }
+                    
+                    // Apply to body immediately if it exists
+                    if (document.body) {
+                        const body = document.body;
+                        body.classList.add('dark-theme');
+                        body.style.backgroundColor = '#1a1a1a';
+                        body.style.setProperty('background-color', '#1a1a1a', 'important');
+                    } else {
+                        // Use MutationObserver for faster body detection
+                        const observer = new MutationObserver(function(mutations) {
+                            if (document.body) {
+                                const body = document.body;
+                                body.classList.add('dark-theme');
+                                body.style.backgroundColor = '#1a1a1a';
+                                body.style.setProperty('background-color', '#1a1a1a', 'important');
+                                observer.disconnect();
+                            }
+                        });
+                        observer.observe(document.documentElement, { childList: true, subtree: true });
+                        
+                        // Also wait for DOMContentLoaded as backup
+                        document.addEventListener('DOMContentLoaded', function() {
+                            if (document.body) {
+                                const body = document.body;
+                                body.classList.add('dark-theme');
+                                body.style.backgroundColor = '#1a1a1a';
+                                body.style.setProperty('background-color', '#1a1a1a', 'important');
+                            }
+                        });
+                        
+                        // Immediate check in case body already exists
+                        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                            setTimeout(function() {
+                                if (document.body) {
+                                    const body = document.body;
+                                    body.classList.add('dark-theme');
+                                    body.style.backgroundColor = '#1a1a1a';
+                                    body.style.setProperty('background-color', '#1a1a1a', 'important');
+                                }
+                            }, 0);
+                        }
+                    }
+                }
+            } catch(e) {
+                console.error('Theme initialization error:', e);
+            }
+        })();
+    </script>
+        <style>
+        /* Blocking style to prevent flash - must be inline */
+        html.dark-theme { background-color: #1a1a1a !important; }
+        html.dark-theme body { background-color: #1a1a1a !important; }
+        /* Prevent white flash during page load */
+        html:not(.dark-theme) { background-color: #ffffff; }
+        body:not(.dark-theme) { background-color: #ffffff; }
+    
+        /* Header styling */
+        .content-grid > h1 {
+            text-align: left !important;
+            text-transform: uppercase !important;
+            font-size: 1.25rem !important; /* 50% of 2.5rem */
+            letter-spacing: 0.2em !important;
+            text-shadow: 
+                0 1px 0 rgba(255, 255, 255, 0.3),
+                0 2px 4px rgba(0, 0, 0, 0.15),
+                0 4px 8px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(0, 0, 0, 0.05) !important;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15)) !important;
+            font-weight: 600 !important;
+            position: relative;
+        }
+        /* Glossy shine effect */
+        .content-grid > h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+    </style>
+    <link rel="stylesheet" href="../../../styles.css?v=62">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Allura&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+        
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="../../../index.html" class="logo">PI<span class="logo-and">and</span>T</a>
+                <p class="logo-subtitle">
+                    <span class="word">people,</span>
+                    <span class="word">innovation</span>
+                    <span class="word">and</span>
+                    <span class="word">technology</span>
+                </p>
+            </div>
+            
+            <span class="logo-suffix"><a href="../../in.html" style="text-decoration: none; color: inherit;">In</a>-&gt;<a href="../in_units.html" style="text-decoration: none; color: inherit;">units</a>-&gt;<a href="in_units_miu.html" style="text-decoration: none; color: inherit;">machine intelligence</a></span>
+                                                <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="in_units_miu.html" class="nav-link">machine intelligence <span class="dropdown-arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="vision/in_units_miu_vision.html" class="dropdown-link">vision <span class="dropdown-arrow">▶</span></a>
+                            <ul>
+                                <li>
+                                    <a href="vision/products/in_units_miu_vision_products.html" class="submenu-link">products <span class="dropdown-arrow">▶</span></a>
+                                    <ul>
+                                        <li><a href="vision/products/in_units_miu_vision_products_software.html" class="submenu-link">software</a></li>
+                                        <li><a href="vision/products/in_units_miu_vision_products_hardware.html" class="submenu-link">hardware</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="vision/services/in_units_miu_vision_services.html" class="submenu-link">services <span class="dropdown-arrow">▶</span></a>
+                                    <ul>
+                                        <li><a href="vision/services/in_units_miu_vision_services_rd.html" class="submenu-link">R&amp;D</a></li>
+                                        <li><a href="vision/services/in_units_miu_vision_services_consultancy.html" class="submenu-link">consultancy</a></li>
+                                        <li><a href="vision/services/in_units_miu_vision_services_education.html" class="submenu-link">education</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="about" class="section" style="padding-top: 8rem;">
+            <div class="container">
+                <div class="content-grid">
+                    <h1>machine intelligence</h1>
+                    <div class="content-text" style=" max-height: calc((100vh - 250px) * 0.91);">
+                        <p>Serving as the specialized reception interface, the Machine Intelligence incoming signals component captures and documents that captures and documents all communications, requests, and initiatives related to machine intelligence research, development, and applications. where communications flow seamlessly in both directions between the organization and external stakeholders regarding machine intelligence capabilities, AI and machine learning applications, and research methodologies. Grounded in the elegant scientific principle of signal proportionality (S_In ∝ S_Proc ∝ S_Out), this section ensures that every incoming signal related to the Machine Intelligence Unit generates a corresponding processing pathway and output mechanism, regardless of interaction direction. The Machine Intelligence Unit incoming signals encompass diverse categories that demonstrate bidirectional interaction capabilities: machine intelligence research inquiries may represent external stakeholders seeking information about our AI research capabilities or</p>
+                        <p>the organization proactively sharing machine intelligence research details with external parties; AI application requests may involve external entities proposing new AI applications or the organization initiating discussions about AI application expansions; machine learning methodology feedback may include external suggestions for refining our machine learning methodologies or organizational requests for external input on methodology improvements; research collaboration inquiries may represent external parties seeking information about our research collaboration structures or the organization sharing research collaboration frameworks with external stakeholders; and development proposal initiatives may involve external recommendations for machine intelligence development or organizational machine intelligence initiatives proposed to external partners. Each incoming signal undergoes systematic reception protocols that maintain the integrity of the triadic matrix structure, ensuring that every signal category received has a corresponding processing pathway (Proc) and output mechanism (Out), regardless of interaction direction. This structural consistency reflects the fundamental principle that organizational information systems must maintain balance and completeness: every type of incoming signal related to</p>
+                        <p>the Machine Intelligence Unit, whether originating from external stakeholders or initiated by the organization, requires a defined processing pathway and a defined output mechanism. The structured nature of Machine Intelligence Unit incoming signals, organized into discrete, categorizable signal units with explicit triadic mapping, enables full automation of business transactions through machine-readable formats, standardized reception protocols, and programmable routing mechanisms. Each incoming signal contains embedded metadata that identifies its source, category, machine intelligence framework component (research, applications, methodologies, collaborations, development), and routing parameters, allowing automated systems to execute initial processing without human intervention while maintaining complete auditability and compliance. The four-column sheet structure, with each column representing a distinct signal component, provides a natural framework for automated parsing, validation, and routing of transactional information related to machine intelligence. Automated agents can extract structured data from each column, verify triadic relationships, execute routing protocols to appropriate processing pathways, and generate acknowledgments, all while maintaining the</p>
+                        <p>proportional signal relationships that ensure organizational balance. For modern organizations, the Machine Intelligence Unit incoming signals component provides strategic advantages including enhanced operational transparency through explicit signal lifecycle mapping for machine intelligence communications, scalable architecture enabling incremental expansion of reception capabilities, and optimized resource allocation through stage-specific performance metrics that account for bidirectional interaction patterns. The systematic reception frameworks reduce cognitive load for both internal stakeholders and external senders while maintaining compatibility with contemporary technology stacks including automated routing systems, quality assurance protocols, and comprehensive audit trails. The automation-ready structure enables organizations to implement intelligent classification systems, automated validation checks, and self-executing routing that responds to verified input signals, transforming traditional manual processes into seamless, automated workflows that maintain the elegant balance of the triadic information architecture while ensuring that all communications related to machine intelligence are properly received, processed, and delivered.</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chat Agent Button -->
+    <img src="../../../../images/agent.png" alt="Speak to an agent" class="chat-agent-btn" id="chatAgentBtn">
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3 class="chat-header-title">Chat Assistant</h3>
+            <button class="chat-close" id="chatClose" aria-label="Close chat">-</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot-message">
+                <div class="message-content">
+                    <p>Hello! I'm here to help you find information on our website. You can ask me about:</p>
+                    <ul>
+                        <li>Our services and products</li>
+                        <li>Machine Intelligence Unit (MIU)</li>
+                        <li>In, Proc, or Out stages</li>
+                        <li>Specific pages or sections</li>
+                    </ul>
+                    <p>What would you like to know?</p>
+                    <p style="margin-top: 1rem; font-size: 0.9em; color: #666;">
+                        💡 <strong>Tip:</strong> To enable Mistral AI for smarter responses, type: <code>/setkey your-api-key</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-wrapper">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your question here..." autocomplete="off">
+            <button class="chat-send" id="chatSend" aria-label="Send message">↑</button>
+        </div>
+    </div>
+
+        <script src="../../../pages-data.js"></script>
+    <script src="../../../dynamic-menu.js"></script>
+    <script src="../../../contextual-nav.js"></script>
+    <script src="../../../menu-hover-control.js"></script>
+
+
+<script src="../../../multi-sheet-pagination.js"></script>
+    <script src="../../../site_agent/mistral_training_config.js"></script>
+    <script src="../../../script.js?v=29"></script>
+</body>
+</html>
+
