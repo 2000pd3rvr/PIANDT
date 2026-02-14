@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+"""
+Fix all page content openings to remove monotonic patterns
+Updates the actual visible paragraph content, not just meta descriptions
+"""
+import re
+from pathlib import Path
+import hashlib
+
+BASE_DIR = Path(__file__).parent.parent
+
+# Varied opening phrases for content
+IN_OPENINGS = [
+    "The {name} incoming signals section functions as the primary reception interface within the triadic information framework",
+    "Operating within the In stage of the PIANDT triadic information system, the {name} incoming signals section serves as the specialized gateway",
+    "Serving as the specialized reception interface, the {name} incoming signals component captures and documents",
+    "As the primary reception stage for {topic}, the {name} incoming signals section systematically receives",
+    "The {name} component represents the initial reception point within the triadic information flow",
+    "Within the triadic information framework, the {name} incoming signals section operates as the dedicated reception mechanism",
+]
+
+PROC_OPENINGS = [
+    "Serving as the specialized analytical engine, the {name} processing component evaluates, synthesizes, and refines",
+    "Within the triadic information framework, the {name} processing component functions as the analytical transformation engine",
+    "The {name} processing section operates as the dedicated transformation mechanism within the PIANDT triadic information system",
+    "As the primary transformation stage for {topic}, the {name} processing section systematically evaluates",
+    "The {name} component represents the analytical transformation point within the triadic information flow",
+    "Operating within the Processing stage of the PIANDT triadic information system, the {name} processing section serves as the specialized analytical engine",
+]
+
+OUT_OPENINGS = [
+    "Within the triadic information framework, the {name} delivered outputs component functions as the final delivery stage",
+    "The {name} delivered outputs section operates as the dedicated delivery mechanism within the PIANDT triadic information system",
+    "Serving as the specialized delivery interface, the {name} delivered outputs component packages, formats, and delivers",
+    "As the primary delivery stage for {topic}, the {name} delivered outputs section systematically formats",
+    "The {name} component represents the final delivery point within the triadic information flow",
+    "Operating within the Out stage of the PIANDT triadic information system, the {name} delivered outputs section serves as the specialized delivery mechanism",
+]
+
+def get_stage_info(file_path):
+    path_str = str(file_path)
+    if '/in/' in path_str:
+        return 'in', IN_OPENINGS
+    elif '/processing/' in path_str or '/proc/' in path_str:
+        return 'proc', PROC_OPENINGS
+    elif '/out/' in path_str:
+        return 'out', OUT_OPENINGS
+    return None, None
+
+def extract_page_name(file_path):
+    filename = file_path.stem
+    filename = re.sub(r'^(in_|proc_|out_)', '', filename)
+    name = filename.replace('_', ' ').title()
+    name = name.replace('Miu', 'MIU').replace('Rd', 'R&D')
+    name = re.sub(r'\s+', ' ', name)
+    # Clean up common patterns
+    name = re.sub(r'^Units\s+MIU\s+Vision', 'Vision', name)
+    name = re.sub(r'^Units\s+MIU', 'Machine Intelligence', name)
+    name = re.sub(r'^About\s+Piandt', 'About PIANDT', name, flags=re.I)
+    return name
+
+def extract_topic(file_path):
+    path_str = str(file_path)
+    if 'about_piandt' in path_str:
+        if 'mission_vision' in path_str:
+            return 'our organizational purpose and long-term aspirations'
+        elif 'charitable_purposes' in path_str:
+            return 'our charitable activities and public benefit objectives'
+        elif 'our_approach' in path_str:
+            return 'our operational methodologies and evidence-based practices'
+        elif 'trustees' in path_str:
+            return 'our trustee recruitment, composition, and diversity frameworks'
+        elif 'governance' in path_str:
+            return 'our governance structures, processes, and inclusive practices'
+        else:
+            return 'our organizational identity, strategic direction, and operational methodologies'
+    elif 'units' in path_str:
+        if 'miu' in path_str:
+            if 'vision' in path_str:
+                if 'products' in path_str:
+                    if 'software' in path_str:
+                        return 'machine intelligence software product development'
+                    elif 'hardware' in path_str:
+                        return 'machine intelligence hardware product development'
+                    else:
+                        return 'machine intelligence product development and vision'
+                elif 'services' in path_str:
+                    if 'rd' in path_str or 'r&d' in path_str.lower():
+                        return 'machine intelligence research and development services'
+                    elif 'consultancy' in path_str:
+                        return 'machine intelligence consultancy services'
+                    elif 'education' in path_str:
+                        return 'machine intelligence educational services'
+                    else:
+                        return 'machine intelligence service development and vision'
+                else:
+                    return 'the Machine Intelligence Unit\'s vision and strategic direction'
+            else:
+                return 'machine intelligence research, development, and applications'
+        else:
+            return 'our operational units, their capabilities, and methodologies'
+    return 'organizational information flow'
+
+def clean_duplicates(text):
+    """Remove duplicate sentences/phrases"""
+    # Remove obvious duplicate patterns
+    text = re.sub(r'(the [^<]+?\.)\s+\1+', r'\1', text, flags=re.I)
+    text = re.sub(r'(This component[^<]+?\.)\s+\1+', r'\1', text, flags=re.I)
+    text = re.sub(r'(Grounded in[^<]+?\.)\s+\1+', r'\1', text, flags=re.I)
+    return text
+
+def update_content(file_path):
+    """Update first content paragraph"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        stage, openings = get_stage_info(file_path)
+        if not stage:
+            return False
+        
+        page_name = extract_page_name(file_path)
+        topic = extract_topic(file_path)
+        
+        # Use hash for consistent selection
+        hash_val = int(hashlib.md5(str(file_path).encode()).hexdigest(), 16)
+        opening_template = openings[hash_val % len(openings)]
+        
+        # Find first paragraph in content-text
+        pattern = r'<div class="content-text"[^>]*>\s*<p>([^<]+)</p>'
+        match = re.search(pattern, content, re.I | re.DOTALL)
+        
+        if not match:
+            return False
+        
+        old_para = match.group(1)
+        
+        # Find where unique content continues (after common opening patterns)
+        unique_marker = re.search(
+            r'(where communications flow|Grounded in|The [^<]+ (?:incoming signals|processing stage|output stage) encompass|This component packages)',
+            old_para,
+            re.I
+        )
+        
+        if unique_marker:
+            rest = old_para[unique_marker.start():]
+        else:
+            # Fallback: take after first sentence
+            first_period = old_para.find('.')
+            if first_period > 0:
+                rest = old_para[first_period + 1:].strip()
+            else:
+                rest = old_para[200:] if len(old_para) > 200 else ''
+        
+        # Build new opening
+        if '{topic}' in opening_template:
+            new_opening = opening_template.format(name=page_name, topic=topic)
+        else:
+            new_opening = opening_template.format(name=page_name)
+        
+        # Add stage-specific continuation
+        if stage == 'in':
+            continuation = f"that captures and documents all communications, requests, and initiatives related to {topic}."
+        elif stage == 'proc':
+            continuation = f"incoming signals related to {topic} into actionable outputs."
+        else:
+            continuation = f"where processed signals related to {topic} are systematically formatted, verified, and delivered to stakeholders with unwavering integrity."
+        
+        # Combine
+        new_para = f"{new_opening} {continuation} {rest}"
+        new_para = clean_duplicates(new_para)
+        
+        # Update
+        content = content.replace(f'<p>{old_para}</p>', f'<p>{new_para}</p>', 1)
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return True
+    except Exception as e:
+        print(f"Error: {file_path}: {e}")
+    return False
+
+def main():
+    html_files = list(BASE_DIR.rglob("*.html"))
+    html_files = [f for f in html_files if 'site_agent' not in str(f) and '.git' not in str(f)]
+    
+    updated = 0
+    for html_file in sorted(html_files):
+        if update_content(html_file):
+            updated += 1
+            print(f"✓ Updated: {html_file.relative_to(BASE_DIR)}")
+    
+    print(f"\n✅ Updated {updated} pages with varied content openings")
+
+if __name__ == '__main__':
+    main()
+

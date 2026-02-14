@@ -1,0 +1,268 @@
+{
+  "in": {
+    "about_piandt": [
+      {
+        "url": "in/about_piandt/in_about_piandt.html",
+        "title": "About PIANDT - PIANDT - In - PIANDT",
+        "h1": "About PIANDT - Incoming Signals"
+      },
+      {
+        "url": "in/about_piandt/in_charitable_purposes.html",
+        "title": "Charitable Purposes - PIANDT - In - PIANDT",
+        "h1": "Charitable Purposes - Incoming Signals"
+      },
+      {
+        "url": "in/about_piandt/in_governance.html",
+        "title": "Governance - PIANDT - In - PIANDT",
+        "h1": "Governance - Incoming Signals"
+      },
+      {
+        "url": "in/about_piandt/in_mission_vision.html",
+        "title": "Our Mission and Vision - PIANDT - In - PIANDT",
+        "h1": "Our Mission and Vision - Incoming Signals"
+      },
+      {
+        "url": "in/about_piandt/in_our_approach.html",
+        "title": "Our Approach - PIANDT - In - PIANDT",
+        "h1": "Our Approach - Incoming Signals"
+      },
+      {
+        "url": "in/about_piandt/in_trustees.html",
+        "title": "Trustees - PIANDT - In - PIANDT",
+        "h1": "Trustees - Incoming Signals"
+      }
+    ],
+    "units": [
+      {
+        "url": "in/units/in_units.html",
+        "title": "Units - In - PIANDT",
+        "h1": "Units - Incoming Signals"
+      },
+      {
+        "url": "in/units/miu/in_miu.html",
+        "title": "PIANDT",
+        "h1": "Machine Intelligence Unit - In"
+      },
+      {
+        "url": "in/units/miu/vision/in_miu_vision.html",
+        "title": "MIU Vision - PIANDT",
+        "h1": "MIU Vision"
+      },
+      {
+        "url": "in/units/miu/vision/products/in_miu_vision_products.html",
+        "title": "MIU Products Vision - PIANDT",
+        "h1": "MIU Products Vision"
+      },
+      {
+        "url": "in/units/miu/vision/products/in_miu_vision_products_hardware.html",
+        "title": "MIU Products Hardware - PIANDT",
+        "h1": "MIU Products Hardware"
+      },
+      {
+        "url": "in/units/miu/vision/products/in_miu_vision_products_software.html",
+        "title": "MIU Products Software - PIANDT",
+        "h1": "MIU Products Software"
+      },
+      {
+        "url": "in/units/miu/vision/services/in_miu_vision_services.html",
+        "title": "MIU Services Vision - PIANDT",
+        "h1": "MIU Services Vision"
+      },
+      {
+        "url": "in/units/miu/vision/services/in_miu_vision_services_consultancy.html",
+        "title": "MIU Services Vision Consultancy - PIANDT",
+        "h1": "MIU Services Vision Consultancy"
+      },
+      {
+        "url": "in/units/miu/vision/services/in_miu_vision_services_education.html",
+        "title": "MIU Services Vision Education - PIANDT",
+        "h1": "MIU Services Vision Education"
+      },
+      {
+        "url": "in/units/miu/vision/services/in_miu_vision_services_rd.html",
+        "title": "MIU Services Vision R&amp;D - PIANDT",
+        "h1": "MIU Services Vision R&amp;D"
+      }
+    ]
+  },
+  "out": {
+    "about_piandt": [
+      {
+        "url": "out/about_piandt/out_about_piandt.html",
+        "title": "About PIANDT - PIANDT",
+        "h1": "About PIANDT - Delivered Outputs"
+      },
+      {
+        "url": "out/about_piandt/out_charitable_purposes.html",
+        "title": "Charitable Purposes - PIANDT",
+        "h1": "Charitable Purposes - Delivered Outputs"
+      },
+      {
+        "url": "out/about_piandt/out_governance.html",
+        "title": "Governance - Delivered Outputs - PIANDT - Out - PIANDT",
+        "h1": "Governance - Delivered Outputs"
+      },
+      {
+        "url": "out/about_piandt/out_mission_vision.html",
+        "title": "Our Mission and Vision - PIANDT",
+        "h1": "Our Mission and Vision - Delivered Outputs"
+      },
+      {
+        "url": "out/about_piandt/out_our_approach.html",
+        "title": "Our Approach - PIANDT",
+        "h1": "Our Approach - Delivered Outputs"
+      },
+      {
+        "url": "out/about_piandt/out_trustees.html",
+        "title": "Trustees - Delivered Outputs - PIANDT - Out - PIANDT",
+        "h1": "Trustees - Delivered Outputs"
+      }
+    ],
+    "units": [
+      {
+        "url": "out/units/miu/out_miu.html",
+        "title": "PIANDT",
+        "h1": "Machine Intelligence Unit - Out"
+      },
+      {
+        "url": "out/units/miu/vision/out_miu_vision.html",
+        "title": "MIU Vision - PIANDT",
+        "h1": "MIU Vision"
+      },
+      {
+        "url": "out/units/miu/vision/products/out_miu_vision_products.html",
+        "title": "MIU Products Vision - PIANDT",
+        "h1": "MIU Products Vision"
+      },
+      {
+        "url": "out/units/miu/vision/products/out_miu_vision_products_hardware.html",
+        "title": "MIU Products Hardware - PIANDT",
+        "h1": "MIU Products Hardware"
+      },
+      {
+        "url": "out/units/miu/vision/products/out_miu_vision_products_software.html",
+        "title": "MIU Products Software - PIANDT",
+        "h1": "MIU Products Software"
+      },
+      {
+        "url": "out/units/miu/vision/services/out_miu_vision_services.html",
+        "title": "MIU Services Vision - PIANDT",
+        "h1": "MIU Services Vision"
+      },
+      {
+        "url": "out/units/miu/vision/services/out_miu_vision_services_consultancy.html",
+        "title": "MIU Services Vision Consultancy - PIANDT",
+        "h1": "MIU Services Vision Consultancy"
+      },
+      {
+        "url": "out/units/miu/vision/services/out_miu_vision_services_education.html",
+        "title": "MIU Services Vision Education - PIANDT",
+        "h1": "MIU Services Vision Education"
+      },
+      {
+        "url": "out/units/miu/vision/services/out_miu_vision_services_rd.html",
+        "title": "MIU Services Vision R&amp;D - PIANDT",
+        "h1": "MIU Services Vision R&amp;D"
+      },
+      {
+        "url": "out/units/out_units.html",
+        "title": "Units - PIANDT",
+        "h1": "Units - Delivered Outputs"
+      }
+    ]
+  },
+  "proc": {
+    "main": [
+      {
+        "url": "processing/processing.html",
+        "title": "Processing - PIANDT",
+        "h1": "Processing",
+        "description": "The Processing component represents the analytical transformation stage of the PIANDT triadic information architecture, where incoming signals undergo systematic evaluation, synthesis, and refinement into actionable outputs. As the intermediary stage between signal reception and delivery, Processing functions as the critical transformation mechanism within our information ecosystem. This component systematically analyzes, evaluates, and synthesizes all incoming signals through rigorous methodologies, ensuring that each communication undergoes appropriate assessment and development before transition to the output stage. The Processing stage encompasses diverse signal categories including product development inquiries, service design requests, strategic partnership evaluations, technical support analyses, feedback integration processes, innovation suggestions, research and development collaborations, consultancy framework development, software architecture design, and educational program structuring. Each signal undergoes methodical processing through established analytical frameworks, ensuring comprehensive evaluation and appropriate transformation."
+      }
+    ],
+    "about_piandt": [
+      {
+        "url": "processing/about_piandt/proc_about_piandt.html",
+        "title": "About PIANDT - PIANDT - Proc - PIANDT",
+        "h1": "About PIANDT - In Progress"
+      },
+      {
+        "url": "processing/about_piandt/proc_charitable_purposes.html",
+        "title": "Charitable Purposes - PIANDT - Proc - PIANDT",
+        "h1": "Charitable Purposes - In Progress"
+      },
+      {
+        "url": "processing/about_piandt/proc_governance.html",
+        "title": "Governance - In Progress - PIANDT - Proc - PIANDT",
+        "h1": "Governance - In Progress"
+      },
+      {
+        "url": "processing/about_piandt/proc_mission_vision.html",
+        "title": "Our Mission and Vision - PIANDT - Proc - PIANDT",
+        "h1": "Our Mission and Vision - In Progress"
+      },
+      {
+        "url": "processing/about_piandt/proc_our_approach.html",
+        "title": "Our Approach - PIANDT - Proc - PIANDT",
+        "h1": "Our Approach - In Progress"
+      },
+      {
+        "url": "processing/about_piandt/proc_trustees.html",
+        "title": "Trustees - In Progress - PIANDT - Proc - PIANDT",
+        "h1": "Trustees - In Progress"
+      }
+    ],
+    "units": [
+      {
+        "url": "processing/units/miu/proc_miu.html",
+        "title": "PIANDT",
+        "h1": "Machine Intelligence Unit - Proc"
+      },
+      {
+        "url": "processing/units/miu/vision/proc_miu_vision.html",
+        "title": "MIU Vision - PIANDT",
+        "h1": "MIU Vision"
+      },
+      {
+        "url": "processing/units/miu/vision/products/proc_miu_vision_products.html",
+        "title": "MIU Products Vision - PIANDT",
+        "h1": "MIU Products Vision"
+      },
+      {
+        "url": "processing/units/miu/vision/products/proc_miu_vision_products_hardware.html",
+        "title": "MIU Products Hardware - PIANDT",
+        "h1": "MIU Products Hardware"
+      },
+      {
+        "url": "processing/units/miu/vision/products/proc_miu_vision_products_software.html",
+        "title": "MIU Products Software - PIANDT",
+        "h1": "MIU Products Software"
+      },
+      {
+        "url": "processing/units/miu/vision/services/proc_miu_vision_services.html",
+        "title": "MIU Services Vision - PIANDT",
+        "h1": "MIU Services Vision"
+      },
+      {
+        "url": "processing/units/miu/vision/services/proc_miu_vision_services_consultancy.html",
+        "title": "MIU Services Vision Consultancy - PIANDT",
+        "h1": "MIU Services Vision Consultancy"
+      },
+      {
+        "url": "processing/units/miu/vision/services/proc_miu_vision_services_education.html",
+        "title": "MIU Services Vision Education - PIANDT",
+        "h1": "MIU Services Vision Education"
+      },
+      {
+        "url": "processing/units/miu/vision/services/proc_miu_vision_services_rd.html",
+        "title": "MIU Services Vision R&amp;D - PIANDT",
+        "h1": "MIU Services Vision R&amp;D"
+      },
+      {
+        "url": "processing/units/proc_units.html",
+        "title": "Units - Proc - PIANDT",
+        "h1": "Units - In Progress"
+      }
+    ]
+  }
+}
