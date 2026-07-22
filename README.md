@@ -4,38 +4,33 @@ emoji: 🔬
 colorFrom: blue
 colorTo: indigo
 sdk: docker
-sdk_version: "4"
+sdk_version: "4.1"
+app_port: 7860
 pinned: false
 ---
 
-PIANDT site. Served via Docker on port 7860.
+PIANDT site **v4.1** — Collaborate menu and enquiry form. Served via Docker on port 7860.
 
-**Private Space:** If you use Safari or iOS, this Space may not load. View this page in **Chrome** or **Firefox** instead.
+**Public repositories**
 
----
+- **GitHub:** [2000pd3rvr/PIANDT](https://github.com/2000pd3rvr/PIANDT)
+- **Hugging Face Space:** [0001AMA/PIANDT](https://huggingface.co/spaces/0001AMA/PIANDT)
 
-## Additional private Spaces (excess / archives)
+## Versioning
 
-Because this Space has a 1 GB storage limit, extra content is in **separate private Hugging Face Spaces**:
+Each deployment bumps a **sub-version** of the Space/site release (e.g. `4` → `4.1`). Asset cache busts follow the same release (`styles.css?v=63`, `script.js?v=30` for v4.1).
 
-| Space | Contents |
-|-------|----------|
-| **PIANDT-THESIS** | THESIS folder (chapters, comments, UKVI, etc.) |
-| **PIANDT-thetex** | thetex and thetex copy (manuscripts, figures, thesis sources) |
+## Collaborate
 
-- **Full repository** (all content, including large files): **[GitHub: 2000pd3rvr/PIANDT](https://github.com/2000pd3rvr/PIANDT)** (private).
-- Each HF Space is private; access the same way as this Space. Create the Spaces and push to them using `create_hf_excess_spaces.sh` in the repo.
+Open to **local and international** partnerships. The enquiry form on `collaborate.html` will forward to an admin email once configured (`window.PIANDT_ADMIN_EMAIL` / `PIANDT_ADMIN_EMAIL` in `script.js`). Until then, submissions are stored locally as a placeholder.
 
----
+## Additional Spaces (excess / archives)
 
-## Additional private Spaces (excess / archives)
-
-Because this Space has a 1 GB storage limit, extra content is in **separate private Hugging Face Spaces**:
+Because this Space has a 1 GB storage limit, extra content may live in separate Hugging Face Spaces:
 
 | Space | Contents |
 |-------|----------|
-| **PIANDT-THESIS** | THESIS folder (chapters, comments, UKVI, etc.) |
-| **PIANDT-thetex** | thetex and thetex copy (manuscripts, figures, thesis sources) |
+| **PIANDT-THESIS** | THESIS folder |
+| **PIANDT-thetex** | thetex manuscript sources |
 
-- **Full repository** (all content, including large files): **[GitHub: 2000pd3rvr/PIANDT](https://github.com/2000pd3rvr/PIANDT)** (private).
-- Each HF Space is private; access the same way as this Space. Create the Spaces and push to them using `create_hf_excess_spaces.sh` in the repo.
+Create / push those with `create_hf_excess_spaces.sh` when needed.

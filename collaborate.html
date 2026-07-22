@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PIANDT. Information about this topic in the PIANDT triadic information architecture.">
-    <title>PIANDT</title>
+    <meta name="description" content="PIANDT welcomes local and international collaborations across research, technology, education, and community impact. Share your collaboration interest.">
+    <title>Collaborate - PIANDT</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
             <script>
         // CRITICAL: Apply theme BEFORE anything else to prevent flash
@@ -13,22 +13,18 @@
             try {
                 const savedTheme = localStorage.getItem('theme') || 'light';
                 if (savedTheme === 'dark') {
-                    // Apply immediately to html element (always exists)
                     const html = document.documentElement;
                     html.classList.add('dark-theme');
-                    // Set inline style to prevent flash - use multiple methods
                     html.style.backgroundColor = '#1a1a1a';
                     html.style.setProperty('background-color', '#1a1a1a', 'important');
                     
-                    // Apply to body immediately if it exists
                     if (document.body) {
                         const body = document.body;
                         body.classList.add('dark-theme');
                         body.style.backgroundColor = '#1a1a1a';
                         body.style.setProperty('background-color', '#1a1a1a', 'important');
                     } else {
-                        // Use MutationObserver for faster body detection
-                        const observer = new MutationObserver(function(mutations) {
+                        const observer = new MutationObserver(function() {
                             if (document.body) {
                                 const body = document.body;
                                 body.classList.add('dark-theme');
@@ -38,8 +34,6 @@
                             }
                         });
                         observer.observe(document.documentElement, { childList: true, subtree: true });
-                        
-                        // Also wait for DOMContentLoaded as backup
                         document.addEventListener('DOMContentLoaded', function() {
                             if (document.body) {
                                 const body = document.body;
@@ -48,18 +42,6 @@
                                 body.style.setProperty('background-color', '#1a1a1a', 'important');
                             }
                         });
-                        
-                        // Immediate check in case body already exists
-                        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                            setTimeout(function() {
-                                if (document.body) {
-                                    const body = document.body;
-                                    body.classList.add('dark-theme');
-                                    body.style.backgroundColor = '#1a1a1a';
-                                    body.style.setProperty('background-color', '#1a1a1a', 'important');
-                                }
-                            }, 0);
-                        }
                     }
                 }
             } catch(e) {
@@ -68,10 +50,8 @@
         })();
     </script>
         <style>
-        /* Blocking style to prevent flash - must be inline */
         html.dark-theme { background-color: #1a1a1a !important; }
         html.dark-theme body { background-color: #1a1a1a !important; }
-        /* Prevent white flash during page load */
         html:not(.dark-theme) { background-color: #ffffff; }
         body:not(.dark-theme) { background-color: #ffffff; }
     </style>
@@ -229,8 +209,8 @@
                         </li>
                     </ul>
                 </li>
-                            <li class="dropdown">
-                    <a href="collaborate.html" class="nav-link">Collaborate <span class="dropdown-arrow">▼</span></a>
+                <li class="dropdown">
+                    <a href="collaborate.html" class="nav-link nav-link-active">Collaborate <span class="dropdown-arrow">▼</span></a>
                     <ul class="dropdown-menu">
                         <li><a href="collaborate.html#openness" class="dropdown-link">open to collaboration</a></li>
                         <li><a href="collaborate.html#local" class="dropdown-link">local partnerships</a></li>
@@ -238,7 +218,7 @@
                         <li><a href="collaborate.html#enquire" class="dropdown-link">start a conversation</a></li>
                     </ul>
                 </li>
-</ul>
+            </ul>
             
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
                 <span class="theme-icon">🌙</span>
@@ -253,8 +233,75 @@
     </nav>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
+        <section id="collaborate" class="section" style="padding-top: 8rem;">
+            <div class="container">
+                <div class="collaborate-intro" id="openness">
+                    <h1>Collaborate</h1>
+                    <p class="contact-lead">We are open to local and foreign collaborations that advance people, innovation, and technology for public benefit.</p>
+                    <div class="content-text collaborate-copy">
+                        <p>PIANDT welcomes partners who share our commitment to useful, ethical, and accessible technology. Whether you are nearby or across borders, we are ready to explore joint research, co-development, education, consultancy, and community programmes.</p>
+                        <p>Tell us who you are, what you hope to build together, and how we can begin. Every serious enquiry is reviewed with care.</p>
+                    </div>
+                </div>
+
+                <div class="collaborate-pillars">
+                    <article class="collaborate-pillar" id="local">
+                        <h2>Local partnerships</h2>
+                        <p>We seek collaboration with universities, labs, charities, SMEs, public bodies, and community organisations in our region—shared facilities, joint pilots, student projects, and applied research that serves people where they live.</p>
+                    </article>
+                    <article class="collaborate-pillar" id="international">
+                        <h2>International partnerships</h2>
+                        <p>We welcome foreign institutions, research consortia, diasporic networks, and industry partners for cross-border programmes, knowledge exchange, dual-site experiments, and technology transfer that respects local needs and global standards.</p>
+                    </article>
+                </div>
+
+                <div class="contact-content collaborate-contact" id="enquire">
+                    <div>
+                        <h2>Start a conversation</h2>
+                        <p class="contact-lead" style="margin-bottom: 1.5rem; font-size: 1.1rem;">Share your collaboration idea. When an admin email is configured, submissions will be forwarded there.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-label">Delivery</span>
+                                <span class="contact-value" id="collabAdminEmailDisplay">Admin email not set yet (placeholder)</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">Scope</span>
+                                <span class="contact-value">Local · International · Research · Education · Industry</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="collaborateForm" novalidate>
+                        <!-- ADMIN_EMAIL placeholder: set window.PIANDT_ADMIN_EMAIL or the constant in script to enable mailto forwarding -->
+                        <div class="form-group">
+                            <label class="form-label" for="collabName">Name</label>
+                            <input type="text" id="collabName" name="name" placeholder="Your name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="collabOrg">Organisation</label>
+                            <input type="text" id="collabOrg" name="organisation" placeholder="University, company, or community group" autocomplete="organization">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="collabEmail">Email</label>
+                            <input type="email" id="collabEmail" name="email" placeholder="you@example.org" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="collabScope">Collaboration type</label>
+                            <select id="collabScope" name="scope" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="local">Local partnership</option>
+                                <option value="international">International / foreign partnership</option>
+                                <option value="both">Both local and international</option>
+                                <option value="other">Other / undecided</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="collabMessage">How would you like to collaborate?</label>
+                            <textarea id="collabMessage" name="message" placeholder="Briefly describe your aims, timeline, and what you hope PIANDT can contribute." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send collaboration enquiry</button>
+                        <p class="form-status" id="collaborateFormStatus" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
@@ -277,12 +324,9 @@
                         <li>Our services and products</li>
                         <li>Machine Intelligence Unit (MIU)</li>
                         <li>In, Proc, or Out stages</li>
-                        <li>Specific pages or sections</li>
+                        <li>Collaboration and partnerships</li>
                     </ul>
                     <p>What would you like to know?</p>
-                    <p style="margin-top: 1rem; font-size: 0.9em; color: #666;">
-                        💡 <strong>Tip:</strong> To enable Mistral AI for smarter responses, type: <code>/setkey your-api-key</code>
-                    </p>
                 </div>
             </div>
         </div>
@@ -302,4 +346,3 @@
     <script src="script.js?v=30"></script>
 </body>
 </html>
-

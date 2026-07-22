@@ -1274,3 +1274,101 @@ function getFallbackResponse(message) {
         });
     }
 })();
+
+/**
+ * Collaboration enquiry form.
+ * Placeholder until ADMIN_EMAIL is configured — then submissions open a mailto: draft.
+ * Set either:
+ *   window.PIANDT_ADMIN_EMAIL = 'you@example.org';
+ * or replace PIANDT_ADMIN_EMAIL below.
+ */
+(function() {
+    const PIANDT_ADMIN_EMAIL = (typeof window !== 'undefined' && window.PIANDT_ADMIN_EMAIL) || '';
+
+    function initCollaborateForm() {
+        const form = document.getElementById('collaborateForm');
+        if (!form) return;
+
+        const statusEl = document.getElementById('collaborateFormStatus');
+        const emailDisplay = document.getElementById('collabAdminEmailDisplay');
+
+        if (emailDisplay) {
+            emailDisplay.textContent = PIANDT_ADMIN_EMAIL
+                ? PIANDT_ADMIN_EMAIL
+                : 'Admin email not set yet (placeholder)';
+        }
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = (form.elements.namedItem('name') || {}).value || '';
+            const organisation = (form.elements.namedItem('organisation') || {}).value || '';
+            const email = (form.elements.namedItem('email') || {}).value || '';
+            const scope = (form.elements.namedItem('scope') || {}).value || '';
+            const message = (form.elements.namedItem('message') || {}).value || '';
+
+            if (!name.trim() || !email.trim() || !scope || !message.trim()) {
+                if (statusEl) {
+                    statusEl.className = 'form-status is-error';
+                    statusEl.textContent = 'Please complete the required fields.';
+                }
+                return;
+            }
+
+            const payload = {
+                name: name.trim(),
+                organisation: organisation.trim(),
+                email: email.trim(),
+                scope: scope,
+                message: message.trim(),
+                submittedAt: new Date().toISOString()
+            };
+
+            // Keep a local copy until email forwarding is wired
+            try {
+                const key = 'piandt_collaboration_enquiries';
+                const existing = JSON.parse(localStorage.getItem(key) || '[]');
+                existing.push(payload);
+                localStorage.setItem(key, JSON.stringify(existing));
+            } catch (err) {
+                console.warn('Could not store collaboration enquiry locally:', err);
+            }
+
+            if (!PIANDT_ADMIN_EMAIL) {
+                if (statusEl) {
+                    statusEl.className = 'form-status is-pending';
+                    statusEl.textContent = 'Thank you. Your enquiry was saved locally. Email forwarding is a placeholder until an admin email is configured.';
+                }
+                form.reset();
+                return;
+            }
+
+            const subject = encodeURIComponent('PIANDT collaboration enquiry — ' + payload.name);
+            const body = encodeURIComponent(
+                [
+                    'Name: ' + payload.name,
+                    'Organisation: ' + (payload.organisation || '(not provided)'),
+                    'Email: ' + payload.email,
+                    'Collaboration type: ' + payload.scope,
+                    '',
+                    payload.message,
+                    '',
+                    'Submitted: ' + payload.submittedAt
+                ].join('\n')
+            );
+            window.location.href = 'mailto:' + PIANDT_ADMIN_EMAIL + '?subject=' + subject + '&body=' + body;
+
+            if (statusEl) {
+                statusEl.className = 'form-status is-success';
+                statusEl.textContent = 'Opening your email client to send this enquiry…';
+            }
+            form.reset();
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCollaborateForm);
+    } else {
+        initCollaborateForm();
+    }
+})();

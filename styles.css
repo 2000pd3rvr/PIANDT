@@ -2500,6 +2500,135 @@ html.dark-theme .content-text p {
     min-height: 150px;
 }
 
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    background: white;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    color: var(--color-text);
+    transition: var(--transition);
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--color-text-light) 50%),
+        linear-gradient(135deg, var(--color-text-light) 50%, transparent 50%);
+    background-position: calc(100% - 18px) calc(1rem + 6px), calc(100% - 12px) calc(1rem + 6px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+}
+
+.form-status {
+    margin: 0;
+    min-height: 1.4em;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-text-light);
+}
+
+.form-status.is-success {
+    color: var(--color-primary);
+}
+
+.form-status.is-pending,
+.form-status.is-error {
+    color: var(--color-accent);
+}
+
+.collaborate-intro {
+    margin-bottom: var(--spacing-lg);
+    max-width: 48rem;
+}
+
+.collaborate-intro h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.collaborate-copy p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    color: var(--color-text);
+}
+
+.collaborate-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.collaborate-pillar h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+    color: var(--color-primary);
+}
+
+.collaborate-pillar p {
+    line-height: 1.7;
+    color: var(--color-text-light);
+}
+
+.collaborate-contact {
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+}
+
+.collaborate-contact h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--color-primary);
+}
+
+body.dark-theme .form-group input,
+body.dark-theme .form-group textarea,
+body.dark-theme .form-group select,
+html.dark-theme .form-group input,
+html.dark-theme .form-group textarea,
+html.dark-theme .form-group select {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ffffff;
+}
+
+body.dark-theme .collaborate-intro h1,
+body.dark-theme .collaborate-pillar h2,
+body.dark-theme .collaborate-contact h2,
+html.dark-theme .collaborate-intro h1,
+html.dark-theme .collaborate-pillar h2,
+html.dark-theme .collaborate-contact h2 {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .collaborate-pillars {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Footer */
 .footer {
     background: var(--color-primary);
