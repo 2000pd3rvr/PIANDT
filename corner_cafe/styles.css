@@ -1685,12 +1685,12 @@ html[data-theme="light"] .gallery-spotlight__dot.is-active {
   transform: translateY(1px);
 }
 
-.tab-panel[data-panel="food"] .menu-heading::before {
+.tab-panel[data-panel="breakfast"] .menu-heading::before {
   background: linear-gradient(180deg, var(--red-bright) 0%, var(--red) 100%);
   box-shadow: 0 0 0 2px rgba(225, 24, 47, 0.16);
 }
 
-.tab-panel[data-panel="food"] .menu-heading::after {
+.tab-panel[data-panel="breakfast"] .menu-heading::after {
   background: linear-gradient(90deg, rgba(225, 24, 47, 0.24) 0%, transparent 100%);
 }
 
