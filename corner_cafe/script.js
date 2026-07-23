@@ -1,5 +1,5 @@
 (() => {
-  const THEME_KEY = "placeholder-name-theme";
+  const THEME_KEY = "corner-cafe-theme";
 
   const applyChrome = (theme) => {
     const meta = document.getElementById("meta-theme-color");
@@ -86,35 +86,18 @@
       return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
     };
     const daySlots = (day) => {
-      // 0 Sun, 1 Mon, ... 6 Sat
-      if (day === 0 || day === 1) return [];
-      if (day >= 2 && day <= 4) return [toMinutes(12, 0), toMinutes(17, 30)];
-      if (day === 5) return [toMinutes(12, 0), toMinutes(17, 50)];
-      return [toMinutes(12, 0)]; // Saturday
+      // 0 Sun, 1 Mon, ... 6 Sat — Mon–Sat 09:00–16:00, Sunday closed
+      if (day === 0) return [];
+      return [toMinutes(9, 0)];
     };
     const isOpenNow = (d) => {
       const day = d.getDay(); // 0 Sun ... 6 Sat
       const mins = toMinutes(d.getHours(), d.getMinutes());
       // Hours from section:
-      // Sun/Mon closed
-      // Tue-Thu: 12:00-15:00 and 17:30-22:00
-      // Fri: 12:00-15:00 and 17:50-22:00
-      // Sat: 12:00-22:00
-      if (day === 0 || day === 1) return false;
-      if (day >= 2 && day <= 4) {
-        return (
-          (mins >= toMinutes(12, 0) && mins < toMinutes(15, 0)) ||
-          (mins >= toMinutes(17, 30) && mins < toMinutes(22, 0))
-        );
-      }
-      if (day === 5) {
-        return (
-          (mins >= toMinutes(12, 0) && mins < toMinutes(15, 0)) ||
-          (mins >= toMinutes(17, 50) && mins < toMinutes(22, 0))
-        );
-      }
-      // Saturday
-      return mins >= toMinutes(12, 0) && mins < toMinutes(22, 0);
+      // Sunday closed
+      // Mon–Sat: 09:00–16:00
+      if (day === 0) return false;
+      return mins >= toMinutes(9, 0) && mins < toMinutes(16, 0);
     };
 
     const nextOpenText = (d) => {
@@ -391,7 +374,7 @@
       let wasSwipe = false;
       const ABOUT_MS = 3000;
       const captionWords = [
-        "Placeholder Name Moment",
+        "Corner cafe Moment",
         "Chef's Detail",
         "Counter Light",
         "Omakase Mood",
@@ -401,7 +384,7 @@
 
       const makeMeta = (imgSrc, idx) => {
         const title = `${captionWords[idx % captionWords.length]}`;
-        const desc = "Curated sushi frame from the Placeholder Name gallery.";
+        const desc = "Curated sushi frame from the Corner cafe gallery.";
         return { title, desc };
       };
 

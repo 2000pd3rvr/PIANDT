@@ -1,10 +1,10 @@
 ---
-title: sushhh bar
+title: Placeholder Name
 sdk: docker
-sdk_version: "1.2"
+sdk_version: "1.4"
 app_port: 7860
 ---
 
-# sushhh bar
+# Placeholder Name
 
-**v1.2** — Map / location updated to Canary Wharf. Static sushi-themed frontend website built with HTML, CSS, and JavaScript
+**v1.4** — Live HF sushi_atelier Space branded as Placeholder Name. Static frontend website built with HTML, CSS, and JavaScript.

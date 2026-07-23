@@ -1,5 +1,5 @@
 (() => {
-  const THEME_KEY = "sushhh-bar-theme";
+  const THEME_KEY = "placeholder-name-theme";
 
   const applyChrome = (theme) => {
     const meta = document.getElementById("meta-theme-color");
@@ -391,7 +391,7 @@
       let wasSwipe = false;
       const ABOUT_MS = 3000;
       const captionWords = [
-        "sushhh Moment",
+        "Placeholder Name Moment",
         "Chef's Detail",
         "Counter Light",
         "Omakase Mood",
@@ -401,7 +401,7 @@
 
       const makeMeta = (imgSrc, idx) => {
         const title = `${captionWords[idx % captionWords.length]}`;
-        const desc = "Curated sushi frame from the sushhh bar gallery.";
+        const desc = "Curated sushi frame from the Placeholder Name gallery.";
         return { title, desc };
       };
 
